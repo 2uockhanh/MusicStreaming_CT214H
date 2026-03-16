@@ -38,39 +38,38 @@ if (isset($_POST['btn_login'])) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <title>Đăng nhập</title>
-   
-    <style>
-        body { font-family: Arial, sans-serif; display: flex; justify-content: center; margin-top: 50px; }
-        .login-form { border: 1px solid #ccc; padding: 20px; border-radius: 5px; width: 300px; }
-        .login-form input { width: 90%; padding: 8px; margin: 10px 0; }
-        .login-form button { width: 100%; padding: 10px; background: #007bff; color: white; border: none; cursor: pointer; }
-        .error { color: red; font-size: 14px; }
-    </style>
-</head>
+<?php include '../includes/header.php'; ?>
+
 <body>
+    <div class="auth-container">
+    <div class="theme-switcher" style=" position: fixed; top: 80px; right: 20px; z-index: 1000; ">
+    <span>Chọn màu giao diện: </span>
+    <button onclick="changeTheme('#2b3d94')" style="background: #2b3d94; width: 25px; height: 25px; border-radius: 50%; cursor: pointer; border: none;"></button>
+    <button onclick="changeTheme('#d62310')" style="background: #ff5722; width: 25px; height: 25px; border-radius: 50%; cursor: pointer; border: none;"></button>
+    <button onclick="changeTheme('#165a17')" style="background: #165a17; width: 25px; height: 25px; border-radius: 50%; cursor: pointer; border: none;"></button>
+    <button onclick="changeTheme('#9c27b0')" style="background: #9c27b0; width: 25px; height: 25px; border-radius: 50%; cursor: pointer; border: none;"></button>
+</div>
+    <h2>Log in</h2>
+    <?php if (!empty($error)) echo "<div class='error-msg'>$error</div>"; ?>
 
-<div class="login-form">
-    <h2>Đăng nhập</h2>
-    
-    <?php if ($error != "") echo "<p class='error'>$error</p>"; ?>
-
-    <form method="POST" action="login.php">
-        <label>Tên đăng nhập:</label>
-        <input type="text" name="username" required>
+    <form method="POST" action="">
+        <div class="form-group">
+            <label>Username:</label>
+            <input type="text" name="username" required>
+        </div>
         
-        <label>Mật khẩu:</label>
-        <input type="password" name="password" required>
+        <div class="form-group">
+            <label>Password:</label>
+            <input type="password" name="password" required>
+        </div>
         
-        <button type="submit" name="btn_login">Đăng nhập</button>
+        <button type="submit" name="btn_login" class="btn-submit">Đăng nhập</button>
     </form>
     
-    <p style="text-align: center; font-size: 14px;">Chưa có tài khoản? <a href="signup.php">Đăng ký</a></p>
+    <div class="auth-links">
+        <p>Not have an account? <a href="signup.php">Sign up now</a></p>
+    </div>
 </div>
+<script src="../js/login.js" defer></script>
 
 </body>
-</html>

@@ -19,22 +19,27 @@ if (isset($_POST['btn_signup'])) {
         }
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<?php include '../includes/header.php'; ?>
+    <div class="auth-container">
+        <h2> Sign up</h2>
     <form method="POST" action="signup.php">
-        <label >Username</label><br>
-        <input type="text" name="username" required><br>
-        <label>Password</label><br>
-        <input type="text" name="password" required><br>
-        <label>Email</label><br>
-        <input type="text" name="email" required><br>
-        <button type="submit" name="btn_signup">Sign up</button>
-    </form>
-</body>
-</html>
+            <div class="form-group">
+                <label>Username:</label>
+                <input type="text" name="username" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Password:</label>
+                <input type="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" name="email" required>
+            </div>
+            <button type="submit" name="btn_signup" class="btn-submit">Đăng ký</button>
+        </form>
+        </form>
+         <div class="auth-links">
+        <p>Already have an account? <a href="login.php"><u>Log in</u></a></p>
+    </div>
+    </div>
