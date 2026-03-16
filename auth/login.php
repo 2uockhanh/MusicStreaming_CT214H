@@ -42,13 +42,6 @@ if (isset($_POST['btn_login'])) {
 
 <body>
     <div class="auth-container">
-    <div class="theme-switcher" style=" position: fixed; top: 80px; right: 20px; z-index: 1000; ">
-    <span>Chọn màu giao diện: </span>
-    <button onclick="changeTheme('#2b3d94')" style="background: #2b3d94; width: 25px; height: 25px; border-radius: 50%; cursor: pointer; border: none;"></button>
-    <button onclick="changeTheme('#d62310')" style="background: #ff5722; width: 25px; height: 25px; border-radius: 50%; cursor: pointer; border: none;"></button>
-    <button onclick="changeTheme('#165a17')" style="background: #165a17; width: 25px; height: 25px; border-radius: 50%; cursor: pointer; border: none;"></button>
-    <button onclick="changeTheme('#9c27b0')" style="background: #9c27b0; width: 25px; height: 25px; border-radius: 50%; cursor: pointer; border: none;"></button>
-</div>
     <h2>Log in</h2>
     <?php if (!empty($error)) echo "<div class='error-msg'>$error</div>"; ?>
 
