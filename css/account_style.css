@@ -1,15 +1,27 @@
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; } /* Hỏng biết dùng font gì nên có gì QK sửa giúp AT nhe
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Passero One } /* Hỏng biết dùng font gì nên có gì QK sửa giúp AT nhe
         
         /* Bố cục tổng */
         body { display: flex; height: 100vh; background-color: #0b1021; color: #fff; }
-
+        
         /* ================= SIDEBAR ================= */
-        .sidebar { width: 220px; background-color: #b0b3b8; color: #000; padding: 30px 20px; display: flex; flex-direction: column; }
-        .sidebar .logo { font-size: 28px; font-weight: bold; margin-bottom: 50px; text-align: center; color: #fff; text-shadow: 1px 1px 3px rgba(0,0,0,0.3); }
+        .sidebar { width: 220px; background-color: #b0b3b8; color: #000; padding: 30px 20px; display: flex; flex-direction: column; image-rendering: auto; }
+        .sidebar .logo { 
+            
+            font-size: 28px; 
+            font-weight: bold;
+             margin-bottom: 50px; 
+             text-align: center; 
+             color: #fff; 
+             text-shadow: 1px 1px 3px rgba(0,0,0,0.3); }
         .sidebar nav a { display: flex; align-items: center; gap: 15px; color: #000; text-decoration: none; font-weight: bold; font-size: 16px; margin-bottom: 25px; }
         .sidebar nav a i { font-size: 20px; }
-
+        .sidebar .logo img {
+        max-width: 80%; 
+        height: auto; 
+        display: block; 
+        margin: 0 auto; 
+    }       
         /* ================= MAIN CONTENT ================= */
         .main-content { 
             flex: 1; padding: 30px 50px; display: flex; flex-direction: column;
@@ -38,7 +50,7 @@
         .form-section { flex: 1; display: flex; flex-direction: column; gap: 20px; max-width: 500px; }
         .form-group { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
         .form-group label { font-weight: bold; width: 120px; }
-        .form-group input { flex: 1; padding: 12px; border-radius: 8px; border: none; background-color: #d9d9d9; outline: none; }
+        .form-group input { flex: 1; padding: 12px; border-radius: 8px; border: none; background-color: #fcfcfc; outline: none; }
 
         /* Action Buttons */
         .action-buttons { display: flex; justify-content: center; gap: 50px; margin-top: 60px; }

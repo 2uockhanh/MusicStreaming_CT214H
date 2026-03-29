@@ -34,7 +34,12 @@
             font-weight: bold; 
             font-size: 16px; 
             margin-bottom: 25px; }
-        
+        .sidebar .logo img {
+             max-width: 80%; 
+            height: auto; 
+            display: block; 
+            margin: 0 auto; 
+        }
         /* Main Content & Topbar */
         .main-content { 
             flex: 1; 
@@ -99,3 +104,23 @@
             border-bottom: 1px solid #eee; }
         .dropdown-menu a:hover { background: #f0f0f0; }
         
+        /* ================= RESPONSIVE (ĐIỆN THOẠI & TABLET) ================= */
+        @media (max-width: 850px) {
+            body { flex-direction: column; height: auto; min-height: 100vh; }
+            .sidebar { width: 100%; padding: 15px; flex-direction: row; justify-content: space-between; align-items: center; }
+            .sidebar .logo { margin-bottom: 0; }
+            .sidebar nav { display: flex; gap: 20px; }
+            .sidebar nav a { margin-bottom: 0; }
+            .sidebar .logo img {
+                max-width: 40%; 
+              
+            }
+            .profile-container { flex-direction: column; align-items: center; gap: 30px; }
+            .form-section { width: 100%; }
+            .form-group { flex-direction: column; align-items: flex-start; gap: 5px; }
+            .form-group input { width: 100%; }
+            
+            .action-buttons { flex-direction: column; gap: 20px; }
+            .search-box { width: 70%; }
+        }
+       
