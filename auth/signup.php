@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 require_once '../includes/db-connect.php';
 if (isset($_POST['btn_signup'])) {
     $username = trim($_POST['username']);
@@ -18,7 +18,7 @@ if (isset($_POST['btn_signup'])) {
             $stmt->close();
         }
 }
-?>
+?> -->
 <?php include '../includes/header.php'; ?>
     <div class="auth-container">
         <h2> Sign up</h2>

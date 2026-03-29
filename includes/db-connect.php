@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root"; // User mặc định của XAMPP
 $password = "";     // Mật khẩu mặc định để trống
-$dbname = "music_web"; // Tên database bạn tạo trong phpMyAdmin
+$dbname = "Emuzik_db"; // Tên database bạn tạo trong phpMyAdmin
 
 // Khởi tạo kết nối
 $conn = new mysqli($servername, $username, $password, $dbname);
