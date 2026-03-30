@@ -6,7 +6,7 @@ if (isset($_POST['btn_signup'])) {
     $email = trim($_POST['email']);
     $hashed_password = password_hash($password, PASSWORD_DEFAULT); // Mã hóa mật khẩu
     // Dùng prepared statement để lưu vào CSDL
-    $sql = "INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, 'user')";
+    $sql = "INSERT INTO users (user_name, email, password, role) VALUES (?, ?, ?, 'user')";
     $stmt = $conn->prepare($sql);
     if ($stmt) {
             $stmt->bind_param("sss", $username,$email, $hashed_password);

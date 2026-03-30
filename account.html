@@ -13,7 +13,7 @@
         <div class="logo"><img src="/images/logo.png" ></div>
         <nav>
             <a href="index.html"><i class="fas fa-home"></i> HOME</a>
-            <a href="upload.php"><i class="fas fa-folder"></i> LIBRARY</a>
+            <a href="library.html"><i class="fas fa-folder"></i> LIBRARY</a>
         </nav>
     </aside>
 
@@ -37,8 +37,9 @@
             <h1>MY ACCOUNT</h1>
             <div class="profile-container">
                 <div class="avatar-section">
-                    <div class="avatar-circle"><i class="fas fa-user"></i></div>
-                    <button class="btn-avatar">Change Avatar</button>
+                    <div class="avatar-circle" id="avatar-preview"><i class="fas fa-user"></i></div>
+                    <input type="file" id="avatar-input" name="avatar" accept="image/*" style="display: none;">
+                    <button class="btn-avatar" onclick="document.getElementById('avatar-input').click();">Change Avatar</button>
                 </div>
 
                 <div class="form-section">
@@ -63,6 +64,6 @@
             </div>
         </section>
     </main>
-
+    <script src="js/change-avatar.js"></script>
 </body>
 </html>
