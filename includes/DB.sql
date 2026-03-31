@@ -32,10 +32,10 @@ create table Songs_Genres (
     foreign key (Genre_id) references Genres(Genre_id)
 );
 create table Users (
-	User_id int primary key,
+	User_id int primary key auto_increment,
     User_name varchar(255) Not NULL,
     Email varchar(100) unique not null, 
-    Password varchar(50) not null,
+    Password VARCHAR(255) not null,
     User_avatar_url varchar(500),
     Role varchar(20) default 'user'
 );

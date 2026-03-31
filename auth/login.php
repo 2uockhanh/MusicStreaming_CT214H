@@ -10,7 +10,7 @@ if (isset($_POST['btn_login'])) {
     $password = $_POST['password'];
 
     // 1. Tìm user trong database bằng Prepared Statement (Chống SQL Injection)
-    $sql = "SELECT id, username, password, role FROM users WHERE username = ?";
+    $sql = "SELECT user_id, user_name, password, role FROM users WHERE user_name = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $username);
     $stmt->execute();
@@ -21,12 +21,17 @@ if (isset($_POST['btn_login'])) {
         // Hàm password_verify sẽ đối chiếu mật khẩu nhập vào với mã băm trong DB
         if (password_verify($password, $row['password'])) {
             // 3. Đăng nhập thành công -> Lưu thông tin vào Session
-            $_SESSION['user_id'] = $row['id'];
-            $_SESSION['username'] = $row['username'];
+            $_SESSION['user_id'] = $row['user_id'];
+            $_SESSION['user_name'] = $row['user_name'];
             $_SESSION['role'] = $row['role'];
+
+            if($row['role'] === 'admin') {
+                header("Location: ../admin/index.php");
+                exit();
+            }
             
             // 4. Chuyển hướng về trang chủ
-            header("Location: ../index.php");
+            header("Location: ../index.html");
             exit();
         } else {
             $error = "Sai mật khẩu!";
