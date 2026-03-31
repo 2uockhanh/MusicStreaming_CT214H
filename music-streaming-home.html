@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eMusik - Home</title> 
+    <link rel="stylesheet" href='home-style.css'>
+</head>
+<body>
+    <div style="display: flex;">
+        <div>
+            <nav class="navbar">
+                <img class="logo" src="./img/logo.png" alt="eMusik"></img>
+                <div class="nav">
+                <table>
+                        <tr>
+                            <button class="nav_button">
+                                <img class="nav_logo" src="./img/home.png"> Home
+                            </button>
+                        </tr>
+                        <tr>
+                            <button class="nav_button">
+                                <img class="nav_logo" src="./img/library.png"> Library
+                            </button>
+                        </tr>
+                        <tr>
+                            <button class="nav_button">
+                                <img class="nav_logo" src="./img/favourite.png"> Favourite
+                            </button>                        
+                        </tr>
+                        <tr>
+                            <button class="nav_button">
+                                <img class="nav_logo" src="./img/account.png"> Account
+                            </button>                        
+                        </tr>
+                    </table>
+                </div>
+            </nav>
+        </div>
+        <div class="home">
+            <div class="header"> 
+                <ul style="display: grid; grid-template-columns: 90% 10%;">
+                    <li>
+                        <div class="search" style="text-align: center;">
+                            <input type="text" id="search_info" name="search_info" placeholder="Search songs, artists..."></input>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="avatar" style="text-align: right; margin-right: 20px; margin-top: 20px; margin-bottom: 20px; width: 10%;">
+                            <button style="background-color: rgba(255,255,255,0); padding: 0; border: 0;">
+                                <img style="width: 40px; height: 40px; border-radius: 30px;" src="./img/avatar.jpg" alt="Avatar"></img>
+                                <select name="avatar" id="avatar">
+                                    <option value="myAccount">My Account</option>
+                                    <option value="MyAccount">My Favourite</option>
+                                    <option value="MyAccount">Theme Mode</option>
+                                    <option value="logOut">Log Out</option>
+                                </select>
+                            </button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="show_song">
+                <div class="show_song_head">
+                    <h3>BEST SONG</h3>
+                </div>
+                <div>
+                    <!-- SONG 1 -->
+                    <button class="song_nav">
+                        <div class="song_nav_grid">
+                            <img src="./img/song/song_jukysan/song_nguoidautien.jpg" alt="eMusik"></img>
+                            <div class="article_body">
+                                <h4>Người Đầu Tiên</h4> <h4 style="font-weight: lighter;">Juky San</h4>
+                            </div>
+                        </div>
+                    </button>
+                    <!-- SONG 2 -->
+                    <button class="song_nav">
+                        <div class="song_nav_grid">
+                            <img src="./img/song/song_rio/song_emoidungkhoc.jpg" alt="eMusik"></img>
+                            <div class="article_body">
+                                <h4>em ơi đừng khóc</h4> <h4 style="font-weight: lighter;">RIO, buitruonglinh</h4>
+                            </div>
+                        </div>
+                    </button>
+                    <!-- SONG 3 -->
+                    <button class="song_nav">
+                        <div class="song_nav_grid">
+                            <img src="./img/song/song_congb/song_vitaminc.jpg" alt="eMusik"></img>
+                            <div class="article_body">
+                                <h4>Vitamin C</h4> <h4 style="font-weight: lighter;">CONGB</h4>
+                            </div>
+                        </div>
+                    </button>
+                    <!-- SONG 4 -->
+                    <button class="song_nav">
+                        <div class="song_nav_grid">
+                            <img src="./img/song/song_vuongbinh/song_thanhtan.jpg" alt="eMusik"></img>
+                            <div class="article_body">
+                                <h4>Thanh Tân</h4> <h4 style="font-weight: lighter;">Vương Bình</h4>
+                            </div>
+                        </div>
+                    </button>
+                    <!-- SONG 5 -->
+                    <button class="song_nav">
+                        <div class="song_nav_grid">
+                            <img src="./img/song/song_buitruonglinh/song_duongtoichoemve.jpg" alt="eMusik"></img>
+                            <div class="article_body">
+                                <h4>Đường Tôi Chở Em Về</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4>
+                            </div>
+                        </div>
+                    </button>
+                    <!-- SONG 6 -->
+                    <button class="song_nav">
+                        <div class="song_nav_grid">
+                            <img src="./img/song/song_buitruonglinh/song_tungngayyeuem.jpg" alt="eMusik"></img>
+                            <div class="article_body">
+                                <h4>Từng Ngày Yêu Em</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+            <div class="show_artist">
+                <div class="show_artist_head">
+                    <h3>NOTABLE ARTIST</h3>
+                </div>
+                <div>
+                    <!-- ARTIST 1 -->
+                    <button class="artist_nav">
+                        <img src="./img/artist/artist_jukysan.jpg" alt="eMusik"></img>
+                        <div class="article_body">
+                            <h4>Juky San</h4>
+                        </div>
+                    </button>
+                    <!-- ARTIST 2 -->
+                    <button class="artist_nav">
+                        <img src="./img/artist/artist_rio.jpg" alt="eMusik"></img>
+                        <div class="article_body">
+                            <h4>RIO</h4>
+                        </div>
+                    </button>
+                    <!-- ARTIST 3 -->
+                    <button class="artist_nav">
+                        <img src="./img/artist/artist_congb.jpg" alt="eMusik"></img>
+                        <div class="article_body">
+                            <h4>CONGB</h4>
+                        </div>
+                    </button>
+                    <!-- ARTIST 4 -->
+                    <button class="artist_nav">
+                        <img src="./img/artist/artist_khoivu.jpg" alt="eMusik"></img>
+                        <div class="article_body">
+                            <h4>KHOI VU</h4>
+                        </div>
+                    </button>
+                    <!-- ARTIST 5 -->
+                    <button class="artist_nav">
+                        <img src="./img/artist/artist_buitruonglinh.jpg" alt="eMusik"></img>
+                        <div class="article_body">
+                            <h4>buitruonglinh</h4>
+                        </div>
+                    </button>
+                    <!-- ARTIST 6 -->
+                    <button class="artist_nav">
+                        <img src="./img/artist/artist_vuongbinh.jpg" alt="eMusik"></img>
+                        <div class="article_body">
+                            <h4>Vương Bình</h4>
+                        </div>
+                    </button>
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h4>About Us</h4>
+                        <ul>
+                            <li><a href="#Introduce">Introduce</a></li>
+                            <li><a href="#Term">Term</a></li>
+                            <li><a href="#Privacy">Privacy</a></li>
+                            <li><a href="#PolicySafety">Policy And Safety</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Useful Link</h4>
+                        <ul>
+                            <li><a href="#Introduce">My Account</a></li>
+                            <li><a href="#Term">Library</a></li>
+                            <li><a href="#Privacy">Favourite</a></li>
+                            <li><a href="#PolicySafety">Import Music</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Social Links</h4>
+                        <ul>
+                            <li><a href="#Facebook">Facebook</a></li>
+                            <li><a href="#TikTok">TikTok</a></li>
+                            <li><a href="#Threads">Threads</a></li>
+                            <li><a href="#Instagram">Instagram</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2026 eMusik. All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
