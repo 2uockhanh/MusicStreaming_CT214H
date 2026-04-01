@@ -26,7 +26,7 @@ if (isset($_POST['btn_login'])) {
             $_SESSION['role'] = $row['role'];
 
             if($row['role'] === 'admin') {
-                header("Location: ../admin/index.php");
+                header("Location: ../admin/dashboard.php");
                 exit();
             }
             

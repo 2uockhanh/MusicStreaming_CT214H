@@ -2,6 +2,8 @@
 :root {
     --container-bg: rgba(255, 255, 255, 0.85);
     --primary-color: #007bff;
+    --bg-main-image: url('../images/bg_login.jpg');
+    --bg-body-color: #0b1021;
     --bg-color: #f4f7f6;
     --container-bg: #ffffff;
     --text-color: #333333;

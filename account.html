@@ -6,6 +6,9 @@
     <title>eMuzik - My Account</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/account_style.css">
+    <link rel="stylesheet" href="css/theme-menu.css">
+    <script src="js/cookie-handler.js"></script>
+    <script src="js/theme-handler.js"></script>
 </head>
 <body>
 
@@ -28,7 +31,19 @@
                 <div class="dropdown-menu">
                     <a href="account.html">My Account</a>
                     <a href="#">Upload Song</a>
-                    <a href="#">Theme Mode</a>
+                    <div class="submenu-item">
+                    <a href="javascript:void(0)" class="submenu-toggle">
+                        Theme Mode <i class="fas fa-chevron-right"></i>
+                    </a>
+                    <div class="theme-options">
+                        <a href="#" onclick="ThemeHandler.toggle('dark')">
+                            <i class="fas fa-moon"></i> DARK
+                        </a>
+                        <a href="#" onclick="ThemeHandler.toggle('light')">
+                            <i class="fas fa-sun"></i> LIGHT
+                        </a>
+                    </div>
+                </div>
                     <a href="#">Sign Out</a>
                 </div>
         </header>
