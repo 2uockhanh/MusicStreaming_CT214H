@@ -1,5 +1,8 @@
-<!-- <?php
-require_once '../includes/db-connect.php';
+<?php
+require '../includes/db-connect.php';
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 if (isset($_POST['btn_signup'])) {
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
@@ -18,7 +21,7 @@ if (isset($_POST['btn_signup'])) {
             $stmt->close();
         }
 }
-?> -->
+?> 
 <?php include '../includes/header.php'; ?>
     <div class="auth-container">
         <h2> Sign up</h2>
@@ -37,7 +40,6 @@ if (isset($_POST['btn_signup'])) {
                 <input type="text" name="email" required>
             </div>
             <button type="submit" name="btn_signup" class="btn-submit">Đăng ký</button>
-        </form>
         </form>
          <div class="auth-links">
         <p>Already have an account? <a href="login.php"><u>Log in</u></a></p>

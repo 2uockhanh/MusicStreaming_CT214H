@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eMuzik - My Account</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/account_style.css">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="logo"><img src="/images/logo.png" ></div>
+        <nav>
+            <a href="index.html"><i class="fas fa-home"></i> HOME</a>
+            <a href="library.html"><i class="fas fa-folder"></i> LIBRARY</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="top-bar">
+            <div class="search-box">
+                <input type="text" placeholder="SEARCH">
+                <i class="fas fa-search"></i>
+            </div>
+             <div class="user-icon-wrapper">
+                <div class="user-icon"><i class="fas fa-user"></i></div>
+                <div class="dropdown-menu">
+                    <a href="account.html">My Account</a>
+                    <a href="#">Upload Song</a>
+                    <a href="#">Theme Mode</a>
+                    <a href="#">Sign Out</a>
+                </div>
+        </header>
+        
+        <section class="account-area">
+            <h1>MY ACCOUNT</h1>
+            <div class="profile-container">
+                <div class="avatar-section">
+                    <div class="avatar-circle" id="avatar-preview"><i class="fas fa-user"></i></div>
+                    <input type="file" id="avatar-input" name="avatar" accept="image/*" style="display: none;">
+                    <button class="btn-avatar" onclick="document.getElementById('avatar-input').click();">Change Avatar</button>
+                </div>
+
+                <div class="form-section">
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" name="username">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label>Change<br>Password</label>
+                        <input type="password" name="password">
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn-action btn-library"><i class="fas fa-music"></i> MY LIBRARY</button>
+                <button class="btn-action btn-upload"><i class="fas fa-upload"></i> UPLOAD SONG</button>
+            </div>
+        </section>
+    </main>
+    <script src="js/change-avatar.js"></script>
+</body>
+</html>

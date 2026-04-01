@@ -31,7 +31,7 @@ if (isset($_POST['btn_login'])) {
             }
             
             // 4. Chuyển hướng về trang chủ
-            header("Location: ../index.html");
+            header("Location: ../index.php");
             exit();
         } else {
             $error = "Sai mật khẩu!";
