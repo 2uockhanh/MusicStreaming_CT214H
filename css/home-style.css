@@ -1,0 +1,272 @@
+body{
+    
+    background-color: rgba(1,1,1,0.6);
+    background-image: url('/img/dark-bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+/* Navigation Bar */
+.navbar {
+    height: 100%;
+    width: 250px;
+    justify-content: center;
+    place-items: center;
+    text-align: center;
+    background-color: rgba(217, 217, 217, 0.72);
+    display: block;
+}
+.logo {
+    width: 50%;
+    margin: 20px auto 40px;
+}
+.nav_logo {
+    max-height: 24px;
+    max-width: 24px;
+}
+.nav_button {
+    width: 250px;
+    height: 60px;
+    font-size: 24px;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0);
+    border: 0px;
+    font-family: Tahoma, sans-serif;
+    text-align: center;
+    text-decoration: none;
+}
+.nav_button:hover {
+    width: 250px;
+    height: 60px;
+    font-size: 24px;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 20px;
+    border: 0px;
+    font-family: Tahoma, sans-serif;
+    text-align: center;
+}
+.home {
+    background-color: rgba(1, 1, 1, 0.7);
+    height: 100%;
+    width: 100%;
+}
+/* Search Bar */
+.header {
+    grid-template-columns: 90% 10%;
+}
+.search {
+    font-family: Tahoma, sans-serif;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.search input {
+    width: 50%;
+    height: 40px;
+    border-radius: 20px;
+    border-width: 0px;
+    font-size: 20px;
+    margin: 0 auto;
+    color: rgba(1, 1, 1, 1);
+    border: 1px solid;
+    padding-left: 10px;
+}
+.search img {
+    width: 40px;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 20px;
+}
+/* Avatar */
+.avatar {
+    text-align: right; 
+    margin-right: 20%; 
+    width: 10%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+/* Show Content */
+.show_song, .show_artist {
+    margin-left: 80px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    background-color: rgba(255, 255, 255, 0);
+    width: 70vw;
+    height: fit-content;
+    border-radius: 10px;
+}
+.show_song_head, .show_artist_head {
+    margin-left: 20px;
+    margin-top: 20px;
+    color: rgba(255, 255, 255, 1);
+}
+.show_song_head h3, .show_artist_head h3 {
+    font-family: Tahoma, sans-serif;
+    margin-bottom: 0px;
+}
+.song_nav, .artist_nav {
+    width: 160px;
+    height: 200px;
+    margin-left: 10px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0);
+    border: 0;
+    border-radius: 20px;
+}
+.song_nav:hover, .artist_nav:hover {
+    width: 160px;
+    height: 200px;
+    margin-left: 10px;
+    text-align: center;
+    background-color: rgba(43, 61, 148, 0.6);
+    border: 0;
+    border-radius: 20px;
+}
+.song_nav_grid {
+    grid-template-rows: auto 30%; 
+    display: grid; 
+    margin-top: 0px; 
+    align-content: center;
+}
+.song_nav img, .artist_nav img {
+    width: 70%;  
+    border-color:white; 
+    border-width: 10px;
+    margin-bottom: 10px; 
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    border: 2px solid;
+    border-color: rgba(255, 255, 255, 1);
+}
+.article_body {
+    font-family: "Roboto", sans-serif;
+}
+.article_body h4 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    text-align: center;
+    color: rgba(255, 255, 255, 1);
+}
+/* Footer */
+.footer {
+    width: 100%;
+    height: max-content;
+    background-color: rgba(217, 217, 217, 0.72);
+    
+}
+.footer-content {
+    margin: 0 auto; 
+    display: grid; 
+    grid-template-columns: repeat(3, 30%); 
+    gap: 40px; 
+    text-align: center;
+}
+.footer-section h4 {
+    font-family: Tahoma, sans-serif; 
+    font-size: 1.2rem; 
+    margin-bottom: 20px;
+}
+.footer-section ul {
+    list-style: none; 
+    padding: 0;
+}
+.footer-section li a {
+    font-family: Tahoma, sans-serif; 
+    color: black; 
+    text-decoration: none;
+}
+.footer-bottom {
+    text-align: center;
+    align-content: center;
+    font-family: Roboto, sans-serif;
+    padding-top: 2px;
+    border-top: 1px solid;
+}
+
+.main-content { 
+    flex: 1; /* Lệnh yêu cầu chiếm hết khoảng trống còn lại bên cạnh Sidebar */
+    min-width: 0; /* Trick của Flexbox: Tránh bị nội dung bên trong phá vỡ cấu trúc */
+    height: 100vh; 
+    overflow-y: auto; /* Cho phép cuộn dọc nội dung bên trong */
+    display: flex; 
+    flex-direction: column; 
+    padding: 30px 50px 0 50px; 
+   padding-bottom: 0 !important;
+}
+
+/* Menu dropdown cạnh avatar */
+
+.user-icon-wrapper { 
+    position: relative; /* Chìa khóa để menu không bay lung tung */
+    cursor: pointer; 
+    display: flex; /* Dùng flex để dễ canh giữa */
+    justify-content: flex-end;
+}
+.dropdown-menu { 
+    display: flex; 
+    visibility: hidden; 
+    opacity: 0; 
+    /* Làm chậm quá trình xuất hiện/biến mất 0.3 giây */
+    transition: visibility 0.3s, opacity 0.3s ease;
+    position: absolute; 
+    top: 45px; /* Đẩy xuống dưới avatar một chút */
+    right: 0; 
+    
+    /* Thiết kế giao diện */
+    background: rgba(255, 255, 255, 0.9); /* Đổi từ đen sang trắng mờ */
+    backdrop-filter: blur(8px); /* Hiệu ứng kính mờ */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Viền sáng nhẹ */
+    width: 160px; 
+    border-radius: 10px; /* Bo góc */
+    flex-direction: column; 
+    z-index: 1000; 
+    box-shadow: 0 8px 16px rgba(0,0,0,0.5); 
+    overflow: hidden; /* Cắt góc các thẻ <a> bên trong cho bo tròn theo */
+}
+.dropdown-menu::before {
+    content: "";
+    position: absolute;
+    top: -15px; /* Vươn lên trên lấp kín khe hở */
+    left: 0;
+    width: 100%;
+    height: 15px;
+    background: transparent; /* Trong suốt hoàn toàn */
+}
+/*Rê chuột vào Avatar thì hiện Menu */
+.user-icon-wrapper:hover .dropdown-menu { 
+    visibility: visible; 
+    opacity: 1;
+    display: flex; 
+    animation: fadeIn 0.3s ease; 
+}
+
+/* Từng dòng link trong menu */
+.dropdown-menu a { 
+    padding: 12px 15px; 
+    color: #080223; 
+    text-decoration:none; 
+    font-size: 14px; 
+    
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+    transition: all 0.2s ease;
+}
+
+/* Xóa viền của dòng cuối cùng */
+.dropdown-menu a:last-child {
+    border-bottom: none;
+}
+
+/* Hiệu ứng khi rê chuột vào từng dòng link */
+.dropdown-menu a:hover { 
+    background: rgba(92, 124, 255, 0.8); /* Màu xanh giống nút Upload */
+    padding-left: 20px; /* Thụt đầu dòng một xíu cho sinh động */
+    font-weight: bold;
+}
+
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+

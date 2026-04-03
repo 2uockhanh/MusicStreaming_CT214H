@@ -1,0 +1,141 @@
+body{
+    background-color: rgba(1,1,1,0.6);
+    background-image: url(./img/dark-bg.jpg);
+}
+/* Navigation Bar */
+.navbar {
+    height: 100%;
+    width: 250px;
+    justify-content: center;
+    place-items: center;
+    text-align: center;
+    background-color: rgba(217, 217, 217, 0.72);
+    display: block;
+}
+.logo {
+    width: 50%;
+    margin: 20px auto 40px;
+}
+.nav_logo {
+    max-height: 24px;
+    max-width: 24px;
+}
+.nav_button {
+    width: 250px;
+    height: 60px;
+    font-size: 24px;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0);
+    border: 0px;
+    font-family: Tahoma, sans-serif;
+    text-align: center;
+}
+.nav_button:hover {
+    width: 250px;
+    height: 60px;
+    font-size: 24px;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 20px;
+    border: 0px;
+    font-family: Tahoma, sans-serif;
+    text-align: center;
+}
+.home {
+    background-color: rgba(1, 1, 1, 0.7);
+    height: 100%;
+    width: 100%;
+}
+/* Search Bar */
+.header {
+    grid-template-columns: 90% 10%;
+}
+.search {
+    font-family: Tahoma, sans-serif;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.search input {
+    width: 50%;
+    height: 40px;
+    border-radius: 20px;
+    border-width: 0px;
+    font-size: 20px;
+    margin: 0 auto;
+    color: rgba(1, 1, 1, 1);
+    border: 1px solid;
+    padding-left: 10px;
+}
+.search img {
+    width: 40px;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 20px;
+}
+/* Avatar */
+.avatar {
+    text-align: right; 
+    margin-right: 20%; 
+    width: 10%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+/* Playlist Header */
+.playlist-header {
+    width: 600px; 
+    grid-template-columns: 15% auto; 
+    display: grid; 
+    gap: 10px; 
+    margin-left: 100px; 
+    font-family: Roboto, sans-serif;
+}
+.playlist-image {
+    width: 90px; 
+    height: 90px;
+}
+.playlist-name {
+    grid-template-rows: 20% 25% auto;
+    color: white; 
+    display: grid;
+}
+.playlist-name h4 {
+    margin-top: 0px; 
+    margin-bottom: 10px;
+}
+.playlist-name h2 {
+    margin-top: 0px; 
+    margin-bottom: 10px;
+}
+/* Footer */
+.footer {
+    width: 100%;
+    height: max-content;
+    background-color: rgba(217, 217, 217, 0.72);
+}
+.footer-content {
+    margin: 0 auto; 
+    display: grid; 
+    grid-template-columns: repeat(3, 30%); 
+    gap: 40px; 
+    text-align: center;
+}
+.footer-section h4 {
+    font-family: Tahoma, sans-serif; 
+    font-size: 1.2rem; 
+    margin-bottom: 20px;
+}
+.footer-section ul {
+    list-style: none; 
+    padding: 0;
+}
+.footer-section li a {
+    font-family: Tahoma, sans-serif; 
+    color: black; 
+    text-decoration: none;
+}
+.footer-bottom {
+    text-align: center;
+    align-content: center;
+    font-family: Roboto, sans-serif;
+    padding-top: 2px;
+    border-top: 1px solid;
+}
