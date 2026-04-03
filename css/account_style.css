@@ -175,6 +175,40 @@
     margin-right: -50px !important; /* Kéo giãn sang phải đụng lề màn hình */
     width: auto !important; 
 }
+/* ================= POPUP MODAL ================= */
+.modal-overlay {
+    display: none; /* Mặc định giấu đi */
+    position: fixed; 
+    top: 0; left: 0; 
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Phủ lớp nền đen mờ che toàn trang */
+    z-index: 2000;
+    justify-content: center; 
+    align-items: center;
+}
+
+.modal-content {
+    background: rgba(20, 20, 30, 0.85); /* Nền kính mờ */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 40px; 
+    border-radius: 10px; 
+    width: 450px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    color: #fff;
+}
+
+.close-modal {
+    position: absolute; 
+    top: 15px; right: 20px;
+    font-size: 28px; 
+    color: #fff; 
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.close-modal:hover { color: #ff5c5c; }
 /* ================= RESPONSIVE ================= */
 @media (max-width: 850px) {
     body { flex-direction: column; height: auto; min-height: 100vh; }

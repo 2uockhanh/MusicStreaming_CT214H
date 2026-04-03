@@ -1,0 +1,126 @@
+
+        /* CSS DÙNG CHUNG CHO MỌI TRANG */
+        * {
+             margin: 0; 
+             padding: 0; 
+             box-sizing: border-box; 
+             font-family: sans-serif; }
+        body {
+             display: flex; 
+             height: 100vh; 
+             background-color: #0b1021; 
+             color: #fff; }
+        
+        /* Sidebar */
+        .sidebar { 
+            width: 220px; 
+            background-color: #b0b3b8; 
+            padding: 30px 20px; 
+            display: flex; 
+            flex-direction: column; 
+        }
+        .sidebar .logo { 
+            font-size: 28px; 
+            font-weight: bold;
+            margin-bottom: 50px; 
+            text-align: center; 
+            color: #fff; }
+        .sidebar nav a { 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+            color: #000; 
+            text-decoration: none; 
+            font-weight: bold; 
+            font-size: 16px; 
+            margin-bottom: 25px; }
+        .sidebar .logo img {
+             max-width: 80%; 
+            height: auto; 
+            display: block; 
+            margin: 0 auto; 
+        }
+        /* Main Content & Topbar */
+        .main-content { 
+            flex: 1; 
+            padding: 30px 50px; 
+            overflow-y: auto; 
+            background: url('/images/bg_login.jpg') center/cover no-repeat;
+         }
+        .top-bar { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 40px; }
+        
+        .search-box { 
+            position: relative; 
+            width: 400px; }
+        .search-box input { 
+            width: 100%;
+            padding: 10px 40px 10px 20px; 
+            border-radius: 20px; 
+            border: none; 
+            background: #888; 
+            color: #fff; 
+            outline: none; 
+        }
+
+        
+        /* Dropdown Menu */
+        .user-icon-wrapper { 
+            position: relative; 
+            cursor: pointer; }
+        .user-icon { 
+            width: 40px; 
+            height: 40px; 
+            background: #fff; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: #5a4b81; 
+            font-size: 20px; 
+        }
+        .dropdown-menu { 
+            position: absolute; 
+            top: 42px; 
+            right: 0; 
+            background: #fff;
+            width: 150px; 
+            border-radius: 5px; 
+            display: none; 
+            flex-direction: column; 
+            z-index: 100; 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+        .user-icon-wrapper:hover .dropdown-menu { 
+            display: flex; 
+        }
+        .dropdown-menu a { 
+            padding: 10px; 
+            color: #000; 
+            text-decoration: none; 
+            font-size: 14px; 
+            border-bottom: 1px solid #eee; }
+        .dropdown-menu a:hover { background: #f0f0f0; }
+        
+        /* ================= RESPONSIVE (ĐIỆN THOẠI & TABLET) ================= */
+        @media (max-width: 850px) {
+            body { flex-direction: column; height: auto; min-height: 100vh; }
+            .sidebar { width: 100%; padding: 15px; flex-direction: row; justify-content: space-between; align-items: center; }
+            .sidebar .logo { margin-bottom: 0; }
+            .sidebar nav { display: flex; gap: 20px; }
+            .sidebar nav a { margin-bottom: 0; }
+            .sidebar .logo img {
+                max-width: 40%; 
+              
+            }
+            .profile-container { flex-direction: column; align-items: center; gap: 30px; }
+            .form-section { width: 100%; }
+            .form-group { flex-direction: column; align-items: flex-start; gap: 5px; }
+            .form-group input { width: 100%; }
+            
+            .action-buttons { flex-direction: column; gap: 20px; }
+            .search-box { width: 70%; }
+        }
+       

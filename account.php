@@ -90,7 +90,7 @@
                         <button type="submit" class="btn-confirm">
                             <i class="fas fa-check-circle"></i> Confirm Change
                         </button>
-                        <button type="cancel" class="btn-cancel">
+                        <button type="button" class="btn-cancel">
                             <i class="fas fa-cancel"></i> Cancel 
                         </button>
                     </div>
@@ -102,7 +102,8 @@
                 <button class="btn-action btn-upload"><i class="fas fa-upload"></i> UPLOAD SONG</button>
             </div>
         </section>
-        
+
+
         <footer class="footer">
             <div class="footer-content">
                 <div class="footer-section">
@@ -139,5 +140,6 @@
         </footer>
     </main>
     <script src="js/change-avatar.js"></script>
+    <script src="js/upload_handler.js"></script>
 </body>
 </html>
