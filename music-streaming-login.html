@@ -7,10 +7,9 @@
 	<link rel="stylesheet" href='welcome-style.css'>
 </head>
 <body>
-	<div class="bg">
-		<!-- <img style="opacity: 0.6" src="./img/dark-bg.jpg"> -->
-		<div class="darkModeToggle">
-			<button class="changModeButton">🌙 DARK</button>
+	<div id="welcome" style="background-color: rgba(1,1,1,0.6);">
+		<div style="text-align: right; margin-right: 10px; margin-top: 10px;">
+			<button id="darkModeToggle" class="darkModeToggle">🌙 DARK</button>
 		</div>
 		<section>
 			<div class="lg">
@@ -25,7 +24,7 @@
 							<td><input type="text" id="input_username" name="input_username"></td>
 						</tr>
 						<tr>
-							<th>Password </th>
+							<th style="margin-right: 20px;">Password </th>
 							<td><input type="text" id="input_password" name="input_password"></td>
 						</tr>
 					</table>
@@ -46,5 +45,6 @@
 			</div>
 		</section>
 	</div>
+	<script src="music-streaming.js"></script>
 </body>
 </html>

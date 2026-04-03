@@ -28,11 +28,13 @@
                                 <img class="nav_logo" src="./img/favourite.png"> Favourite
                             </button>                        
                         </tr>
+                        <!--
                         <tr>
                             <button class="nav_button">
                                 <img class="nav_logo" src="./img/account.png"> Account
                             </button>                        
                         </tr>
+                        -->
                     </table>
                 </div>
             </nav>
@@ -46,16 +48,16 @@
                         </div>
                     </li>
                     <li>
-                        <div class="avatar">
-                            <button style="background-color: rgba(255,255,255,0); padding: 0; border: 0;">
+                        <div class="avatar_dropdown">
+                            <button class="dropbtn" id="dropbtn">
                                 <img style="width: 40px; height: 40px; border-radius: 30px;" src="./img/avatar.jpg" alt="Avatar"></img>
-                                <select name="avatar" id="avatar">
-                                    <option value="myAccount">My Account</option>
-                                    <option value="MyAccount">My Favourite</option>
-                                    <option value="MyAccount">Theme Mode</option>
-                                    <option value="logOut">Log Out</option>
-                                </select>
                             </button>
+                            <div class="dropDownList" name="avatar" id="dropDown">
+                                <button value="myAccount" class="dropDownBtn">My Account</option>
+                                <button value="MyFavourite" class="dropDownBtn">My Favourite</option>
+                                <button value="ThemeMode" class="dropDownBtn">Theme Mode</option>
+                                <button value="logOut" class="dropDownBtn">Log Out</option>
+                            </div>
                         </div>
                     </li>
                 </ul>
@@ -74,79 +76,103 @@
                 <div class="uploaded_song_head">
                     <h3>UPLOADED SONG</h3>
                 </div>
-                <div>
-                    <!-- SONG 1 -->
-                    <button class="song_nav">
-                        <div class="song_nav_grid">
-                            <img src="./img/song/song_buitruonglinh/song_thinhvuongvietnamsangngoi.jpg" alt="eMusik"></img>
-                            <div class="article_body">
-                                <h4>Thịnh Vượng Việt Nam Sáng Ngời</h4> 
-                                <h4 style="font-weight: lighter;">buitruonglinh</h4>
+                <div class="uploaded_song_body">
+                    <div class="show_body_grid">
+                        <button class="arrow-btn">
+                            <img src="./img/left-arrow.png" style="height: 30px;"></img>
+                        </button>
+                    </div>
+                    <div class="show_body_grid">
+                        <!-- SONG 1 -->
+                        <button class="song_nav">
+                            <div class="song_nav_grid">
+                                <img src="./img/song/song_buitruonglinh/song_thinhvuongvietnamsangngoi/poster.jpg" alt="eMusik"></img>
+                                <div class="article_body">
+                                    <h4>Thịnh Vượng Việt Nam Sáng Ngời</h4> 
+                                    <h4 style="font-weight: lighter;">buitruonglinh</h4>
+                                </div>
                             </div>
-                        </div>
-                    </button>
-                    <!-- SONG 2 -->
-                    <button class="song_nav">
-                        <div class="song_nav_grid">
-                            <img src="./img/song/song_buitruonglinh/song_duemtungyeu.jpg" alt="eMusik"></img>
-                            <div class="article_body">
-                                <h4>Dù Em Từng Yêu</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4>
+                        </button>
+                        <!-- SONG 2 -->
+                        <button class="song_nav">
+                            <div class="song_nav_grid">
+                                <img src="./img/song/song_buitruonglinh/song_duemtungyeu/poster.jpg" alt="eMusik"></img>
+                                <div class="article_body">
+                                    <h4>Dù Em Từng Yêu</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4>
+                                </div>
+                            </div> 
+                        </button>
+                        <!-- SONG 3 -->
+                        <button class="song_nav">
+                            <div class="song_nav_grid">
+                                <img src="./img/song/song_buitruonglinh/song_giothi/poster.jpg" alt="eMusik"></img>
+                                <div class="article_body">
+                                    <h4>Giờ Thì</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4>
+                                </div>
                             </div>
-                        </div> 
-                    </button>
-                    <!-- SONG 3 -->
-                    <button class="song_nav">
-                        <div class="song_nav_grid">
-                            <img src="./img/song/song_buitruonglinh/song_giothi.jpg" alt="eMusik"></img>
-                            <div class="article_body">
-                                <h4>Giờ Thì</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4>
+                        </button>
+                        <!-- SONG 4 -->
+                        <button class="song_nav">
+                            <div class="song_nav_grid">
+                                <img src="./img/song/song_buitruonglinh/song_duongtoichoemve/poster.jpg" alt="eMusik"></img>
+                                <div class="article_body">
+                                    <h4>Đường Tôi Chở Em Về</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4>
+                                </div>
                             </div>
-                        </div>
-                    </button>
-                    <!-- SONG 4 -->
-                    <button class="song_nav">
-                        <div class="song_nav_grid">
-                            <img src="./img/song/song_buitruonglinh/song_duongtoichoemve.jpg" alt="eMusik"></img>
-                            <div class="article_body">
-                                <h4>Đường Tôi Chở Em Về</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4>
+                        </button>
+                        <!-- SONG 5 -->
+                        <button class="song_nav">
+                            <div class="song_nav_grid">
+                                <img src="./img/song/song_buitruonglinh/song_tungngayyeuem/poster.jpg" alt="eMusik"></img>
+                                <div class="article_body">
+                                    <h4>Từng Ngày Yêu Em</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4>
+                                </div>
                             </div>
-                        </div>
-                    </button>
-                    <!-- SONG 5 -->
-                    <button class="song_nav">
-                        <div class="song_nav_grid">
-                            <img src="./img/song/song_buitruonglinh/song_tungngayyeuem.jpg" alt="eMusik"></img>
-                            <div class="article_body">
-                                <h4>Từng Ngày Yêu Em</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4>
-                            </div>
-                        </div>
-                    </button>
+                        </button>
+                    </div>
+                    <div class="show_body_grid">
+                        <button class="arrow-btn">
+                            <img src="./img/right-arrow.png" style="height: 30px;"></img>
+                        </button>
+                    </div>
                 </div>
             </div>
             <div class="playlists">
                 <div class="playlists_head">
                     <h3>PLAYLISTS</h3>
                 </div>
-                <div>
-                    <!-- PLAYLIST 1 -->
-                    <button class="playlist_nav">
-                        <div class="playlist_nav_grid">
-                            <img src="./img/song/song_buitruonglinh/song_thinhvuongvietnamsangngoi.jpg" alt="eMusik"></img>
-                            <div class="article_body">
-                                <h4>Thịnh Vượng Việt Nam Sáng Ngời</h4> 
-                                <h4 style="font-weight: lighter;">Đĩa Đơn</h4>
+                <div class="playlists_body">
+                    <div class="show_body_grid">
+                        <button class="arrow-btn">
+                            <img src="./img/left-arrow.png" style="height: 30px;"></img>
+                        </button>
+                    </div>
+                    <div class="show_body_grid">
+                        <!-- PLAYLIST 1 -->
+                        <button class="playlist_nav">
+                            <div class="playlist_nav_grid">
+                                <img src="./img/playlist/playlist_buitruonglinh/diadon_thinhvuongvietnamsangngoi/poster.jpg" alt="eMusik"></img>
+                                <div class="article_body">
+                                    <h4>Thịnh Vượng Việt Nam Sáng Ngời</h4> 
+                                    <h4 style="font-weight: lighter;">Đĩa Đơn</h4>
+                                </div>
                             </div>
-                        </div>
-                    </button>
-                    <!-- PLAYLIST 2 -->
-                    <button class="playlist_nav">
-                        <div class="playlist_nav_grid">
-                            <img src="./img/song/song_buitruonglinh/song_duemtungyeu.jpg" alt="eMusik"></img>
-                            <div class="article_body">
-                                <h4>Từng Ngày Như Mãi Mãi</h4> <h4 style="font-weight: lighter;">Album</h4>
-                            </div>
-                        </div> 
-                    </button>
+                        </button>
+                        <!-- PLAYLIST 2 -->
+                        <button class="playlist_nav">
+                            <div class="playlist_nav_grid">
+                                <img src="./img/playlist/playlist_buitruonglinh/album_tungngaynhumaimai/poster.jpg" alt="eMusik"></img>
+                                <div class="article_body">
+                                    <h4>Từng Ngày Như Mãi Mãi</h4> <h4 style="font-weight: lighter;">Album</h4>
+                                </div>
+                            </div> 
+                        </button>
+                    </div>
+                    <div class="show_body_grid">
+                        <button class="arrow-btn">
+                            <img src="./img/right-arrow.png" style="height: 30px;"></img>
+                        </button>
+                    </div>
                 </div>
             </div>
             <footer class="footer">
@@ -185,5 +211,6 @@
             </footer>
         </div>
     </div>
+    <script src="music-streaming-home.js"></script>
 </body>
 </html>

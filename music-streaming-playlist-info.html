@@ -28,11 +28,13 @@
                                 <img class="nav_logo" src="./img/favourite.png"> Favourite
                             </button>                        
                         </tr>
+                        <!--
                         <tr>
                             <button class="nav_button">
                                 <img class="nav_logo" src="./img/account.png"> Account
                             </button>                        
                         </tr>
+                        -->
                     </table>
                 </div>
             </nav>
@@ -46,16 +48,16 @@
                         </div>
                     </li>
                     <li>
-                        <div class="avatar">
-                            <button style="background-color: rgba(255,255,255,0); padding: 0; border: 0;">
+                        <div class="avatar_dropdown">
+                            <button class="dropbtn" id="dropbtn">
                                 <img style="width: 40px; height: 40px; border-radius: 30px;" src="./img/avatar.jpg" alt="Avatar"></img>
-                                <select name="avatar" id="avatar">
-                                    <option value="myAccount">My Account</option>
-                                    <option value="MyAccount">My Favourite</option>
-                                    <option value="MyAccount">Theme Mode</option>
-                                    <option value="logOut">Log Out</option>
-                                </select>
                             </button>
+                            <div class="dropDownList" name="avatar" id="dropDown">
+                                <button value="myAccount" class="dropDownBtn">My Account</option>
+                                <button value="MyFavourite" class="dropDownBtn">My Favourite</option>
+                                <button value="ThemeMode" class="dropDownBtn">Theme Mode</option>
+                                <button value="logOut" class="dropDownBtn">Log Out</option>
+                            </div>
                         </div>
                     </li>
                 </ul>
@@ -75,48 +77,117 @@
                 </div>
             </div>
             <div>
-                <table style="margin-left: auto; margin-right: auto; margin-bottom: 20px; font-family: Roboto, sans-serif; color: white;">
-                    <tr style="background-color: rgba(217, 217, 217, 0.6); color: black;">
-                        <th style="text-align:center; width: 20%;">#</th>
-                        <th style="text-align:left; width: 70%;">Title</th>
-                        <th style="text-align:center; width: 30%;">Duration</th>
+                <table class="playlist-table">
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Duration</th>
                     </tr>
-                    <tr style="line-height: 50px;">
-                        <td style="text-align:center; width: 20%;">1</td>
-                        <td style="text-align:left; width: 70%;">Intro (Mong Em Hạnh Phúc Suốt Cuộc Đời Này)</td>
-                        <td style="text-align:center; width: 30%;">2:01</td>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <div>
+                                <h4>Intro Mong Em Hạnh Phúc Suốt Cuộc Đời Này</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4> 
+                            </div>
+                        </td>
+                        <td>2:01</td>
                     </tr>
-                    <tr style="line-height: 50px;">
-                        <td style="text-align:center; width: 20%;">2</td>
-                        <td style="text-align:left; width: 70%;">Từng Ngày Như Mãi Mãi</td>
-                        <td style="text-align:center; width: 30%;">3:33</td>
+                    <tr>
+                        <td>2</td>
+                        <td>
+                            <div>
+                                <h4>Từng Ngày Như Mãi Mãi</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4> 
+                            </div>
+                        </td>
+                        <td>3:33</td>
                     </tr>
-                    <tr style="line-height: 50px;">
-                        <td style="text-align:center; width: 20%;">3</td>
-                        <td style="text-align:left; width: 70%;">Em Ơi Là Em</td>
-                        <td style="text-align:center; width: 30%;">3:07</td>
+                    <tr>
+                        <td>3</td>
+                        <td>
+                            <div>
+                                <h4>Em Ơi Là Em</h4> <h4 style="font-weight: lighter;">buitruonglinh, Kiều Chi, BMZ</h4> 
+                            </div>
+                        </td>
+                        <td>3:07</td>
                     </tr>
-                    <tr style="line-height: 50px;">
-                        <td style="text-align:center; width: 20%;">4</td>
-                        <td style="text-align:left; width: 70%;">Vì Điều Gì</td>
-                        <td style="text-align:center; width: 30%;">2:33</td>
+                    <tr>
+                        <td>4</td>
+                        <td>
+                            <div>
+                                <h4>Vì Điều Gì</h4> <h4 style="font-weight: lighter;">buitruonglinh, Kiều Chi, BMZ</h4> 
+                            </div>
+                        </td>
+                        <td>2:33</td>
                     </tr>
-                    <tr style="line-height: 50px;">
-                        <td style="text-align:center; width: 20%;">5</td>
-                        <td style="text-align:left; width: 70%;">Từng Ngày Yêu Em</td>
-                        <td style="text-align:center; width: 30%;">3:45</td>
+                    <tr>
+                        <td>5</td>
+                        <td>
+                            <div>
+                                <h4>Từng Ngày Yêu Em</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4> 
+                            </div>
+                        </td>
+                        <td>3:45</td>
                     </tr>
-                    <tr style="line-height: 50px;">
-                        <td style="text-align:center; width: 20%;">6</td>
-                        <td style="text-align:left; width: 70%;">Nàng Công Chúa Nhỏ (Interlude)</td>
-                        <td style="text-align:center; width: 30%;">2:04</td>
+                    <tr>
+                        <td>6</td>
+                        <td>
+                            <div>
+                                <h4>Nàng Công Chúa Nhỏ (Interlude)</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4> 
+                            </div>
+                        </td>
+                        <td>2:04</td>
                     </tr>
-                    <tr style="line-height: 50px;">
-                        <td style="text-align:center; width: 20%;">...</td>
-                        <td style="text-align:left; width: 70%;">...</td>
-                        <td style="text-align:center; width: 30%;">...</td>
+                    <tr>
+                        <td>7</td>
+                        <td>
+                            <div>
+                                <h4>Đi Cùng Anh</h4> <h4 style="font-weight: lighter;">buitruonglinh, 52Hz</h4> 
+                            </div>
+                        </td>
+                        <td>3:08</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>
+                            <div>
+                                <h4>Anh Chưa Từng Hết Yêu</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4> 
+                            </div>
+                        </td>
+                        <td>3:28</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>
+                            <div>
+                                <h4>Chỉ Là Không Có Nhau</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4> 
+                            </div>
+                        </td>
+                        <td>4:01</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>
+                            <div>
+                                <h4>Dù Em Từng Yêu</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4> 
+                            </div>
+                        </td>
+                        <td>3:14</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>
+                            <div>
+                                <h4>Chỉ Là Không Có Nhau</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4> 
+                            </div>
+                        </td>
+                        <td>3:54</td>
                     </tr>
                 </table>
+            </div>
+            <div class="copyright">
+                <p>Last Update: 03/04/2026</p>
+                <p>&copy; 2024 LOOPS MUSIC.</p>
+                <p>&copy; 2024 LOOPS MUSIC.</p>
             </div>
             <footer class="footer">
                 <div class="footer-content">
@@ -154,4 +225,6 @@
             </footer>
         </div>
     </div>
+    <script src="music-streaming-home.js"></script>
 </body>
+</html>
