@@ -1,132 +1,191 @@
+/* ================= FORM TÀI KHOẢN ================= */
+.article_body h1 { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 28px; 
+    margin-bottom: 40px; 
+    color: #fff;
+    text-align: center;
+}
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Passero One } /* Hỏng biết dùng font gì nên có gì QK sửa giúp AT nhe
-        
-        /* Bố cục tổng */
-        body { display: flex; height: 100vh; background-color: #0b1021; color: #fff; }
-        
-        /* ================= SIDEBAR ================= */
-        .sidebar { width: 220px; background-color: #b0b3b8; color: #000; padding: 30px 20px; display: flex; flex-direction: column; image-rendering: auto; }
-        .sidebar .logo { 
-            
-            font-size: 28px; 
-            font-weight: bold;
-             margin-bottom: 50px; 
-             text-align: center; 
-             color: #fff; 
-             text-shadow: 1px 1px 3px rgba(0,0,0,0.3); }
-        .sidebar nav a { display: flex; align-items: center; gap: 15px; color: #000; text-decoration: none; font-weight: bold; font-size: 16px; margin-bottom: 25px; }
-        .sidebar nav a i { font-size: 20px; }
-        .sidebar .logo img {
-        max-width: 80%; 
-        height: auto; 
-        display: block; 
-        margin: 0 auto; 
-    }       
-        /* ================= MAIN CONTENT ================= */
-        .main-content { 
-            flex: 1; padding: 30px 50px; display: flex; flex-direction: column;
-            /* Thay url() bằng đường dẫn ảnh nền thật của bạn */
-            background: url('/images/bg_login.jpg') center/cover no-repeat; 
-        }
 
-        /* Top Bar */
-        .top-bar { display: flex; justify-content: center; align-items: center; position: relative; margin-bottom: 50px; min-height: 40px; }
-        .search-box { position: relative; width: 50%; }
-        .search-box input { width: 100%; padding: 10px 40px 10px 20px; border-radius: 20px; border: none; background-color: #888; color: #fff; outline: none; }
-        .search-box input::placeholder { color: #ddd; }
-        .search-box i { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: #000; }
-        .user-icon { position: absolute; right: 0; width: 40px; height: 40px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #5a4b81; font-size: 20px; }
+.profile-container { 
+    display: flex; 
+    gap: 60px; 
+    align-items: center;
+    justify-content: center; 
+}
 
-        /* Account Section */
-        h1 { font-size: 28px; margin-bottom: 40px; }
-        .profile-container { display: flex; gap: 60px; align-items: flex-start; }
+/* --- Khu vực Avatar --- */
+.avatar-section { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 15px; 
+}
+.avatar-circle { 
+    width: 200px; 
+    height: 200px; 
+    border-radius: 50%; 
+    overflow: hidden; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    background-color: #f0f0f0; 
+}
+.avatar-circle img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+}
+.btn-avatar { 
+    padding: 8px 15px; 
+    border: none; 
+    background: #fff; 
+    color: #000; 
+    font-weight: bold; 
+    cursor: pointer; 
+    border-radius: 5px; 
+}
 
-        /* Avatar */
-        .avatar-section { display: flex; flex-direction: column; align-items: center; gap: 15px; }
-        /* Khung chứa avatar */
-    .avatar-circle {
-        width: 200px; /* Bạn có thể chỉnh lại kích thước cho phù hợp giao diện */
-        height: 200px;
-        border-radius: 50%; /* Tạo hình tròn */
-        overflow: hidden; /* Cực kỳ quan trọng: Cắt bỏ phần hình ảnh thừa tràn ra ngoài */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #f0f0f0; /* Màu nền dự phòng */
-    }
+/* Khung chứa Avatar (Làm mỏ neo) */
+.user-icon-wrapper { 
+    position: relative; 
+    cursor: pointer; 
+    display: inline-block;
+}
 
-    /* Thẻ img hiển thị ảnh đại diện nằm bên trong khung */
-    .avatar-circle img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover; /* Giúp ảnh zoom lên vừa vặn khung tròn mà không bị méo tỉ lệ */
-    }
-        .btn-avatar { padding: 8px 15px; border: none; background: #fff; color: #000; font-weight: bold; cursor: pointer; }
+/* Biểu tượng Avatar */
+.user-icon { 
+    width: 40px; 
+    height: 40px; 
+    background: #fff; 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    color: #5a4b81; 
+    font-size: 20px; 
+}
 
-        /* Form */
-        .form-section { flex: 1; display: flex; flex-direction: column; gap: 20px; max-width: 500px; }
-        .form-group { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-        .form-group label { font-weight: bold; width: 120px; }
-        .form-group input { flex: 1; padding: 12px; border-radius: 8px; border: none; background-color: #fcfcfc; outline: none; }
+/* --- Khu vực Form Input --- */
+.form-section { 
+    flex: 1; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 20px; 
+    max-width: 500px; 
+    
+}
+.form-group { 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    gap: 20px; 
+}
+.form-group label { 
+    font-weight: bold; 
+    width: 120px;
+    color: #fff; 
+}
+.form-group input { 
+    flex: 1; 
+    padding: 12px; 
+    border-radius: 8px; 
+    border: none; 
+    background-color: #fcfcfc; 
+    outline: none; 
+    color: #000; 
+}
 
-        /* Action Buttons */
-        .action-buttons { display: flex; justify-content: center; gap: 50px; margin-top: 60px; }
-        .btn-action { display: flex; align-items: center; gap: 10px; padding: 15px 30px; border: none; border-radius: 5px; font-size: 18px; font-weight: bold; color: #000; cursor: pointer; }
-        .btn-action i { font-size: 24px; }
-        .btn-library { background-color: #ff5c5c; }
-        .btn-upload { background-color: #5c7cff; }
-         /* Dropdown Menu */
-        .user-icon-wrapper { 
-            position:absolute; 
-            right: 0;
-            cursor: pointer; }
-        .user-icon { 
-            width: 40px; 
-            height: 40px; 
-            background: #fff; 
-            border-radius: 50%; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            color: #5a4b81; 
-            font-size: 20px; 
-        }
-        .dropdown-menu { 
-            position: absolute; 
-            top: 42px; 
-            right: 0; 
-            background: #fff;
-            width: 150px; 
-            border-radius: 5px; 
-            display: none; 
-            flex-direction: column; 
-            z-index: 100; 
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
-        .user-icon-wrapper:hover .dropdown-menu { 
-            display: flex; 
-        }
-        .dropdown-menu a { 
+/* --- Nút bấm --- */
+.btn-confirm { 
+    background-color: #28a745; 
+    color: #fff; 
+    border: none; 
+    padding: 12px 30px; 
+    border-radius: 8px; 
+    font-size: 16px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+}
+.btn-confirm:hover { background-color: #218838; }
+
+/* --- Nút bấm --- */
+.btn-cancel { 
+    background-color: #bd5232; 
+    color: #fff; 
+    border: none; 
+    padding: 12px 30px; 
+    border-radius: 8px; 
+    font-size: 16px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+}
+.action-buttons { 
+    display: flex; 
+    justify-content: center; 
+    gap: 50px; 
+    margin-top: 60px; 
+    margin-bottom: 40px;
+}
+.btn-action { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    padding: 15px 30px; 
+    border: none; 
+    border-radius: 5px; 
+    font-size: 18px; 
+    font-weight: bold; 
+    color: #000; 
+    cursor: pointer; 
+}
+.btn-action i { font-size: 24px; }
+.btn-library { background-color: #ff5c5c; }
+.btn-upload { background-color: #5c7cff; }
+
+ .dropdown-menu a { 
             padding: 10px; 
             color: #000; 
             text-decoration: none; 
             font-size: 14px; 
             border-bottom: 1px solid #eee; }
         .dropdown-menu a:hover { background: #f0f0f0; }
+/* 1. Diệt tận gốc khoảng hở đáy của khung chứa */
+.main-content { 
+    padding-bottom: 0 !important; 
+}
 
-        /* ================= RESPONSIVE (ĐIỆN THOẠI & TABLET) ================= */
-        @media (max-width: 850px) {
-            body { flex-direction: column; height: auto; min-height: 100vh; }
-            .sidebar { width: 100%; padding: 15px; flex-direction: row; justify-content: space-between; align-items: center; }
-            .sidebar .logo { margin-bottom: 0; }
-            .sidebar nav { display: flex; gap: 20px; }
-            .sidebar nav a { margin-bottom: 0; }
-            
-            .profile-container { flex-direction: column; align-items: center; gap: 30px; }
-            .form-section { width: 100%; }
-            .form-group { flex-direction: column; align-items: flex-start; gap: 5px; }
-            .form-group input { width: 100%; }
-            
-            .action-buttons { flex-direction: column; gap: 20px; }
-            .search-box { width: 70%; }
-        }
-       
+/* 2. Ép khối nội dung ở giữa phình to ra để đẩy văng Footer xuống đáy */
+.article_body {
+    flex: 1; 
+}
+
+/* 3. Chốt chặt Footer sát sàn và ép tràn viền 2 bên */
+.footer {
+    margin-top: auto;
+    margin-bottom: 0 !important; 
+    margin-left: -50px !important; /* Kéo giãn sang trái đụng Sidebar */
+    margin-right: -50px !important; /* Kéo giãn sang phải đụng lề màn hình */
+    width: auto !important; 
+}
+/* ================= RESPONSIVE ================= */
+@media (max-width: 850px) {
+    body { flex-direction: column; height: auto; min-height: 100vh; }
+    .navbar { width: 100%; min-height: auto; flex-direction: row; justify-content: space-between; padding: 15px; }
+    .nav_button { width: auto; font-size: 16px; height: auto; }
+    .header { grid-template-columns: 1fr; gap: 15px; }
+    .search input { width: 100%; }
+    .profile-container { flex-direction: column; align-items: center; gap: 30px; }
+    .form-section { width: 100%; }
+    .form-group { flex-direction: column; align-items: flex-start; gap: 5px; }
+    .form-group input { width: 100%; }
+    .action-buttons { flex-direction: column; gap: 20px; }
+    .footer-content { grid-template-columns: 1fr; }
+}

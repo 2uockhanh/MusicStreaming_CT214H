@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>eMusik - Home</title> 
-    <link rel="stylesheet" href='home-style.css'>
+    <link rel="stylesheet" href='./css/home-style.css'>
 </head>
 <body>
     <div style="display: flex;">
@@ -46,17 +46,19 @@
                         </div>
                     </li>
                     <li>
-                        <div class="avatar" style="text-align: right; margin-right: 20px; margin-top: 20px; margin-bottom: 20px; width: 10%;">
-                            <button style="background-color: rgba(255,255,255,0); padding: 0; border: 0;">
-                                <img style="width: 40px; height: 40px; border-radius: 30px;" src="./img/avatar.jpg" alt="Avatar"></img>
-                                <select name="avatar" id="avatar">
-                                    <option value="myAccount">My Account</option>
-                                    <option value="MyAccount">My Favourite</option>
-                                    <option value="MyAccount">Theme Mode</option>
-                                    <option value="logOut">Log Out</option>
-                                </select>
-                            </button>
+                        <div class="avatar" >
+                            <div class="user-icon-wrapper">
+                                 <img style="width: 40px; height: 40px; border-radius: 30px;" src="./img/avatar.jpg" alt="Avatar"></img>
+
+                                <div class="dropdown-menu">
+                                    <a href="account.html">My Account</a>
+                                    <a href="#">My Favourite</a>
+                                    <a href="#">Theme Mode</a>
+                                    <a href="#">Log Out</a>
+                                </div>
+                            </div>
                         </div>
+                    
                     </li>
                 </ul>
             </div>

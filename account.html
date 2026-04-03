@@ -6,35 +6,66 @@
     <title>eMuzik - My Account</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/account_style.css">
+    <link rel="stylesheet" href="css/home-style.css">
 </head>
-<body>
-
-    <aside class="sidebar">
-        <div class="logo"><img src="/images/logo.png" ></div>
-        <nav>
-            <a href="index.html"><i class="fas fa-home"></i> HOME</a>
-            <a href="library.html"><i class="fas fa-folder"></i> LIBRARY</a>
-        </nav>
-    </aside>
-
-    <main class="main-content">
-        <header class="top-bar">
-            <div class="search-box">
-                <input type="text" placeholder="SEARCH">
-                <i class="fas fa-search"></i>
-            </div>
-             <div class="user-icon-wrapper">
-                <div class="user-icon"><i class="fas fa-user"></i></div>
-                <div class="dropdown-menu">
-                    <a href="account.html">My Account</a>
-                    <a href="#">Upload Song</a>
-                    <a href="#">Theme Mode</a>
-                    <a href="#">Sign Out</a>
+<body class="home"><div style="display: flex;">
+        <div>
+            <nav class="navbar">
+                <img class="logo" src="./img/logo.png" alt="eMusik"></img>
+                <div class="nav">
+                <table>
+                        <tr>
+                            <button class="nav_button">
+                                <img class="nav_logo" src="./img/home.png"> Home 
+                            </button>
+                        </tr>
+                        <tr>
+                            <button class="nav_button">
+                                <img class="nav_logo" src="./img/library.png"> Library
+                            </button>
+                        </tr>
+                        <tr>
+                            <button class="nav_button">
+                                <img class="nav_logo" src="./img/favourite.png"> Favourite
+                            </button>                        
+                        </tr>
+                        <tr>
+                            <button class="nav_button">
+                                <img class="nav_logo" src="./img/account.png"> Account
+                            </button>                        
+                        </tr>
+                    </table>
                 </div>
-        </header>
-        
-        <section class="account-area">
+            </nav>
+        </div>
+        <div class="main-content">
+            <div class="header"> 
+                <ul style="display: grid; grid-template-columns: 90% 10%;">
+                    <li>
+                        <!-- <div class="search" style="text-align: center;">
+                            <input type="text" id="search_info" name="search_info" placeholder="Search songs, artists..."></input>
+                        </div> -->
+                    </li>
+                    <li>
+                        <div class="avatar">
+                            <div class="user-icon-wrapper">
+                                 <img style="width: 40px; height: 40px; border-radius: 30px;" src="./img/avatar.jpg" alt="Avatar"></img>
+                               
+                                <div class="dropdown-menu">
+                                    <a href="account.html">My Account</a>
+                                    <a href="#">My Favourite</a>
+                                    <a href="#">Theme Mode</a>
+                                    <a href="#">Log Out</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+ 
+        <section class="article_body">
             <h1>MY ACCOUNT</h1>
+            
             <div class="profile-container">
                 <div class="avatar-section">
                     <div class="avatar-circle" id="avatar-preview"><i class="fas fa-user"></i></div>
@@ -55,6 +86,14 @@
                         <label>Change<br>Password</label>
                         <input type="password" name="password">
                     </div>
+                    <div class="form-group" style="justify-content: flex-end; margin-top: 10px;">
+                        <button type="submit" class="btn-confirm">
+                            <i class="fas fa-check-circle"></i> Confirm Change
+                        </button>
+                        <button type="cancel" class="btn-cancel">
+                            <i class="fas fa-cancel"></i> Cancel 
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -63,6 +102,41 @@
                 <button class="btn-action btn-upload"><i class="fas fa-upload"></i> UPLOAD SONG</button>
             </div>
         </section>
+        
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About Us</h4>
+                    <ul>
+                        <li><a href="#Introduce">Introduce</a></li>
+                        <li><a href="#Term">Term</a></li>
+                        <li><a href="#Privacy">Privacy</a></li>
+                        <li><a href="#PolicySafety">Policy And Safety</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Useful Link</h4>
+                    <ul>
+                        <li><a href="#Introduce">My Account</a></li>
+                        <li><a href="#Term">Library</a></li>
+                        <li><a href="#Privacy">Favourite</a></li>
+                        <li><a href="#PolicySafety">Import Music</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Social Links</h4>
+                    <ul>
+                        <li><a href="#Facebook">Facebook</a></li>
+                        <li><a href="#TikTok">TikTok</a></li>
+                        <li><a href="#Threads">Threads</a></li>
+                        <li><a href="#Instagram">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 eMusik. All rights reserved.</p>
+            </div>
+        </footer>
     </main>
     <script src="js/change-avatar.js"></script>
 </body>

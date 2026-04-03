@@ -1,6 +1,6 @@
 body{
     background-color: rgba(1,1,1,0.6);
-    background-image: url(./img/dark-bg.jpg);
+    background-image: url(/images/bg_login.jpg);
 }
 /* Navigation Bar */
 .navbar {

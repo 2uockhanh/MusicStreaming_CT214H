@@ -3,43 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>eMuzik - Home</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/index_style.css">
-  
+    <title>eMusik - Home</title> 
+    <link rel="stylesheet" href='./css/home-style.css'>
 </head>
 <body>
-
-    <aside class="sidebar">
-        <div class="logo">eMuzik</div>
-        <nav>
-            <a href="index.html"><i class="fas fa-home"></i> HOME</a>
-            <a href="library.html"><i class="fas fa-folder"></i> LIBRARY</a>
-        </nav>
-    </aside>
-
-    <main class="main-content">
-        <header class="top-bar">
-            <div style="flex: 1; display: flex; justify-content: center;">
-                <div class="search-box">
-                    <input type="text" placeholder="SEARCH">
+    <div style="display: flex;">
+        <div>
+            <nav class="navbar">
+                <img class="logo" src="./img/logo.png" alt="eMusik"></img>
+                <div class="nav">
+                <table>
+                        <tr>
+                            <button class="nav_button">
+                                <img class="nav_logo" src="./img/home.png"> Home
+                            </button>
+                        </tr>
+                        <tr>
+                            <button class="nav_button">
+                                <img class="nav_logo" src="./img/library.png"> Library
+                            </button>
+                        </tr>
+                        <tr>
+                            <button class="nav_button">
+                                <img class="nav_logo" src="./img/favourite.png"> Favourite
+                            </button>                        
+                        </tr>
+                        <tr>
+                            <button class="nav_button">
+                                <img class="nav_logo" src="./img/account.png"> Account
+                            </button>                        
+                        </tr>
+                    </table>
                 </div>
+            </nav>
+        </div>
+        <div class="home">
+            <div class="header"> 
+                <ul style="display: grid; grid-template-columns: 90% 10%;">
+                    <li>
+                        <div class="search" style="text-align: center;">
+                            <input type="text" id="search_info" name="search_info" placeholder="Search songs, artists..."></input>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="avatar" >
+                            <div class="user-icon-wrapper">
+                                 <img style="width: 40px; height: 40px; border-radius: 30px;" src="./img/avatar.jpg" alt="Avatar"></img>
+
+                                <div class="dropdown-menu">
+                                    <a href="account.html">My Account</a>
+                                    <a href="#">My Favourite</a>
+                                    <a href="#">Theme Mode</a>
+                                    <a href="#">Log Out</a>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </li>
+                </ul>
             </div>
-            
-            <div class="user-icon-wrapper">
-                <div class="user-icon"><i class="fas fa-user"></i></div>
-                <div class="dropdown-menu">
-                    <a href="account.html">My Account</a>
-                    <a href="#">Upload Song</a>
-                     <a href="#">Theme Mode</a>
-                    <a href="#">Sign Out</a>
+           
+            <footer class="footer">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h4>About Us</h4>
+                        <ul>
+                            <li><a href="#Introduce">Introduce</a></li>
+                            <li><a href="#Term">Term</a></li>
+                            <li><a href="#Privacy">Privacy</a></li>
+                            <li><a href="#PolicySafety">Policy And Safety</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Useful Link</h4>
+                        <ul>
+                            <li><a href="#Introduce">My Account</a></li>
+                            <li><a href="#Term">Library</a></li>
+                            <li><a href="#Privacy">Favourite</a></li>
+                            <li><a href="#PolicySafety">Import Music</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Social Links</h4>
+                        <ul>
+                            <li><a href="#Facebook">Facebook</a></li>
+                            <li><a href="#TikTok">TikTok</a></li>
+                            <li><a href="#Threads">Threads</a></li>
+                            <li><a href="#Instagram">Instagram</a></li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </header>
-
-        <div id="page-content">
-            </div>
-
-    </main>
+                <div class="footer-bottom">
+                    <p>&copy; 2026 eMusik. All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+    </div>
 </body>
 </html>
