@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>eMusik - Artist Info</title> 
-    <link rel="stylesheet" href='/css/artist-info-style.css'>
-    <link rel="stylesheet" href="/css/home-style.css">
+    <title>eMusik - Home</title> 
+    <link rel="stylesheet" href='library-style.css'>
 </head>
 <body>
     <div style="display: flex;">
@@ -49,7 +48,7 @@
                         </div>
                     </li>
                     <li>
-                        <div class="avatar_dropdown">
+                        <div class="avatar_dropdown" style="text-align: right; margin-right: 20px; margin-top: 20px; margin-bottom: 20px; width: 10%;">
                             <button class="dropbtn" id="dropbtn">
                                 <img style="width: 40px; height: 40px; border-radius: 30px;" src="./img/avatar.jpg" alt="Avatar"></img>
                             </button>
@@ -63,73 +62,31 @@
                     </li>
                 </ul>
             </div>
-            <div style="margin-bottom: 20px;">
-                <div class="artist-header">
-                    <img class="artist-image" src="./img/artist/artist_buitruonglinh.jpg" alt="buitruonglinh"></img>
-                    <div class="artist-name">
-                        <h4>buitruonglinh</h4>
-                        <h4 style="font-weight: lighter;">0 followers</h4>
-                    </div>
-                    <button class="follow-button">FOLLOW</button>
+            <div class="show_your_playlist">
+                <div class="show_your_playlist_head">
+                    <h3>YOUR PLAYLIST</h3>
+                    <a class="add_playlist_btn" id="add_playlist_btn">
+                        <img src="./img/add.png" style="width: 20px; height: 20px;"></img>
+                    </a>
                 </div>
-            </div>
-            <div class="uploaded_song">
-                <div class="uploaded_song_head">
-                    <h3>UPLOADED SONG</h3>
-                </div>
-                <div class="uploaded_song_body">
+                <div class="show_your_favourite_body">
                     <div class="show_body_grid">
                         <button class="arrow-btn">
                             <img src="./img/left-arrow.png" style="height: 30px;"></img>
                         </button>
                     </div>
-                    <div class="show_body_grid">
-                        <!-- SONG 1 -->
-                        <button class="song_nav">
-                            <div class="song_nav_grid">
-                                <img src="./img/song/song_buitruonglinh/song_thinhvuongvietnamsangngoi/poster.jpg" alt="eMusik"></img>
+                    <div class="show_body_grid" style="color: white; font-family: Tahoma, sans-serif;">
+                        <!-- PLAYLIST 1 -->
+                        <button class="your_favourite_nav">
+                            <div class="your_favourite_nav_grid">
+                                <img src="./img/default-playlist-avatar.jpg" alt="eMusik"></img>
                                 <div class="article_body">
-                                    <h4>Thịnh Vượng Việt Nam Sáng Ngời</h4> 
-                                    <h4 style="font-weight: lighter;">buitruonglinh</h4>
+                                    <h4>Say Hi</h4> <h4 style="font-weight: lighter;">6 songs</h4>
                                 </div>
                             </div>
                         </button>
-                        <!-- SONG 2 -->
-                        <button class="song_nav">
-                            <div class="song_nav_grid">
-                                <img src="./img/song/song_buitruonglinh/song_duemtungyeu/poster.jpg" alt="eMusik"></img>
-                                <div class="article_body">
-                                    <h4>Dù Em Từng Yêu</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4>
-                                </div>
-                            </div> 
-                        </button>
-                        <!-- SONG 3 -->
-                        <button class="song_nav">
-                            <div class="song_nav_grid">
-                                <img src="./img/song/song_buitruonglinh/song_giothi/poster.jpg" alt="eMusik"></img>
-                                <div class="article_body">
-                                    <h4>Giờ Thì</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4>
-                                </div>
-                            </div>
-                        </button>
-                        <!-- SONG 4 -->
-                        <button class="song_nav">
-                            <div class="song_nav_grid">
-                                <img src="./img/song/song_buitruonglinh/song_duongtoichoemve/poster.jpg" alt="eMusik"></img>
-                                <div class="article_body">
-                                    <h4>Đường Tôi Chở Em Về</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4>
-                                </div>
-                            </div>
-                        </button>
-                        <!-- SONG 5 -->
-                        <button class="song_nav">
-                            <div class="song_nav_grid">
-                                <img src="./img/song/song_buitruonglinh/song_tungngayyeuem/poster.jpg" alt="eMusik"></img>
-                                <div class="article_body">
-                                    <h4>Từng Ngày Yêu Em</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4>
-                                </div>
-                            </div>
-                        </button>
+
+                        <!-- You don't have any playlist. -->
                     </div>
                     <div class="show_body_grid">
                         <button class="arrow-btn">
@@ -138,35 +95,25 @@
                     </div>
                 </div>
             </div>
-            <div class="playlists">
-                <div class="playlists_head">
-                    <h3>PLAYLISTS</h3>
+            <div class="show_your_favourite">
+                <div class="show_your_favourite_head">
+                    <h3>YOUR FAVOURTIE</h3>
                 </div>
-                <div class="playlists_body">
+                <div class="show_your_favourite_body">
                     <div class="show_body_grid">
                         <button class="arrow-btn">
                             <img src="./img/left-arrow.png" style="height: 30px;"></img>
                         </button>
                     </div>
-                    <div class="show_body_grid">
-                        <!-- PLAYLIST 1 -->
-                        <button class="playlist_nav">
-                            <div class="playlist_nav_grid">
-                                <img src="./img/playlist/playlist_buitruonglinh/diadon_thinhvuongvietnamsangngoi/poster.jpg" alt="eMusik"></img>
+                    <div class="show_body_grid" style="color: white; font-family: Roboto, sans-serif;">
+                        <!-- SONG 1 -->
+                        <button class="your_favourite_nav">
+                            <div class="your_favourite_nav_grid">
+                                <img src="./img/song/song_buitruonglinh/song_tungngayyeuem/poster.jpg" alt="eMusik"></img>
                                 <div class="article_body">
-                                    <h4>Thịnh Vượng Việt Nam Sáng Ngời</h4> 
-                                    <h4 style="font-weight: lighter;">Đĩa Đơn</h4>
+                                    <h4>Từng Ngày Yêu Em</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4>
                                 </div>
                             </div>
-                        </button>
-                        <!-- PLAYLIST 2 -->
-                        <button class="playlist_nav">
-                            <div class="playlist_nav_grid">
-                                <img src="./img/playlist/playlist_buitruonglinh/album_tungngaynhumaimai/poster.jpg" alt="eMusik"></img>
-                                <div class="article_body">
-                                    <h4>Từng Ngày Như Mãi Mãi</h4> <h4 style="font-weight: lighter;">Album</h4>
-                                </div>
-                            </div> 
                         </button>
                     </div>
                     <div class="show_body_grid">
@@ -212,6 +159,29 @@
             </footer>
         </div>
     </div>
-    <script src="music-streaming-home.js"></script>
+    <div class="add_playlist_popup" id="add_playlist_popup">
+        <div class="popup_head" id="popup_head">
+            <div class="popup_header" id="popup_header">Create Playlist</div>
+            <button class="popup_close" id="popup_close">&#128936;</button>
+        </div>
+        <div style="grid-template-columns: 240px 330px; gap: 30px; display: grid;">
+            <div style="margin-left: 30px;">
+                <img src="./img/default-playlist-avatar.jpg" style="width: 200px; height: 200px; border: 3px solid black;">
+                <button style="font-family: Roboto, sans-serif; width: fit-content; height: fit-content; background-color: rgba(217, 217, 217, 1); color: black; font-size: medium; padding: 10px; font-weight: bold; border-radius: 20px; justify-content: center; text-align: center; margin-top: 10px; margin-left: 40px;">Change Avatar</button>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 10px; margin-top: 0px;">Playlist's Name</h4>
+                <input placeholder="Enter playlist's name" style="width: 300px; height: 30px; border-radius: 30px; background-color: rgba(217, 217, 217, 1); color: black; padding-left: 10px;">
+                <h4 style="margin-bottom: 10px;">Description</h4>
+                <input type="text" placeholder="Describe your playlist" style="width: 300px; height: 120px; border-radius: 30px; background-color: rgba(217, 217, 217, 1); color: black; padding-left: 10px;">
+            </div>
+        </div>
+        <div style="grid-template-columns: 240px 150px 150px; gap: 30px; display: grid; margin-top: 10px;">
+            <button class="changeSeenMode" id="changeSeenMode">🔒 Private</button>
+            <button style="width: 80%; height: fit-content; padding: 10px; border-radius: 20px; font-family: Roboto, sans-serif; background-color: rgba(1, 1, 1, 1); color: white;">Create</button>
+            <button style="width: 80%; height: fit-content; padding: 10px; border-radius: 20px; font-family: Roboto, sans-serif; background-color: red; color: white;">Cancel</button>
+        </div>
+    </div>
+    <script src="music-streaming-library.js"></script>
 </body>
 </html>

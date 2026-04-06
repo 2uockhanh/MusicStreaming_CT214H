@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eMusik - Playlist Info</title> 
+    <link rel="stylesheet" href='song-info-style.css'>
+</head>
+<body>
+    <div style="display: flex;">
+        <div>
+            <nav class="navbar">
+                <img class="logo" src="./img/logo.png" alt="eMusik"></img>
+                <div class="nav">
+                <table>
+                        <tr>
+                            <button class="nav_button">
+                                <img class="nav_logo" src="./img/home.png"> Home
+                            </button>
+                        </tr>
+                        <tr>
+                            <button class="nav_button">
+                                <img class="nav_logo" src="./img/library.png"> Library
+                            </button>
+                        </tr>
+                        <tr>
+                            <button class="nav_button">
+                                <img class="nav_logo" src="./img/favourite.png"> Favourite
+                            </button>                        
+                        </tr>
+                        <!--
+                        <tr>
+                            <button class="nav_button">
+                                <img class="nav_logo" src="./img/account.png"> Account
+                            </button>                        
+                        </tr>
+                        -->
+                    </table>
+                </div>
+            </nav>
+        </div>
+        <div class="home">
+            <div class="header"> 
+                <ul style="display: grid; grid-template-columns: 90% 10%;">
+                    <li>
+                        <div class="search" style="text-align: center;">
+                            <input type="text" id="search_info" name="search_info" placeholder="Search songs, artists..."></input>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="avatar_dropdown">
+                            <button class="dropbtn" id="dropbtn">
+                                <img style="width: 40px; height: 40px; border-radius: 30px;" src="./img/avatar.jpg" alt="Avatar"></img>
+                            </button>
+                            <div class="dropDownList" name="avatar" id="dropDown">
+                                <button value="myAccount" class="dropDownBtn">My Account</option>
+                                <button value="MyFavourite" class="dropDownBtn">My Favourite</option>
+                                <button value="ThemeMode" class="dropDownBtn">Theme Mode</option>
+                                <button value="logOut" class="dropDownBtn">Log Out</option>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div style="justify-content: center;">
+                <div class="song-header">
+                    <img class="song-image" src="./img/song/song_buitruonglinh/song_tungngayyeuem/poster.jpg" alt="tungngayyeuem"></img>
+                    <div class="song-name">
+                        <h4>Song</h4>
+                        <h2>Từng Ngày Yêu Em</h2>
+                        <div style="margin-top: 0px; grid-template-columns: 30px 100px auto; display: grid; align-content: center;">
+                            <img style="width: 30px; height: 30px; border-radius: 30px;" src="./img/artist/artist_buitruonglinh.jpg" alt="buitruonglinh"></img>
+                            <h4 style="margin-left: 10px; margin-top: 5px;">buitruonglinh</h4>
+                            <h4 style="margin-left: 10px; margin-top: 5px;"> - 2024</h4>
+                        </div>
+                    </div>
+                    <button id="playBtn" class="playBtn">&#9205; PLAY</button>
+                </div>
+            </div>
+            <div style="margin-bottom: 20px; grid-template-columns: 65% 35%; display: grid; color: white;">
+                <div class="lyrics">
+                    <h4 style="font-family: Tahoma, sans-serif; font-size: 110%; margin-left: 15%; margin-bottom: 20px;">Lyrics</h4>
+                    <div class="lyric-body" style="border-radius: 10px; background-color: grey; color: black; max-width: 70%; padding: 5px; margin-left: 10%;">
+                        <p style="font-family: Roboto, sans-serif; margin: 10px; font-style: italic; font-weight: lighter; color: rgba(217, 217, 217, 1);">
+                            Lại chìm trong đôi mắt em xoe tròn ngất ngây<br> 
+                            Phút giây khi mà anh khẽ nhìn sang<br>
+                            Lại làm đôi môi nhớ em lại muốn hôn em thêm bao lần<br>
+                            Từng ngày cô đơn xé đôi, hạ thu đông khẽ trôi<br>
+                            Cạnh bên em anh sẽ thôi u sầu<br>
+                            Lại làm cho anh càng thấy yêu em hơn ngày qua<br>
+                            Chẳng phải gió cuốn mưa bay đưa đôi tay 
+                            Đón anh về ngày lời yêu cất lên<br>
+                            Chỉ cần thức giấc khi bên em nơi anh thấy yên bình<br>
+                            Biển rộng sông sâu anh trót thương chỉ riêng mình em thôi đấy<br>
+                            Tình yêu ấy chẳng thể đổi thay<br>
+                            Dù là bao lâu cảm xúc trong anh mãi đong đầy<br>
+                            Vội lạc vào giấc mơ nhẹ nhàng tựa ý thơ<br>
+                            Nụ cười người để anh nhớ để anh mong đợi<br>
+                            Sợ một ngày ngát xanh cuộc đời này vắng em<br>
+                            Anh phải làm sao bây giờ ?<br>
+                            Em này anh biết chăng bao ngày bao tháng năm<br>
+                            Chỉ cần một lần say đắm sẽ in hằn sâu trong tim anh<br>
+                            Mãi như vậy như lời hứa yêu em yêu mình em một đời<br>
+                            Từ khi yêu em thế gian vương đầy sắc hoa<br>
+                            Tới nơi chân trời ta vẫn hằng mơ<br>
+                            Đừng để cho tia nắng mai đặt chiếc hôn lên đôi vai gầy<br>
+                            Mặc kệ cơn dông bước ra điều gì phía trước ta<br>
+                            Từng ngày bên nhau lướt qua êm đềm<br>
+                            Lại làm cho anh càng muốn yêu em không rời xa<br>
+                            Tình yêu đến ngọt ngào yêu áng mây trên cao<br>
+                            Tình yêu khẽ thì thầm anh thích em ra sao<br>
+                            Tình yêu muốn nồng nàn như sóng xô dạt dào khắp muôn nơi<br>
+                            Từng ngày cô đơn xé đôi hạ thu đông khẽ trôi<br>
+                            Cạnh bên em anh sẽ thôi u sầu<br>
+                            Lại làm cho anh càng thấy yêu em<br>
+                            Lại làm mình ngất ngây nghẹn ngào từng phút giây<br>
+                            Cả bầu trời ngày hôm ấy bỗng như thu lại<br>
+                            Nhẹ nhàng rồi dắt tay<br>
+                            Anh ngỏ lời muốn em sẽ là của anh sau này<br>
+                            Em à anh biết chăng<br>
+                            Dẫu là bao tháng năm<br>
+                            Chỉ cần một lần say đắm sẽ in hằn sâu trong tim anh<br>
+                            Mãi như vậy như lời hứa yêu em<br>
+                            yêu mình em một đời<br>
+                            Tình yêu đến ngọt ngào yêu áng mây trên cao<br>
+                            Tình yêu khẽ thì thầm anh thích em ra sao<br>
+                            Tình yêu muốn nồng nàn như sóng xô dạt dào khắp muôn nơi<br>
+                            Từng ngày cô đơn xé đôi hạ thu đông khẽ trôi<br>
+                            Cạnh bên em anh sẽ thôi u sầu<br>
+                            Lại làm cho anh càng thấy yêu em<br>
+                            Lại làm mình ngất ngây nghẹn ngào từng phút giây<br>
+                            Cả bầu trời ngày hôm ấy bỗng như thu lại<br>
+                            Nhẹ nhàng rồi dắt tay<br>
+                            Anh ngỏ lời muốn em sẽ là của anh sau này<br>
+                            Em à anh biết chăng<br>
+                            Dẫu là bao tháng năm<br>
+                            Chỉ cần một lần say đắm sẽ in hằn sâu trong tim anh<br>
+                            Mãi như vậy như lời hứa yêu em yêu mình em một đời<br>
+                            Là ri la, là ri la, la ri la ta ta<br>
+                            Là ri la, là ri la, la ri la ta ta<br>
+                            Lời yêu thương mà lâu nay<br>
+                            Từ con tim anh dành cho em<br>
+                            Sẽ không bao giờ đổi thay<br>
+                            Là ri la, là ri la, la ri la ta ta<br>
+                            Là ri la, là ri la, la ri la ta ta<br>
+                            Vì anh sẽ mãi như vậy<br>
+                            Như lời hứa yêu em<br>
+                            Yêu mình em một đời<br>
+                        </p>
+                    </div>
+                </div>
+                <div class="artist-participate">
+                    <h4 style="font-family: Tahoma, sans-serif; font-size: 110%;">Artists</h4>
+                    <div class="artist-participate-body">
+                        <div class="artist-participate-nav" style="grid-template-columns: 30px auto; display: grid; gap: 10px; font-family: Tahoma, sans-serif; align-content: center;">
+                            <img style="width: 30px; height:30px; border-radius: 30px;" src="./img/artist/artist_buitruonglinh.jpg"></img>
+                            <h4 style="margin-left: 10px; margin-top: 5px;">buitruonglinh</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>Last Update: 03/04/2026</p>
+                <p>&copy; 2024 LOOPS MUSIC.</p>
+                <p>&copy; 2024 LOOPS MUSIC.</p>
+            </div>
+            <footer class="footer">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h4>About Us</h4>
+                        <ul>
+                            <li><a href="#Introduce">Introduce</a></li>
+                            <li><a href="#Term">Term</a></li>
+                            <li><a href="#Privacy">Privacy</a></li>
+                            <li><a href="#PolicySafety">Policy And Safety</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Useful Link</h4>
+                        <ul>
+                            <li><a href="#Introduce">My Account</a></li>
+                            <li><a href="#Term">Library</a></li>
+                            <li><a href="#Privacy">Favourite</a></li>
+                            <li><a href="#PolicySafety">Import Music</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Social Links</h4>
+                        <ul>
+                            <li><a href="#Facebook">Facebook</a></li>
+                            <li><a href="#TikTok">TikTok</a></li>
+                            <li><a href="#Threads">Threads</a></li>
+                            <li><a href="#Instagram">Instagram</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2026 eMusik. All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <div class="popup" id="popup">
+        <div style="grid-template-columns: 240px auto 300px; display: grid;">
+            <div style="grid-template-columns: 60px auto; display: grid; margin-left: 20px; margin-top: 20px;">
+                <img style="width: 60px; height: 60px;" src="./img/song/song_buitruonglinh/song_tungngayyeuem/poster.jpg"></img>
+                <div style="grid-template-rows: 30px 30px; margin-left: 10px; margin-top: 0px; margin-bottom: 0px; display: grid; font-family: Roboto, sans-serif; align-items: center;">
+                    <h4>Từng Ngày Yêu Em</h4> 
+                    <h4 style="font-weight: lighter;">buitruonglinh</h4>
+                </div>
+            </div>
+            <div style="grid-template-rows: 30px 30px; display: grid; margin-left: 20px; margin-top: 20px;">
+                <div style="align-content: center; justify-content: center; text-align: center;">
+                    <img class="playImg" id="prevImg" src="./img/left-next.png"></img>
+                    <img class="playImg" id="playImg" src="./img/play-music.png"></img>
+                    <img class="playImg" id="nextImg" src="./img/right-next.png"></img>
+                </div>
+                <div style="align-content: center; justify-content: center; text-align: center; grid-template-columns: 50px auto 50px; display: grid; margin-left: 20px; margin-top: 20px;">
+                    <h5>00:00</h5> 
+                    <div style="border-radius: 20px; width: 400px; height: 2px; border: 2px solid rgba(1, 1, 1, 1); margin-top: 25px; margin-left: 10px; margin-right: 10px;"></div>
+                    <h5>03:45</h5>
+                </div>
+            </div>
+            <div style="grid-template-columns: 30px auto; display: grid; margin-top: 20px; margin-right: 50px; align-content: center; justify-content: center; text-align: center;">
+                <img style="width: 30px; height: 30px;" src="./img/volume.png"></img>
+                <div style="border-radius: 20px; width: 150px; height: 2px; border: 2px solid rgba(1, 1, 1, 1); margin-top: 10px; margin-left: 10px; margin-right: 10px;"></div>
+            </div>
+            <audio id="myAudio">
+                <source src="./img/song/song_buitruonglinh/song_tungngayyeuem/song.mp3" type="audio/mpeg"></source>
+            </audio>
+        </div>
+    </div>
+    <script src="music-streaming-song.js"></script>
+</body>
+</html>
