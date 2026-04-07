@@ -46,6 +46,38 @@ body{
     height: 100%;
     width: 100%;
 }
+/* Drop Down */
+.avatar_dropdown {
+    text-align: right; 
+    margin-right: 20%; 
+    width: 10%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    position: relative; 
+    display: inline-block;
+}
+.dropDownBtn {
+    min-width: 150px;
+    height: 40px;
+    text-align: right;
+    font-size: medium;
+    font-family: Roboto, sans-serif;
+    font-weight: bold;
+}
+.dropbtn {
+    background-color: rgba(255,255,255,0); 
+    padding: 0px; 
+    border: 0px;
+}
+.dropDownList {
+    position: absolute; 
+    right: -30px; 
+    left: auto;
+    display: none;
+}
+.showDropDown {
+    display: block;
+}
 /* Search Bar */
 .header {
     grid-template-columns: 90% 10%;
@@ -71,18 +103,10 @@ body{
     background-color: rgba(255, 255, 255, 1);
     border-radius: 20px;
 }
-/* Avatar */
-.avatar {
-    text-align: right; 
-    margin-right: 20%; 
-    width: 10%;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
 /* Playlist Header */
 .playlist-header {
     width: 600px; 
-    grid-template-columns: 15% auto; 
+    grid-template-columns: auto 80%; 
     display: grid; 
     gap: 10px; 
     margin-left: 100px; 
@@ -91,6 +115,7 @@ body{
 .playlist-image {
     width: 90px; 
     height: 90px;
+    border: 2px solid white;
 }
 .playlist-name {
     grid-template-rows: 20% 25% auto;
@@ -105,11 +130,57 @@ body{
     margin-top: 0px; 
     margin-bottom: 10px;
 }
+/* Playlist Table */
+.playlist-table {
+    margin-left: auto; margin-right: auto; margin-bottom: 20px; font-family: Roboto, sans-serif; color: black; border-collapse: collapse;
+}
+.playlist-table tr:nth-child(1) {
+    background-color: rgba(217, 217, 217, 1);
+}
+.playlist-table tr {
+    background-color: rgba(255, 255, 255, 0.6);
+}
+.playlist-table td {
+    border-bottom: 2px solid black;
+}
+.playlist-table td:nth-child(1) {
+    text-align:center; 
+    width: 100px;
+}
+.playlist-table td:nth-child(2) {
+    text-align:left; 
+    width: 800px;
+}
+.playlist-table td:nth-child(2) div {
+    align-content: center;
+    margin-top: 5px; 
+    margin-bottom: 5px;
+}
+.playlist-table td:nth-child(2) h4 {
+    margin-top: 0px; 
+    margin-bottom: 0px;
+}
+.playlist-table td:nth-child(3) {
+    text-align:center; 
+    width: 300px;
+}
+/* Copy Right */
+.copyright {
+    margin-left: 20px;
+    font-family: Roboto, sans-serif;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+.copyright p {
+    color: grey;
+    margin: 0px;
+}
 /* Footer */
 .footer {
     width: 100%;
     height: max-content;
-    background-color: rgba(217, 217, 217, 0.72);
+    background-color: rgba(217, 217, 217, 0);
+    color: white;
 }
 .footer-content {
     margin: 0 auto; 
@@ -129,7 +200,7 @@ body{
 }
 .footer-section li a {
     font-family: Tahoma, sans-serif; 
-    color: black; 
+    color: rgba(217, 217, 217, 1); 
     text-decoration: none;
 }
 .footer-bottom {
