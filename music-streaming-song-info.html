@@ -3,45 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>eMusik - Playlist Info</title> 
-    <link rel="stylesheet" href='song-info-style.css'>
+    <title>eMusik - Từng Ngày Yêu Em - buitruonglinh</title> 
+    <link rel="stylesheet" href='./css/song-info-style.css'>
+    <link href='https://fonts.googleapis.com/css?family=Passero One' rel='stylesheet'>
 </head>
 <body>
     <div style="display: flex;">
         <div>
             <nav class="navbar">
-                <img class="logo" src="./img/logo.png" alt="eMusik"></img>
+                <button class="logo_nav" onclick="document.location='./music-streaming-home.html'">
+                    <h3 style="font-family: 'Passero One'; font-size: 48px; margin: 0px auto;">eMuzik</h3>
+                </button>
                 <div class="nav">
                 <table>
                         <tr>
-                            <button class="nav_button">
-                                <img class="nav_logo" src="./img/home.png"> Home
+                            <button class="nav_button" onclick="document.location='./music-streaming-home.html'">
+                                <img class="nav_logo" src="./img/home.png"> Home</img>
                             </button>
                         </tr>
                         <tr>
-                            <button class="nav_button">
+                            <button class="nav_button" onclick="document.location='./music-streaming-library.html'">
                                 <img class="nav_logo" src="./img/library.png"> Library
                             </button>
                         </tr>
                         <tr>
-                            <button class="nav_button">
+                            <button class="nav_button" onclick="document.location='./music-streaming-favourite.html'">
                                 <img class="nav_logo" src="./img/favourite.png"> Favourite
                             </button>                        
                         </tr>
-                        <!--
-                        <tr>
-                            <button class="nav_button">
-                                <img class="nav_logo" src="./img/account.png"> Account
-                            </button>                        
-                        </tr>
-                        -->
                     </table>
                 </div>
             </nav>
         </div>
         <div class="home">
             <div class="header"> 
-                <ul style="display: grid; grid-template-columns: 90% 10%;">
+                <ul style="display: grid; grid-template-columns: 90% 10%; list-style-type: none;">
                     <li>
                         <div class="search" style="text-align: center;">
                             <input type="text" id="search_info" name="search_info" placeholder="Search songs, artists..."></input>
@@ -55,7 +51,7 @@
                             <div class="dropDownList" name="avatar" id="dropDown">
                                 <button value="myAccount" class="dropDownBtn">My Account</option>
                                 <button value="MyFavourite" class="dropDownBtn">My Favourite</option>
-                                <button value="ThemeMode" class="dropDownBtn">Theme Mode</option>
+                                <button value="themeMode" id="themeMode" class="dropDownBtn">🌙 Theme Mode</button>
                                 <button value="logOut" class="dropDownBtn">Log Out</option>
                             </div>
                         </div>
@@ -68,7 +64,7 @@
                     <div class="song-name">
                         <h4>Song</h4>
                         <h2>Từng Ngày Yêu Em</h2>
-                        <div style="margin-top: 0px; grid-template-columns: 30px 100px auto; display: grid; align-content: center;">
+                        <div onclick="document.location='./music-streaming-artist-info.html'" style="margin-top: 0px; grid-template-columns: 30px 100px auto; display: grid; align-content: center;">
                             <img style="width: 30px; height: 30px; border-radius: 30px;" src="./img/artist/artist_buitruonglinh.jpg" alt="buitruonglinh"></img>
                             <h4 style="margin-left: 10px; margin-top: 5px;">buitruonglinh</h4>
                             <h4 style="margin-left: 10px; margin-top: 5px;"> - 2024</h4>
@@ -152,7 +148,7 @@
                 <div class="artist-participate">
                     <h4 style="font-family: Tahoma, sans-serif; font-size: 110%;">Artists</h4>
                     <div class="artist-participate-body">
-                        <div class="artist-participate-nav" style="grid-template-columns: 30px auto; display: grid; gap: 10px; font-family: Tahoma, sans-serif; align-content: center;">
+                        <div onclick="document.location='./music-streaming-artist-info.html'" class="artist-participate-nav" style="grid-template-columns: 30px auto; display: grid; gap: 10px; font-family: Tahoma, sans-serif; align-content: center;">
                             <img style="width: 30px; height:30px; border-radius: 30px;" src="./img/artist/artist_buitruonglinh.jpg"></img>
                             <h4 style="margin-left: 10px; margin-top: 5px;">buitruonglinh</h4>
                         </div>
@@ -230,6 +226,7 @@
             </audio>
         </div>
     </div>
-    <script src="music-streaming-song.js"></script>
+    <script src="./js/music-streaming-song.js"></script>
+    <script src="./js/music-streaming-home.js"></script>
 </body>
 </html>

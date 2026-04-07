@@ -3,28 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>eMusik - Home</title> 
-    <link rel="stylesheet" href='library-style.css'>
+    <title>eMusik - Library</title> 
+    <link rel="stylesheet" href='./css/library-style.css'>
+    <link href='https://fonts.googleapis.com/css?family=Passero One' rel='stylesheet'>
 </head>
 <body>
     <div style="display: flex;">
         <div>
             <nav class="navbar">
-                <img class="logo" src="./img/logo.png" alt="eMusik"></img>
+                <button class="logo_nav" onclick="document.location='./music-streaming-home.html'">
+                    <h3 style="font-family: 'Passero One'; font-size: 48px; margin: 0px auto;">eMuzik</h3>
+                </button>
                 <div class="nav">
                 <table>
                         <tr>
-                            <button class="nav_button">
-                                <img class="nav_logo" src="./img/home.png"> Home
+                            <button class="nav_button" onclick="document.location='./music-streaming-home.html'">
+                                <img class="nav_logo" src="./img/home.png"> Home</img>
                             </button>
                         </tr>
                         <tr>
-                            <button class="nav_button">
+                            <button class="nav_button" onclick="document.location='./music-streaming-library.html'">
                                 <img class="nav_logo" src="./img/library.png"> Library
                             </button>
                         </tr>
                         <tr>
-                            <button class="nav_button">
+                            <button class="nav_button" onclick="document.location='./music-streaming-favourite.html'">
                                 <img class="nav_logo" src="./img/favourite.png"> Favourite
                             </button>                        
                         </tr>
@@ -41,7 +44,7 @@
         </div>
         <div class="home">
             <div class="header"> 
-                <ul style="display: grid; grid-template-columns: 90% 10%;">
+                <ul style="display: grid; grid-template-columns: 90% 10%; list-style-type: none;">
                     <li>
                         <div class="search" style="text-align: center;">
                             <input type="text" id="search_info" name="search_info" placeholder="Search songs, artists..."></input>
@@ -55,7 +58,7 @@
                             <div class="dropDownList" name="avatar" id="dropDown">
                                 <button value="myAccount" class="dropDownBtn">My Account</option>
                                 <button value="MyFavourite" class="dropDownBtn">My Favourite</option>
-                                <button value="ThemeMode" class="dropDownBtn">Theme Mode</option>
+                                <button value="themeMode" id="themeMode" class="dropDownBtn">🌙 Theme Mode</button>
                                 <button value="logOut" class="dropDownBtn">Log Out</option>
                             </div>
                         </div>
@@ -97,7 +100,7 @@
             </div>
             <div class="show_your_favourite">
                 <div class="show_your_favourite_head">
-                    <h3>YOUR FAVOURTIE</h3>
+                    <h3>YOUR FAVOURITE</h3>
                 </div>
                 <div class="show_your_favourite_body">
                     <div class="show_body_grid">
@@ -108,7 +111,7 @@
                     <div class="show_body_grid" style="color: white; font-family: Roboto, sans-serif;">
                         <!-- SONG 1 -->
                         <button class="your_favourite_nav">
-                            <div class="your_favourite_nav_grid">
+                            <div class="your_favourite_nav_grid" onclick="document.location='music-streaming-song-info.html'">
                                 <img src="./img/song/song_buitruonglinh/song_tungngayyeuem/poster.jpg" alt="eMusik"></img>
                                 <div class="article_body">
                                     <h4>Từng Ngày Yêu Em</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4>
@@ -182,6 +185,7 @@
             <button style="width: 80%; height: fit-content; padding: 10px; border-radius: 20px; font-family: Roboto, sans-serif; background-color: red; color: white;">Cancel</button>
         </div>
     </div>
-    <script src="music-streaming-library.js"></script>
+    <script src="./js/music-streaming-library.js"></script>
+    <script src="./js/music-streaming-home.js"></script>
 </body>
 </html>
