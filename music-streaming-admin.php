@@ -99,10 +99,6 @@
                             <label>Album ID</label>
                             <input type="number" id="album_id" name="album_id">
                         </div>
-                        <div class="form-group-modern" style="flex: 1;">
-                            <label>Views</label>
-                            <input type="number" id="view_count" name="view_count" value="0">
-                        </div>
                     </div>
                     <div class="modal-actions">
                         <button type="button" class="btn-cancel" onclick="closeSongModal()">Cancel</button>

@@ -1,13 +1,13 @@
 body {
-    background-image: url('./img/dark-bg.jpg');
+    background-image: url('../img/dark-bg.jpg');
     background-size: 100% 100%;
 }
 .dark-body {
-    background-image: url('./img/dark-bg.jpg');
+    background-image: url('../img/dark-bg.jpg');
     background-size: 100% 100%;
 }
 .light-body {
-    background-image: url('./img/light-bg.jpg');
+    background-image: url('../img/light-bg.jpg');
     background-size: 100% 100%;
 }
 .darkModeToggle {

@@ -1,3 +1,28 @@
+<?php
+require './includes/db-connect.php';
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+if (isset($_POST['btn_signup'])) {
+    $username = trim($_POST['username']);
+    $password = trim($_POST['password']);
+    $email = trim($_POST['email']);
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT); // Mã hóa mật khẩu
+    // Dùng prepared statement để lưu vào CSDL
+    $sql = "INSERT INTO users (user_name, email, password, role) VALUES (?, ?, ?, 'user')";
+    $stmt = $conn->prepare($sql);
+    if ($stmt) {
+            $stmt->bind_param("sss", $username,$email, $hashed_password);
+            if ($stmt->execute()) {
+                echo "<script>alert('Đăng ký thành công!'); window.location.href='login.php';</script>";
+            } else {
+                $error = "Lỗi: Tên đăng nhập đã tồn tại!";
+            }
+            $stmt->close();
+        }
+}
+?> 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
