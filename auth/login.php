@@ -26,12 +26,12 @@ if (isset($_POST['btn_login'])) {
             $_SESSION['role'] = $row['role'];
 
             if($row['role'] === 'admin') {
-                header("Location: ../admin/index.php");
+                header("Location: ../admin/dashboard.php");
                 exit();
             }
             
             // 4. Chuyển hướng về trang chủ
-            header("Location: ../index.php");
+            header("Location: ../music-streaming-home.html");
             exit();
         } else {
             $error = "Sai mật khẩu!";
