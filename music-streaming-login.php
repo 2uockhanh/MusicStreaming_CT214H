@@ -25,12 +25,12 @@ if (isset($_POST['btn_login'])) {
             $_SESSION['role'] = $row['role'];
 
             if($row['role'] === 'admin') {
-                header("Location: ../admin/index.php");
+                header("Location: music-streaming-admin.php");
                 exit();
             }
             
             // 4. Chuyển hướng về trang chủ
-            header("Location: ../index.php");
+            header("Location: music-streaming-home.php");
             exit();
         } else {
             $error = "Sai mật khẩu!";
@@ -74,7 +74,7 @@ if (isset($_POST['btn_login'])) {
 						</tr>
 						<tr>
 							<th style="margin-right: 20px;">Password </th>
-							<td><input type="text" id="input_password" name="password"></td>
+							<td><input type="password" id="input_password" name="password"></td>
 						</tr>
 					</table>
 				</div>
@@ -89,7 +89,7 @@ if (isset($_POST['btn_login'])) {
 						<tr>
 							<td>Not have an account? </td>
 							<td>
-								<a href="music-streaming-signup.html">Sign up now</a>
+								<a href="music-streaming-signup.php">Sign up now</a>
 							</td>
 						</tr>
 					</table>

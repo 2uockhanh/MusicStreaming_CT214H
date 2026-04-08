@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
         usernameInput.value = originalDataUser.username;
         emailInput.value = originalDataUser.email;
         passwordInput.value = '';
-
         alert('Changes have been discarded.');
     });
 
@@ -30,8 +29,8 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        fetch('../includes/profile-handler.php', {
-            method: POST,
+        fetch('./includes/profile-handler.php', { 
+            method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(newDataUser)
         })
@@ -43,9 +42,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 originalDataUser.email = newDataUser.email;
                 passwordInput.value = '';
             } else {
-                alert('Error updating profile: ' + data.message);
+                alert('Error: ' + data.message);
             }
         })
-        .catch(err => console.error('Connection Error:', err));
+        .catch(err => {
+            console.error('Connection Error:', err);
+            alert('Could not connect to server.');
+        });
     });
 });

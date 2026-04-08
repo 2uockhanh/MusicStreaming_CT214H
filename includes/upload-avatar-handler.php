@@ -14,9 +14,10 @@
 
         if(in_array(strtolower($fileType), $allowedTypes)) {
             if(move_uploaded_file($_FILES["avatar"]["tmp_name"], $target_file_path)) {
+                $dbPath = "uploads/avatars/" . $fileName;
                 $sql = "UPDATE users SET User_avatar_url = ? WHERE user_id = ?";
                 $stmt = $conn->prepare($sql);
-                $stmt->bind_param("si", $target_file_path, $userId);
+                $stmt->bind_param("si", $dbPath, $userId);
                 if($stmt->execute()) {
                     echo json_encode(['success' => true, 'message' => 'Avatar updated successfully!']);
                 } else {

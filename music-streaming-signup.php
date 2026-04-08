@@ -4,9 +4,9 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 if (isset($_POST['btn_signup'])) {
-    $username = trim($_POST['username']);
-    $password = trim($_POST['password']);
-    $email = trim($_POST['email']);
+    $username = trim($_POST['input_username']);
+    $password = trim($_POST['input_password']);
+    $email = trim($_POST['input_email']);
     $hashed_password = password_hash($password, PASSWORD_DEFAULT); // Mã hóa mật khẩu
     // Dùng prepared statement để lưu vào CSDL
     $sql = "INSERT INTO users (user_name, email, password, role) VALUES (?, ?, ?, 'user')";
@@ -14,7 +14,7 @@ if (isset($_POST['btn_signup'])) {
     if ($stmt) {
             $stmt->bind_param("sss", $username,$email, $hashed_password);
             if ($stmt->execute()) {
-                echo "<script>alert('Đăng ký thành công!'); window.location.href='login.php';</script>";
+                echo "<script>alert('Đăng ký thành công!'); window.location.href='music-streaming-login.php';</script>";
             } else {
                 $error = "Lỗi: Tên đăng nhập đã tồn tại!";
             }
@@ -40,34 +40,36 @@ if (isset($_POST['btn_signup'])) {
 			<div class="lg">
 				<img class="logo" src="./img/logo.png">
 			</div>
-			<div class="signup">
+			<form action="" method="POST">
+				<div class="signup">
 				<h3>SIGN UP</h3>
 				<div class="signup_form">
 					<table>
 						<tr>
 							<th>Username </th>
-							<td><input type="text" id="input_username" name="input_username"></td>
+							<td><input type="text" id="input_username" name="input_username" required></td>
 						</tr>
 						<tr>
 							<th>Password </th>
-							<td><input type="text" id="input_password" name="input_password"></td>
+							<td><input type="password" id="input_password" name="input_password" required></td>
 						</tr>
 						<tr>
 							<th>Email </th>
-							<td><input type="text" id="input_password" name="input_password"></td>
+							<td><input type="email" id="input_email" name="input_email" required></td>
 						</tr>
 					</table>
 				</div>
-				<button class="btn">SIGN UP</button>
+				<button class="btn" name="btn_signup">SIGN UP</button>
 				<div class="nav_form">
 					<table>
 						<tr>
 							<td>Already have an account?</td>
-							<td><a href="music-streaming-login.html">Log In Now.</a></td>
+							<td><a href="music-streaming-login.php">Log In Now.</a></td>
 						</tr>
 					</table>
 				</div>
 			</div>
+			</form>
 		</section>
 	</div>
 	<script src="music-streaming.js"></script>

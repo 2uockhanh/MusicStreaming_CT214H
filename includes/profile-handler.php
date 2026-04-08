@@ -1,41 +1,52 @@
 <?php
 session_start();
+require 'db-connect.php';
+
 header('Content-Type: application/json');
 
-$pdo = new PDO("mysql:host=localhost;dbname=Emuzik_db;charset=utf8", "root", "");
-
-$data = json_decode(file_get_contents('php://input'), true);
-
-if (!isset($_SESSION['user_id']) || !$data) {
-    echo json_encode(['status' => 'error', 'message' => 'Yêu cầu không hợp lệ']);
+if (!isset($_SESSION['user_id'])) {
+    echo json_encode(['status' => 'error', 'message' => 'Unauthorized access.']);
     exit;
 }
 
-$user_id = $_SESSION['user_id'];
-$username = $data['username'];
-$email = $data['email'];
-$password = $data['password'];
+$input = json_decode(file_get_contents('php://input'), true);
+
+if (!$input) {
+    echo json_encode(['status' => 'error', 'message' => 'Invalid request data.']);
+    exit;
+}
+
+$userId = $_SESSION['user_id'];
+$newUsername = trim($input['username']);
+$newEmail = trim($input['email']);
+$newPassword = $input['password'];
 
 try {
-    $sql = "UPDATE Users SET User_name = ?, Email = ?";
-    $params = [$username, $email];
-
-    if (!empty($password)) {
-        $sql .= ", Password = ?";
-        $params[] = password_hash($password, PASSWORD_DEFAULT);
-    }
-
-    $sql .= " WHERE User_id = ?";
-    $params[] = $user_id;
-
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute($params);
-
-    echo json_encode(['status' => 'success']);
-} catch (PDOException $e) {
-    if ($e->getCode() == 23000) {
-        echo json_encode(['status' => 'error', 'message' => 'This username or email is already taken']);
+    if (!empty($newPassword)) {
+        $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+        $sql = "UPDATE users SET user_name = ?, email = ?, password = ? WHERE user_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sssi", $newUsername, $newEmail, $hashedPassword, $userId);
     } else {
-        echo json_encode(['status' => 'error', 'message' => 'Error updating profile: ' . $e->getMessage()]);
+        $sql = "UPDATE users SET user_name = ?, email = ? WHERE user_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ssi", $newUsername, $newEmail, $userId);
     }
+
+    if ($stmt->execute()) {
+        $_SESSION['username'] = $newUsername;
+        echo json_encode(['status' => 'success']);
+    } else {
+        if ($conn->errno == 1062) {
+            echo json_encode(['status' => 'error', 'message' => 'Username or Email already exists.']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Database error: ' . $conn->error]);
+        }
+    }
+
+    $stmt->close();
+} catch (Exception $e) {
+    echo json_encode(['status' => 'error', 'message' => 'System error: ' . $e->getMessage()]);
 }
+
+$conn->close();
