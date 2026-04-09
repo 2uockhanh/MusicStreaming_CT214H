@@ -48,7 +48,7 @@ document.getElementById('avatar-input').onchange = function() {
                 const formData = new FormData();
                 formData.append('avatar', blob, 'avatar.jpg');
 
-                fetch('../includes/upload-avatar-handler.php', {
+                fetch('includes/upload-avatar-handler.php', {
                     method: 'POST',
                     body: formData
                 })
@@ -56,8 +56,7 @@ document.getElementById('avatar-input').onchange = function() {
                 .then(data => {
                     if (data.success) {
                         alert('Avatar updated successfully!');
-                        const headerIcon = document.querySelector('.user-icon img');
-                        if(headerIcon) headerIcon.src = dataUrl;
+                        location.reload();
                     } else {
                         alert('Failed to update: ' + data.message);
                     }

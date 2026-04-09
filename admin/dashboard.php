@@ -24,7 +24,7 @@ $songCount = $conn->query("SELECT COUNT(*) as total FROM Songs")->fetch_assoc()[
             <a href="admin/manage_users.php" class="btn btn-user"><i class="fas fa-users"></i> USERS</a>
             <a href="admin/manage_songs.php" class="btn btn-music"><i class="fas fa-music"></i> MUSIC</a>
             <button id="refresh-stats" class="btn btn-refresh"><i class="fas fa-sync"></i> REFRESH</button>
-            <a href="../auth/login.php" class="btn btn-logout">LOGOUT</a>
+            <a href="../auth/logout.php" class="btn btn-logout" onclick="return confirm('Bạn có chắc chắn muốn đăng xuất?')">LOGOUT</a>
         </div>
         <br>
         <div class="grid">

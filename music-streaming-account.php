@@ -86,7 +86,7 @@ $stmt->close();
                                     <a href="music-streaming-account.php">My Account</a>
                                     <a href="#">My Favourite</a>
                                     <a href="#">Theme Mode</a>
-                                    <a href="#">Log Out</a>
+                                    <a href="auth/logout.php" onclick="return confirm('Are you sure you want to log out?')">Log Out</a>
                                 </div>
                             </div>
                         </div>

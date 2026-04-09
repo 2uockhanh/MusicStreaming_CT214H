@@ -74,7 +74,7 @@ if (!empty($_SESSION['user_id'])) {
                                 <button type="button" class="dropDownBtn" onclick="window.location.href='music-streaming-account.php'">My Account</button>
                                 <button type="button" class="dropDownBtn">My Favourite</button>
                                 <button type="button" class="dropDownBtn">Theme Mode</button>
-                                <button type="button" class="dropDownBtn">Log Out</button>
+                                <button type="button" class="dropDownBtn" onclick="if(confirm('Are you sure you want to log out?')) window.location.href='auth/logout.php'">Log Out</button>
                             </div>
                         </div>
                     </li>

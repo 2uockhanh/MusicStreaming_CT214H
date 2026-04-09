@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include '../includes/db-connect.php';
+    include 'db-connect.php';
 
     if(isset($_SESSION['user_id']) && isset($_FILES['avatar'])) {
         $userId = $_SESSION['user_id'];
