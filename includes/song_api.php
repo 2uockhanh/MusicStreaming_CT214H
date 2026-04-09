@@ -28,10 +28,21 @@ function handleMusicUpload($file_input) {
     return null;
 }
 
-// ==================== 1. READ ====================
+// hiển thị danh sách các bài hát có trong csdl => đặt ID giảm dần để biết được bài nào được thêm vào gần đây nhất
+
 if ($action === 'read') {
+    $search = $_GET['search'] ?? ''; // Lấy từ khóa tìm kiếm
     try {
-        $stmt = $conn->prepare("SELECT Song_id, Song_title, File_url, Lyric, Album_id, View_count FROM Songs ORDER BY Song_id DESC");
+        if ($search !== '') {
+            // Nếu có từ khóa -> Tìm theo tên bài hát
+            $searchParam = "%" . $search . "%";
+            $stmt = $conn->prepare("SELECT Song_id, Song_title, File_url, Lyric, Album_id, View_count FROM Songs WHERE Song_title LIKE ? ORDER BY Song_id DESC");
+            $stmt->bind_param("s", $searchParam);
+        } else {
+            // Nếu không có từ khóa -> Lấy tất cả
+            $stmt = $conn->prepare("SELECT Song_id, Song_title, File_url, Lyric, Album_id, View_count FROM Songs ORDER BY Song_id DESC");
+        }
+        
         $stmt->execute();
         $result = $stmt->get_result(); 
         echo json_encode(['success' => true, 'data' => $result->fetch_all(MYSQLI_ASSOC)]);
@@ -41,7 +52,7 @@ if ($action === 'read') {
     exit;
 }
 
-// ==================== 2. CREATE ====================
+// Thêm bài hát vào CSDL
 if ($action === 'create') {
     $title = $_POST['song_title'] ?? '';
     $lyric = $_POST['lyric'] ?? '';
@@ -70,7 +81,7 @@ if ($action === 'create') {
     exit;
 }
 
-// ==================== 3. UPDATE ====================
+// Cập nhật lại thông tin bài hát
 if ($action === 'update') {
     $id = $_POST['song_id'] ?? '';
     $title = $_POST['song_title'] ?? '';
@@ -100,7 +111,7 @@ if ($action === 'update') {
     exit;
 }
 
-// ==================== 4. DELETE ====================
+// Xóa bài hát khỏi CSDL
 if ($action === 'delete') {
     $id = $_POST['id'] ?? '';
     try {
@@ -116,4 +127,7 @@ if ($action === 'delete') {
     }
     exit;
 }
+
 ?>
+
+

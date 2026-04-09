@@ -16,6 +16,9 @@
 
     <main class="main-content">
         <div id="users" class="table-container active">
+             <div class="search" style="text-align: center; margin-bottom: 15px;">
+                <input type="text" id="search_info" placeholder="Search for username" onkeyup="searchUser()" style="padding: 10px; width: 300px; border-radius: 5px; border: 1px solid #ccc;">
+            </div>
             <div class="header">
                 <h1>Users List</h1>
                 <button class="btn-add" onclick="openModal('add')"><i class="fas fa-plus"></i> Add User</button>
@@ -31,6 +34,9 @@
         </div>
 
         <div id="songs" class="table-container">
+            <div class="search" style="text-align: center; margin-bottom: 15px;">
+                <input type="text" id="search_song" placeholder="Search for ID or song's name..." onkeyup="searchSongs()" style="padding: 10px; width: 300px; border-radius: 5px; border: 1px solid #ccc;">
+            </div>
             <div class="header">
                 <h1>Songs List</h1>
                 <button class="btn-add" onclick="openSongModal('add')"><i class="fas fa-plus"></i> Add Song</button>

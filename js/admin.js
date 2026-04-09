@@ -4,9 +4,54 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ==================== QUẢN LÝ USER ====================
-async function loadUsers() {
+
+
+
+// async function  loadUsers(searchQuery = '') {
+//     try{
+//         const reponse = await fetch ('includes/user_api.php?action=read&search=${encodeURIComponent(searchQuery)}');
+//         const result = await reponse.json();
+//         if(result.success){
+//             const tbody = document.querySelector('#User-list-body');
+//             tbody.innerHTML='';
+//             result.data.forEach(user => {
+//                 let badgeClass = user.Role === 'admin' ? 'badge-admin' :'badge-user';
+//                 let tr = document.createElement('tr');
+//                 const userData = encodeURIComponent(JSON.stringify(user));
+
+//                 tr.innerHTML = `
+//                     <td>${user.User_id}</td>
+//                     <td>${user.User_name}</td>
+//                     <td>${user.Email}</td>
+//                     <td><span class="badge ${badgeClass}">${user.Role}</span></td>
+//                     <td>
+//                         <button class="action-btn btn-edit" onclick="openModal('edit', '${userData}')"><i class="fas fa-edit"></i></button>
+//                         <button class="action-btn btn-delete" onclick="deleteUser(${user.User_id})"><i class="fas fa-trash"></i></button>
+//                     </td>
+//                 `;
+               
+//             });
+//              tbody.appendChild(tr);
+//         }
+//     } catch (error){
+//         console.error('Can not connect to User:',error);
+//     };
+// }
+async function loadUsers(searchQuery = '') {
     try {
-        const response = await fetch('includes/user_api.php?action=read');
+
+        const formData = new FormData();
+        formData.append('action', 'read');
+        if (searchQuery !== '') {
+            formData.append('search', searchQuery);
+        }
+
+
+        const response = await fetch('includes/user_api.php', {
+            method: 'POST',
+            body: formData
+        });
+        
         const result = await response.json();
 
         if (result.success) {
@@ -17,7 +62,6 @@ async function loadUsers() {
                 let badgeClass = user.Role === 'admin' ? 'badge-admin' : 'badge-user';
                 let tr = document.createElement('tr');
                 
-                // Chuyển object user thành string an toàn để truyền vào hàm edit
                 const userData = encodeURIComponent(JSON.stringify(user));
 
                 tr.innerHTML = `
@@ -36,6 +80,10 @@ async function loadUsers() {
     } catch (error) { console.error('Lỗi kết nối User:', error); }
 }
 
+function searchUser(){
+    const keyword = document.getElementById('search_info').value;
+    loadUsers(keyword);
+}
 function openModal(mode, dataString = null) {
     const modal = document.getElementById('crud-modal');
     const form = document.getElementById('crud-form');
@@ -88,9 +136,11 @@ async function deleteUser(id) {
 }
 
 // ==================== QUẢN LÝ BÀI HÁT (SONGS) ====================
-async function loadSongs() {
+// Thêm tham số searchQuery mặc định là rỗng
+async function loadSongs(searchQuery = '') {
     try {
-        const response = await fetch('includes/song_api.php?action=read');
+        // Gắn thêm search vào đường dẫn API
+        const response = await fetch(`includes/song_api.php?action=read&search=${encodeURIComponent(searchQuery)}`);
         const result = await response.json();
 
         if (result.success) {
@@ -117,6 +167,12 @@ async function loadSongs() {
             });
         }
     } catch (error) { console.error('Lỗi tải bài hát:', error); }
+}
+
+// Hàm tìm kiếm bài hát
+function searchSongs() {
+    const keyword = document.getElementById('search_song').value;
+    loadSongs(keyword);
 }
 
 function openSongModal(mode, dataString = null) {

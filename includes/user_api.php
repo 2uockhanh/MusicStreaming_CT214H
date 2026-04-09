@@ -3,22 +3,27 @@ header('Content-Type: application/json');
 require 'db-connect.php'; 
 
 $action = $_GET['action'] ?? $_POST['action'] ?? '';
+
+// Load danh sách bài hát và chức năng tìm kiếm tài khoản 
 if ($action === 'read') {
+
+    $search = $_POST['search'] ?? ''; 
     try {
-        // Chuẩn bị câu lệnh SQL
-        $stmt = $conn->prepare("SELECT User_id, User_name, Email, Role FROM Users ORDER BY User_id DESC");
+        if ($search !== '') {
+            $searchParam = "%" . $search . "%";
+            $stmt = $conn->prepare("SELECT User_id, User_name, Email, Role FROM Users WHERE User_name LIKE ? OR Email LIKE ? ORDER BY User_id DESC");
+            $stmt->bind_param("ss", $searchParam, $searchParam);
+        } else {
+            $stmt = $conn->prepare("SELECT User_id, User_name, Email, Role FROM Users ORDER BY User_id DESC");
+        }
+        
         $stmt->execute();
-        
-     
-        $result = $stmt->get_result(); 
-        $users = $result->fetch_all(MYSQLI_ASSOC); 
-        
-        // Trả về JSON
-        echo json_encode(['success' => true, 'data' => $users]);
-        
+        $result = $stmt->get_result();
+        echo json_encode(['success' => true, 'data' => $result->fetch_all(MYSQLI_ASSOC)]);
     } catch (Exception $e) {
-        echo json_encode(['success' => false, 'message' => 'Lỗi CSDL: ' . $e->getMessage()]);
+        echo json_encode(['success' => false, "message" => 'Lỗi DB: ' . $e->getMessage()]);
     }
+    exit;
 }
 if ($action === 'create') {
     $username = $_POST['username'] ?? '';
@@ -82,4 +87,6 @@ if ($action === 'delete') {
         echo json_encode(['success' => false, 'message' => 'Không thể xóa user này (có thể do đang vướng khóa ngoại ở bảng Songs/Playlists).']);
     }
 }
+
+
 ?>
