@@ -138,6 +138,23 @@ body{
     margin-top: 0px; 
     margin-bottom: 10px;
 }
+/* Like, Share, Add Playlist Button */
+.likeBtn {
+    width: fit-content; 
+    padding: 5px 10px; 
+    font-weight: bold; 
+    border-radius: 10px;
+}
+.likeBtn:hover {
+    width: fit-content; 
+    padding: 5px 10px; 
+    font-weight: bold; 
+    border-radius: 10px;
+    color: gray;
+}
+.liked {
+    color: red;
+}
 /* Play Button */
 .playBtn {
     font-family: Roboto, sans-serif; 
@@ -147,7 +164,7 @@ body{
     height: 40px; 
     font-size: 110%;
     font-weight: bold;
-    background-color: blue;
+    background-color: #5c7cff;
     border-radius: 10px;
     margin-top: 20px;
 }
@@ -199,6 +216,10 @@ body{
 }
 /* Switch Song and Play Music */
 .playImg {
+    background-color: rgba(0, 0, 0, 0); 
+    border: 0px solid;
+}
+.playImg img {
     width: 30px; 
     height: 30px; 
     margin-left: 10px; 
@@ -213,4 +234,36 @@ body{
     bottom: 0px; 
     display: none; 
     position: fixed;
+}
+/* Add to Playlist Popup */
+.add_to_playlist_popup {
+    width: 600px; height: 400px; display: none; background-color: white; position: fixed; left: 33%; top: 20%; border-radius: 20px;
+}
+.popupHead {
+    grid-template-columns:auto 40px; 
+    display: grid;
+}
+.popupHeader {
+    font-family: Roboto, sans-serif; 
+    font-weight: bold; 
+    font-size: 20px; 
+    margin: 20px 0px 20px 20px;
+}
+.popupClose {
+    width: fit-content;
+    height: fit-content;
+    font-size: 20px;
+    border-radius: 30px;
+    margin-top: 10px;
+}
+.popup_search input {
+    width: 70%;
+    height: 30px;
+    border-radius: 20px;
+    border-width: 0px;
+    font-size: 20px;
+    margin: 0 auto;
+    color: rgba(1, 1, 1, 1);
+    border: 1px solid;
+    padding-left: 10px;
 }

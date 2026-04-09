@@ -148,6 +148,7 @@ body{
 .playlist-table tr {
     background-color: rgba(255, 255, 255, 0.6);
     border-bottom: 2px solid black;
+    cursor: pointer;
 }
 .playlist-table td:nth-child(1) {
     text-align:center; 
@@ -169,6 +170,23 @@ body{
 .playlist-table td:nth-child(3) {
     text-align:center; 
     width: 300px;
+}
+/* Add Song, Display Mode, Edit, Remove Playlist Button */
+.likeBtn {
+    width: fit-content; 
+    padding: 5px 10px; 
+    font-weight: bold; 
+    border-radius: 10px;
+}
+.likeBtn:hover {
+    width: fit-content; 
+    padding: 5px 10px; 
+    font-weight: bold; 
+    border-radius: 10px;
+    color: gray;
+}
+.liked {
+    color: red;
 }
 /* Copy Right */
 .copyright {
@@ -215,4 +233,72 @@ body{
     font-family: Roboto, sans-serif;
     padding-top: 2px;
     border-top: 1px solid;
+}
+/* Add to Playlist Popup */
+.add_songs_popup {
+    width: 600px; height: 400px; display: none; background-color: white; position: fixed; left: 33%; top: 20%; border-radius: 20px;
+}
+.popupHead {
+    grid-template-columns:auto 40px; 
+    display: grid;
+}
+.popupHeader {
+    font-family: Roboto, sans-serif; 
+    font-weight: bold; 
+    font-size: 20px; 
+    margin: 20px 0px 20px 20px;
+}
+.popupClose {
+    width: fit-content;
+    height: fit-content;
+    font-size: 20px;
+    border-radius: 30px;
+    margin-top: 10px;
+}
+.popup_search input {
+    width: 70%;
+    height: 30px;
+    border-radius: 20px;
+    border-width: 0px;
+    font-size: 20px;
+    margin: 0 auto;
+    color: rgba(1, 1, 1, 1);
+    border: 1px solid;
+    padding-left: 10px;
+}
+/* Edit Playlist */
+.edit_playlist_popup {
+    width: 600px; 
+    height: 400px; 
+    background-color: rgba(255, 255, 255, 1); 
+    border-radius: 30px; 
+    display: none; 
+    position: fixed; 
+    left: 33%; 
+    top: 20%;
+}
+.popup_head {
+    grid-template-columns:auto 40px; 
+    display: grid;
+}
+.popup_header {
+    font-family: Roboto, sans-serif; 
+    font-weight: bold; 
+    font-size: 20px; 
+    margin: 20px 0px 20px 20px;
+}
+.popup_close {
+    width: fit-content;
+    height: fit-content;
+    font-size: 20px;
+    border-radius: 30px;
+    margin-top: 10px;
+}
+.changeSeenMode {
+    width: fit-content; 
+    height: fit-content; 
+    padding: 10px; 
+    margin-left: 20px; 
+    border-radius: 20px; 
+    font-family: Roboto, sans-serif;
 }

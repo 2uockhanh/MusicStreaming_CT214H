@@ -137,7 +137,7 @@ body{
 .follow-button {
     font-family: Roboto, sans-serif; 
     height: 40px; 
-    background-color: rgba(255, 0, 0, 1); 
+    background-color: #ff5c5c; 
     color: white; 
     font-weight: bold;
     font-size: 110%; 
