@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>eMusik - Playlist Info</title> 
+    <title>eMusik - Album - Từng Ngày Như Mãi Mãi</title> 
     <link rel="stylesheet" href='./css/playlist-info-style.css'>
     <link href='https://fonts.googleapis.com/css?family=Passero One' rel='stylesheet'>
 </head>
@@ -26,15 +26,10 @@
                                 <img class="nav_logo" src="./img/library.png"> Library
                             </button>
                         </tr>
+                        <!--
                         <tr>
                             <button class="nav_button" onclick="document.location='./music-streaming-favourite.html'">
                                 <img class="nav_logo" src="./img/favourite.png"> Favourite
-                            </button>                        
-                        </tr>
-                        <!--
-                        <tr>
-                            <button class="nav_button">
-                                <img class="nav_logo" src="./img/account.png"> Account
                             </button>                        
                         </tr>
                         -->
@@ -56,16 +51,18 @@
                                 <img style="width: 40px; height: 40px; border-radius: 30px;" src="./img/avatar.jpg" alt="Avatar"></img>
                             </button>
                             <div class="dropDownList" name="avatar" id="dropDown">
-                                <button value="myAccount" class="dropDownBtn">My Account</option>
-                                <button value="MyFavourite" class="dropDownBtn">My Favourite</option>
+                                <button onclick="document.location='./music-streaming-account.html'" value="myAccount" class="dropDownBtn">My Account</option>
+                                <!--
+                                    <button value="MyFavourite" class="dropDownBtn">My Favourite</option>
+                                -->
                                 <button value="themeMode" id="themeMode" class="dropDownBtn">🌙 Theme Mode</button>
-                                <button value="logOut" class="dropDownBtn">Log Out</option>
+                                <button onclick="document.location='./music-streaming-login.html'" value="logOut" class="dropDownBtn">Log Out</option>
                             </div>
                         </div>
                     </li>
                 </ul>
             </div>
-            <div style="margin-bottom: 20px;">
+            <div style="margin-bottom: 20px; cursor: pointer;">
                 <div class="playlist-header" onclick="document.location='./music-streaming-artist-info.html'">
                     <img class="playlist-image" src="./img/playlist/playlist_buitruonglinh/album_tungngaynhumaimai/poster.jpg" alt="tungngaynhumaimai"></img>
                     <div class="playlist-name">
@@ -79,109 +76,92 @@
                     </div>
                 </div>
             </div>
+            <div style="margin-left: 200px; margin-top: 20px; margin-bottom: 20px;">
+                <button class="likeBtn" id="addSongsBtn">Add Songs</button>
+                <button class="likeBtn" id="editPlaylistBtn">Edit Playlist</button>
+                <button class="likeBtn">Remove Playlist</button>
+            </div>
             <div>
                 <table class="playlist-table">
-                    <tr>
+                    <tr style="cursor: unset;">
                         <th>#</th>
                         <th>Title</th>
                         <th>Duration</th>
                     </tr>
-                    <tr>
+                    <tr onclick="document.location='./music-streaming-song-info.html'">
                         <td>1</td>
                         <td>
-                            <div>
-                                <h4>Intro Mong Em Hạnh Phúc Suốt Cuộc Đời Này</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4> 
-                            </div>
+                            <div> <h4>Intro Mong Em Hạnh Phúc Suốt Cuộc Đời Này</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4> </div>
                         </td>
                         <td>2:01</td>
                     </tr>
-                    <tr>
+                    <tr onclick="document.location='./music-streaming-song-info.html'">
                         <td>2</td>
                         <td>
-                            <div>
-                                <h4>Từng Ngày Như Mãi Mãi</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4> 
-                            </div>
+                            <div> <h4>Từng Ngày Như Mãi Mãi</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4> </div>
                         </td>
                         <td>3:33</td>
                     </tr>
-                    <tr>
+                    <tr onclick="document.location='./music-streaming-song-info.html'">
                         <td>3</td>
                         <td>
-                            <div>
-                                <h4>Em Ơi Là Em</h4> <h4 style="font-weight: lighter;">buitruonglinh, Kiều Chi, BMZ</h4> 
-                            </div>
+                            <div> <h4>Em Ơi Là Em</h4> <h4 style="font-weight: lighter;">buitruonglinh, Kiều Chi, BMZ</h4> </div>
                         </td>
                         <td>3:07</td>
                     </tr>
-                    <tr>
+                    <tr onclick="document.location='./music-streaming-song-info.html'">
                         <td>4</td>
                         <td>
-                            <div>
-                                <h4>Vì Điều Gì</h4> <h4 style="font-weight: lighter;">buitruonglinh, Kiều Chi, BMZ</h4> 
-                            </div>
+                            <div> <h4>Vì Điều Gì</h4> <h4 style="font-weight: lighter;">buitruonglinh, Kiều Chi, BMZ</h4> </div>
                         </td>
                         <td>2:33</td>
                     </tr>
                     <tr onclick="document.location='./music-streaming-song-info.html'">
                         <td>5</td>
                         <td>
-                            <div>
-                                <h4>Từng Ngày Yêu Em</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4> 
-                            </div>
+                            <div> <h4>Từng Ngày Yêu Em</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4> </div>
                         </td>
                         <td>3:45</td>
                     </tr>
-                    <tr>
+                    <tr onclick="document.location='./music-streaming-song-info.html'">
                         <td>6</td>
                         <td>
-                            <div>
-                                <h4>Nàng Công Chúa Nhỏ (Interlude)</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4> 
-                            </div>
+                            <div> <h4>Nàng Công Chúa Nhỏ (Interlude)</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4> </div>
                         </td>
                         <td>2:04</td>
                     </tr>
-                    <tr>
+                    <tr onclick="document.location='./music-streaming-song-info.html'">
                         <td>7</td>
                         <td>
-                            <div>
-                                <h4>Đi Cùng Anh</h4> <h4 style="font-weight: lighter;">buitruonglinh, 52Hz</h4> 
-                            </div>
+                            <div> <h4>Đi Cùng Anh</h4> <h4 style="font-weight: lighter;">buitruonglinh, 52Hz</h4> </div>
                         </td>
                         <td>3:08</td>
                     </tr>
-                    <tr>
+                    <tr onclick="document.location='./music-streaming-song-info.html'">
                         <td>8</td>
                         <td>
-                            <div>
-                                <h4>Anh Chưa Từng Hết Yêu</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4> 
-                            </div>
+                            <div> <h4>Anh Chưa Từng Hết Yêu</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4> </div>
                         </td>
                         <td>3:28</td>
                     </tr>
-                    <tr>
+                    <tr onclick="document.location='./music-streaming-song-info.html'">
                         <td>9</td>
                         <td>
-                            <div>
-                                <h4>Chỉ Là Không Có Nhau</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4> 
-                            </div>
+                            <div> <h4>Chỉ Là Không Có Nhau</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4> </div>
                         </td>
                         <td>4:01</td>
                     </tr>
-                    <tr>
+                    <tr onclick="document.location='./music-streaming-song-info.html'">
                         <td>10</td>
                         <td>
-                            <div>
-                                <h4>Dù Em Từng Yêu</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4> 
-                            </div>
+                            <div> <h4>Dù Em Từng Yêu</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4> </div>
                         </td>
                         <td>3:14</td>
                     </tr>
-                    <tr>
+                    <tr onclick="document.location='./music-streaming-song-info.html'">
                         <td>11</td>
                         <td>
-                            <div>
-                                <h4>Chỉ Là Không Có Nhau</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4> 
-                            </div>
+                            <div> <h4>Chỉ Là Không Có Nhau</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4> </div>
                         </td>
                         <td>3:54</td>
                     </tr>
@@ -206,10 +186,10 @@
                     <div class="footer-section">
                         <h4>Useful Link</h4>
                         <ul>
-                            <li><a href="#Introduce">My Account</a></li>
-                            <li><a href="#Term">Library</a></li>
-                            <li><a href="#Privacy">Favourite</a></li>
-                            <li><a href="#PolicySafety">Import Music</a></li>
+                            <li><a href="./music-streaming-account.html">My Account</a></li>
+                            <li><a href="./music-streaming-library.html">Library</a></li>
+                            <li><a href="./music-streaming-favourite.html">Favourite</a></li>
+                            <li><a href="./music-streaming-import-music.html">Import Music</a></li>
                         </ul>
                     </div>
                     <div class="footer-section">
@@ -228,6 +208,67 @@
             </footer>
         </div>
     </div>
+    <div class="add_songs_popup" id="add_songs_popup">
+        <div class="popupHead" id="popupHead">
+            <div class="popupHeader" id="popupHeader">Add Songs</div>
+            <button class="popupClose" id="popupClose">&#128936;</button>
+        </div>
+        <div class="popup_search" style="text-align: center;">
+            <input type="text" id="search_info" name="search_info" placeholder="Search playlists..."></input>
+        </div>
+        <div style="margin: 20px auto;">
+            <div style="grid-template-columns: 40px 60% 60px; display: grid; gap: 10px; align-items: center; justify-content: center; border-top: 1px solid black;">
+                <img src="./img/song/song_jukysan/song_nguoidautien/poster.jpg" style="width: 40px; height: 40px; border: 1px solid black; border-radius: 10px;"></img>
+                <p style="font-family: Roboto, sans-serif;">Người Đầu Tiên</p>
+                <button style="background-color: grey; color: black; padding: 5px 10px; font-weight: bold; border-radius: 20px;">Add</button>
+            </div>
+            <div style="grid-template-columns: 40px 60% 60px; display: grid; gap: 10px; align-items: center; justify-content: center; border-top: 1px solid black;">
+                <img src="./img/song/song_congb/song_vitaminc/poster.jpg" style="width: 40px; height: 40px; border: 1px solid black; border-radius: 10px;"></img>
+                <p style="font-family: Roboto, sans-serif;">Vitamin C</p>
+                <button style="background-color: grey; color: black; padding: 5px 10px; font-weight: bold; border-radius: 20px;">Add</button>
+            </div>
+            <div style="grid-template-columns: 40px 60% 60px; display: grid; gap: 10px; align-items: center; justify-content: center; border-top: 1px solid black;">
+                <img src="./img/song/song_rio/song_emoidungkhoc/poster.jpg" style="width: 40px; height: 40px; border: 1px solid black; border-radius: 10px;"></img>
+                <p style="font-family: Roboto, sans-serif;">em ơi đừng khóc</p>
+                <button style="background-color: grey; color: black; padding: 5px 10px; font-weight: bold; border-radius: 20px;">Add</button>
+            </div>
+            <div style="grid-template-columns: 40px 60% 60px; display: grid; gap: 10px; align-items: center; justify-content: center; border-top: 1px solid black;">
+                <img src="./img/song/song_khoivu/song_sairoi/poster.jpg" style="width: 40px; height: 40px; border: 1px solid black; border-radius: 10px;"></img>
+                <p style="font-family: Roboto, sans-serif;">SAIROI</p>
+                <button style="background-color: grey; color: black; padding: 5px 10px; font-weight: bold; border-radius: 20px;">Add</button>
+            </div>
+            <div style="grid-template-columns: 40px 60% 60px; display: grid; gap: 10px; align-items: center; justify-content: center; border-top: 1px solid black;">
+                <img src="./img/song/song_vuongbinh/song_thanhtan/poster.jpg" style="width: 40px; height: 40px; border: 1px solid black; border-radius: 10px;"></img>
+                <p style="font-family: Roboto, sans-serif;">Thanh Tân</p>
+                <button style="background-color: grey; color: black; padding: 5px 10px; font-weight: bold; border-radius: 20px;">Add</button>
+            </div>
+        </div>
+    </div>
+    <div class="edit_playlist_popup" id="edit_playlist_popup">
+        <div class="popup_head" id="popup_head">
+            <div class="popup_header" id="popup_header">Edit Playlist</div>
+            <button class="popup_close" id="popup_close">&#128936;</button>
+        </div>
+        <div style="grid-template-columns: 240px 330px; gap: 30px; display: grid;">
+            <div style="margin-left: 30px;">
+                <img src="./img/playlist/playlist_buitruonglinh/album_tungngaynhumaimai/poster.jpg" style="width: 200px; height: 200px; border: 3px solid black;">
+                <button style="font-family: Roboto, sans-serif; width: fit-content; height: fit-content; background-color: rgba(217, 217, 217, 1); color: black; font-size: medium; padding: 10px; font-weight: bold; border-radius: 20px; justify-content: center; text-align: center; margin-top: 10px; margin-left: 40px;">Change Avatar</button>
+            </div>
+            <div style="font-family: Roboto, sans-serif;">
+                <h4 style="margin-bottom: 10px; margin-top: 0px;">Playlist's Name</h4>
+                <input type="text" value="Từng Ngày Như Mãi Mãi" style="width: 300px; height: 30px; border-radius: 30px; background-color: rgba(217, 217, 217, 1); color: black; padding-left: 10px;">
+                <h4 style="margin-bottom: 10px;">Description</h4>
+                <input type="text" value="" style="width: 300px; height: 120px; border-radius: 30px; background-color: rgba(217, 217, 217, 1); color: black; padding-left: 10px;">
+            </div>
+        </div>
+        <div style="grid-template-columns: 240px 150px 150px; gap: 30px; display: grid; margin-top: 10px;">
+            <button class="changeSeenMode" id="changeSeenMode">🔒 Private</button>
+            <button style="width: 80%; height: fit-content; padding: 10px 20px; border-radius: 20px; font-family: Roboto, sans-serif; background-color: rgba(1, 1, 1, 1); color: white;">Create</button>
+            <button style="width: 80%; height: fit-content; padding: 10px 20px; border-radius: 20px; font-family: Roboto, sans-serif; background-color: red; color: white;">Cancel</button>
+        </div>
+    </div>
+    
     <script src="./js/music-streaming-home.js"></script>
+    <script src="./js/music-streaming-playlist-info.js"></script>
 </body>
 </html>
