@@ -194,7 +194,7 @@ function openSongModal(mode, dataString = null) {
         document.getElementById('song_title').value = data.Song_title;
         document.getElementById('lyric').value = data.Lyric || '';
         document.getElementById('album_id').value = data.Album_id || '';
-        document.getElementById('view_count').value = data.View_count;
+     
         
         if(fileNameDisplay) {
             fileNameDisplay.innerText = "File hiện tại: " + (data.File_url || 'Chưa có');

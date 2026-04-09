@@ -93,11 +93,13 @@ if ($action === 'update') {
         $new_file_url = handleMusicUpload('music_file');
 
         if ($new_file_url) {
-            $stmt = $conn->prepare("UPDATE Songs SET Song_title=?, File_url=?, Lyric=?, View_count=?, Album_id=? WHERE Song_id=?");
-            $stmt->bind_param("sssiii", $title, $new_file_url, $lyric, $views, $album_id, $id);
+            // Đã xóa View_count ra khỏi câu lệnh
+            $stmt = $conn->prepare("UPDATE Songs SET Song_title=?, File_url=?, Lyric=?, Album_id=? WHERE Song_id=?");
+            $stmt->bind_param("sssii", $title, $new_file_url, $lyric, $album_id, $id);
         } else {
-            $stmt = $conn->prepare("UPDATE Songs SET Song_title=?, Lyric=?, View_count=?, Album_id=? WHERE Song_id=?");
-            $stmt->bind_param("ssiii", $title, $lyric, $views, $album_id, $id);
+            // Đã xóa View_count ra khỏi câu lệnh
+            $stmt = $conn->prepare("UPDATE Songs SET Song_title=?, Lyric=?, Album_id=? WHERE Song_id=?");
+            $stmt->bind_param("ssii", $title, $lyric, $album_id, $id);
         }
 
         if ($stmt->execute()) {
@@ -108,7 +110,6 @@ if ($action === 'update') {
     } catch (Exception $e) {
         echo json_encode(['success' => false, 'message' => $e->getMessage()]);
     }
-    exit;
 }
 
 // Xóa bài hát khỏi CSDL

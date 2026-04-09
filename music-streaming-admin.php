@@ -21,7 +21,7 @@
             </div>
             <div class="header">
                 <h1>Users List</h1>
-                <button class="btn-add" onclick="openModal('add')"><i class="fas fa-plus"></i> Add User</button>
+                <button class="btn-add" onclick="openModal('add')"><i class="fas fa-plus"></i> Add Admin</button>
             </div>
             <table>
                 <thead>
