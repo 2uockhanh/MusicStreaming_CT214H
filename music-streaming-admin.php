@@ -10,8 +10,11 @@
 <body>
     <aside class="sidebar">
         <div class="sidebar-header">eMuzik Admin</div>
+        <button class="nav-btn" onclick="window.location.href='music-streaming-home.php'"><i class="fas fa-home"></i> Return to Home</button>
         <button class="nav-btn active" onclick="switchTab('users', this)"><i class="fas fa-users"></i> Users Management</button>
         <button class="nav-btn" onclick="switchTab('songs', this)"><i class="fas fa-music"></i> Songs Management</button>
+        <button class="nav-btn" onclick="switchTab('albums', this)"><i class="fas fa-list"></i> Albums Management</button>
+        <button class="nav-btn" onclick="switchTab('artists', this)"><i class="fas fa-list"></i> Artists Management</button>
     </aside>
 
     <main class="main-content">
@@ -96,6 +99,8 @@
                         <input type="file" id="music_file" name="music_file" accept="audio/*">
                         <small id="current-file-name" style="color: #666; display: block; margin-top: 5px;"></small>
                     </div>
+
+
                     <div class="form-group-modern">
                         <label>Lyrics</label>
                         <textarea id="lyric" name="lyric" rows="4"></textarea>
@@ -113,6 +118,10 @@
                 </form>
             </div>
         </div>
+
+
+
+
     </main>
 
     <script>

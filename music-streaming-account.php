@@ -10,14 +10,16 @@ if (!isset($_SESSION['user_id'])) {
 $avatarUrl = 'img/avatar.jpg';
 $email = '';
 $username = '';
+$userRole = '';
 
 $userId = $_SESSION['user_id'];
-$stmt = $conn->prepare("SELECT User_name, email, User_avatar_url FROM users WHERE user_id = ?");
+$stmt = $conn->prepare("SELECT User_name, email, User_avatar_url, Role FROM users WHERE user_id = ?");
 $stmt->bind_param("i", $userId);
 $stmt->execute();
 $result = $stmt->get_result();
 if ($row = $result->fetch_assoc()) {
     $email = $row['email'];
+    $userRole = $row['Role'];
     $username = $row['User_name'];
     $_SESSION['user_name'] = $row['User_name'];
     if (!empty($row['User_avatar_url'])) {
@@ -84,6 +86,9 @@ $stmt->close();
 
                                 <div class="dropdown-menu">
                                     <a href="music-streaming-account.php">My Account</a>
+                                    <?php if ($userRole === 'admin'): ?>
+                                    <a href="music-streaming-admin.php">Admin Dashboard</a>
+                                    <?php endif; ?>
                                     <a href="#">My Favourite</a>
                                     <a href="#">Theme Mode</a>
                                     <a href="auth/logout.php" onclick="return confirm('Are you sure you want to log out?')">Log Out</a>
@@ -131,8 +136,8 @@ $stmt->close();
                 </div>
 
                 <div class="action-buttons">
-                    <button class="btn-action btn-library"><i class="fas fa-music"></i> MY LIBRARY</button>
-                    <button class="btn-action btn-upload"><i class="fas fa-upload"></i> UPLOAD SONG</button>
+                    <!--<button class="btn-action btn-library"><i class="fas fa-music"></i> MY LIBRARY</button>-->
+                    <!-- <button class="btn-action btn-upload"><i class="fas fa-upload"></i> UPLOAD SONG</button> -->
                 </div>
             </section>
 

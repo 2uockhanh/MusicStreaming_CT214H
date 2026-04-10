@@ -3,9 +3,10 @@ session_start();
 include 'includes/db-connect.php';
 
 $avatarUrl = 'img/avatar.jpg';
+$userRole = '';
 if (!empty($_SESSION['user_id'])) {
     $userId = $_SESSION['user_id'];
-    $stmt = $conn->prepare("SELECT User_avatar_url FROM users WHERE user_id = ?");
+    $stmt = $conn->prepare("SELECT User_avatar_url, Role FROM users WHERE user_id = ?");
     $stmt->bind_param("i", $userId);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -13,6 +14,7 @@ if (!empty($_SESSION['user_id'])) {
         if (!empty($row['User_avatar_url'])) {
             $avatarUrl = $row['User_avatar_url'];
         }
+        $userRole = $row['Role'];
     }
     $stmt->close();
 }
@@ -37,7 +39,7 @@ if (!empty($_SESSION['user_id'])) {
                             </button>
                         </tr>
                         <tr>
-                            <button class="nav_button">
+                            <button class="nav_button" onclick="document.location='./music-streaming-library.php'">
                                 <img class="nav_logo" src="./img/library.png"> Library
                             </button>
                         </tr>
@@ -72,6 +74,9 @@ if (!empty($_SESSION['user_id'])) {
                             </button>
                             <div class="dropDownList" name="avatar" id="dropDown">
                                 <button type="button" class="dropDownBtn" onclick="window.location.href='music-streaming-account.php'">My Account</button>
+                                <?php if ($userRole === 'admin'): ?>
+                                <button value="Admin Dashboard" class="dropDownBtn" onclick="window.location.href='music-streaming-admin.php'">Admin Dashboard</button>
+                                <?php endif; ?>
                                 <button type="button" class="dropDownBtn">My Favourite</button>
                                 <button type="button" class="dropDownBtn">Theme Mode</button>
                                 <button type="button" class="dropDownBtn" onclick="if(confirm('Are you sure you want to log out?')) window.location.href='auth/logout.php'">Log Out</button>
@@ -274,8 +279,8 @@ if (!empty($_SESSION['user_id'])) {
                     <div class="footer-section">
                         <h4>Useful Link</h4>
                         <ul>
-                            <li><a href="#Introduce">My Account</a></li>
-                            <li><a href="#Term">Library</a></li>
+                            <li><a href="music-streaming-account.php">My Account</a></li>
+                            <li><a href="music-streaming-library.php">Library</a></li>
                             <li><a href="#Privacy">Favourite</a></li>
                             <li><a href="#PolicySafety">Import Music</a></li>
                         </ul>

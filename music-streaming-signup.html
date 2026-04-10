@@ -4,12 +4,12 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>eMusik - Sign Up</title>
-	<link rel="stylesheet" href='/css/welcome-style.css'>
+	<link rel="stylesheet" href='./css/welcome-style.css'>
 </head>
 <body>
-	<div class="bg">
-		<div class="darkModeToggle">
-			<button>🌙 DARK</button>
+	<div id="welcome" style="background-color: rgba(1,1,1,0.6);">
+		<div style="text-align: right; margin-right: 10px; margin-top: 10px;">
+			<button id="darkModeToggle" class="darkModeToggle">🌙 DARK</button>
 		</div>
 		<section>
 			<div class="lg">
@@ -17,23 +17,23 @@
 			</div>
 			<div class="signup">
 				<h3>SIGN UP</h3>
-				<form method="POST" action="music-streaming-signup.php" class="signup_form">
+				<div class="signup_form">
 					<table>
 						<tr>
 							<th>Username </th>
-							<td><input type="text" id="input_username" name="username" required></td>
+							<td><input type="text" id="input_username" name="input_username"></td>
 						</tr>
 						<tr>
 							<th>Password </th>
-							<td><input type="password" id="input_password" name="password" required></td>
+							<td><input type="text" id="input_password" name="input_password"></td>
 						</tr>
 						<tr>
 							<th>Email </th>
-							<td><input type="email" id="input_email" name="email" required></td>
+							<td><input type="text" id="input_password" name="input_password"></td>
 						</tr>
 					</table>
-				</form>
-				<button class="btn" onclick="document.querySelector('.signup_form').submit()">SIGN UP</button>
+				</div>
+				<button class="btn">SIGN UP</button>
 				<div class="nav_form">
 					<table>
 						<tr>
@@ -45,5 +45,6 @@
 			</div>
 		</section>
 	</div>
+	<script src="./js/music-streaming-mode-toggle.js"></script>
 </body>
 </html>
