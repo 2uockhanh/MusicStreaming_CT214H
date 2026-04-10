@@ -1,14 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+session_start();
+include 'includes/db-connect.php';
 
+$avatarUrl = './img/avatar.jpg';
+$userRole = '';
+if (!empty($_SESSION['user_id'])) {
+    $userId = $_SESSION['user_id'];
+    $stmt = $conn->prepare("SELECT User_avatar_url, Role FROM users WHERE user_id = ?");
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($row = $result->fetch_assoc()) {
+        if (!empty($row['User_avatar_url'])) {
+            $avatarUrl = $row['User_avatar_url'];
+        }
+        $userRole = $row['Role'] ?? '';
+    }
+    $stmt->close();
+}
+?><!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>eMusik - Library</title>
+    <title>eMusik - Library</title> 
     <link rel="stylesheet" href='./css/library-style.css'>
+    <link rel="stylesheet" href=".css/home-style.css">
     <link href='https://fonts.googleapis.com/css?family=Passero One' rel='stylesheet'>
 </head>
-
 <body>
     <div style="display: flex;">
         <div>
@@ -17,7 +36,7 @@
                     <h3 style="font-family: 'Passero One'; font-size: 48px; margin: 0px auto;">eMuzik</h3>
                 </button>
                 <div class="nav">
-                    <table>
+                <table>
                         <tr>
                             <button class="nav_button" onclick="document.location='./music-streaming-home.php'">
                                 <img class="nav_logo" src="./img/home.png"> Home</img>
@@ -40,7 +59,7 @@
             </nav>
         </div>
         <div class="home">
-            <div class="header">
+            <div class="header"> 
                 <ul style="display: grid; grid-template-columns: 90% 10%; list-style-type: none;">
                     <li>
                         <div class="search" style="text-align: center;">
@@ -50,16 +69,16 @@
                     <li>
                         <div class="avatar_dropdown" style="text-align: right; margin-right: 20px; margin-top: 20px; margin-bottom: 20px; width: 10%;">
                             <button class="dropbtn" id="dropbtn">
-                                <img style="width: 40px; height: 40px; border-radius: 30px;" src="./img/avatar.jpg" alt="Avatar"></img>
+                                <img style="width: 40px; height: 40px; border-radius: 30px;" src="<?php echo htmlspecialchars($avatarUrl); ?>" alt="Avatar"></img>
                             </button>
                             <div class="dropDownList" name="avatar" id="dropDown">
-                                <button onclick="document.location='./music-streaming-account.php'" value="myAccount" class="dropDownBtn">My Account</option>
-                                    <!-- <button value="MyFavourite" class="dropDownBtn">My Favourite</option> -->
-                                    <?php if ($userRole === 'admin'): ?>
-                                        <button value="Admin Dashboard" class="dropDownBtn" onclick="window.location.href='music-streaming-admin.php'">Admin Dashboard</button>
-                                    <?php endif; ?>
-                                    <button value="themeMode" id="themeMode" class="dropDownBtn">🌙 Theme Mode</button>
-                                    <button onclick="document.location='./music-streaming-login.php'" value="logOut" class="dropDownBtn">Log Out</option>
+                                <button type="button" class="dropDownBtn" onclick="window.location.href='music-streaming-account.php'">My Account</button>
+                                <?php if ($userRole === 'admin'): ?>
+                                <button type="button" class="dropDownBtn" onclick="window.location.href='music-streaming-admin.php'">Admin Dashboard</button>
+                                <?php endif; ?>
+                                <button type="button" class="dropDownBtn">My Favourite</button>
+                                <button type="button" class="dropDownBtn">Theme Mode</button>
+                                <button type="button" class="dropDownBtn" onclick="if(confirm('Are you sure you want to log out?')) window.location.href='auth/logout.php'">Log Out</button>
                             </div>
                         </div>
                     </li>
@@ -84,8 +103,7 @@
                             <div class="your_favourite_nav_grid">
                                 <img src="./img/default-playlist-avatar.jpg" alt="eMusik"></img>
                                 <div class="article_body">
-                                    <h4>Say Hi</h4>
-                                    <h4 style="font-weight: lighter;">6 songs</h4>
+                                    <h4>Say Hi</h4> <h4 style="font-weight: lighter;">6 songs</h4>
                                 </div>
                             </div>
                         </button>
@@ -114,8 +132,7 @@
                             <div class="your_favourite_nav_grid" onclick="document.location='music-streaming-song-info.html'">
                                 <img src="./img/song/song_buitruonglinh/song_tungngayyeuem/poster.jpg" alt="eMusik"></img>
                                 <div class="article_body">
-                                    <h4>Từng Ngày Yêu Em</h4>
-                                    <h4 style="font-weight: lighter;">buitruonglinh</h4>
+                                    <h4>Từng Ngày Yêu Em</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4>
                                 </div>
                             </div>
                         </button>
@@ -189,5 +206,4 @@
     <script src="./js/music-streaming-library.js"></script>
     <script src="./js/music-streaming-home.js"></script>
 </body>
-
 </html>

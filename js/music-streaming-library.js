@@ -1,6 +1,23 @@
-document.getElementById("dropbtn").addEventListener("click", openAvatarBlock);
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Library JS loaded');
+    const dropbtn = document.getElementById("dropbtn");
+    if (dropbtn) {
+        dropbtn.addEventListener("click", openAvatarBlock);
+        console.log('Dropbtn event listener added');
+    } else {
+        console.error('Dropbtn not found');
+    }
+});
+
 function openAvatarBlock() {
-    document.getElementById("dropDown").classList.toggle("showDropDown");
+    console.log('openAvatarBlock called');
+    const dropdown = document.getElementById("dropDown");
+    if (dropdown) {
+        dropdown.classList.toggle("showDropDown");
+        console.log('Dropdown toggled, current classes:', dropdown.className);
+    } else {
+        console.error('Dropdown not found');
+    }
 };
 
 document.getElementById("add_playlist_btn").addEventListener("click", openCreatePlaylistPopup);
