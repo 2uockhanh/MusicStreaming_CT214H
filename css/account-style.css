@@ -179,11 +179,12 @@ body{
 
 /* 3. Chốt chặt Footer sát sàn và ép tràn viền 2 bên */
 .footer {
-    margin-top: auto;
+    margin-top: 20px;
     margin-bottom: 0 !important; 
-    margin-left: -50px !important; /* Kéo giãn sang trái đụng Sidebar */
-    margin-right: -50px !important; /* Kéo giãn sang phải đụng lề màn hình */
-    width: auto !important; 
+    /* margin-left: -50px !important; Kéo giãn sang trái đụng Sidebar */
+    /* margin-right: -50px !important; Kéo giãn sang phải đụng lề màn hình */
+    width: 100%; /*auto !important;*/ 
+    text-align: center;
 }
 /* ================= POPUP MODAL ================= */
 .modal-overlay {

@@ -130,8 +130,8 @@ body{
     color: white; 
     display: grid;
 }
-.artist-name h4 {
-    margin-top: 0px; 
+.artist-name h3 {
+    margin-top: 10px; 
     margin-bottom: 10px;
 }
 .follow-button {
