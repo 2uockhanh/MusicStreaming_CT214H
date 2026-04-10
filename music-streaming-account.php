@@ -53,7 +53,7 @@ $stmt->close();
                             </button>
                         </tr>
                         <tr>
-                            <button class="nav_button">
+                            <button class="nav_button" onclick="window.location.href='music-streaming-library.php'">
                                 <img class="nav_logo" src="./img/library.png"> Library
                             </button>
                         </tr>

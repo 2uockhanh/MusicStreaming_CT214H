@@ -87,18 +87,17 @@ if ($action === 'update') {
     $id = $_POST['song_id'] ?? '';
     $title = $_POST['song_title'] ?? '';
     $lyric = $_POST['lyric'] ?? '';
-    $views = $_POST['view_count'] ?? 0;
     $album_id = !empty($_POST['album_id']) ? $_POST['album_id'] : null;
 
     try {
         $new_file_url = handleMusicUpload('music_file');
 
         if ($new_file_url) {
-            $stmt = $conn->prepare("UPDATE Songs SET Song_title=?, File_url=?, Lyric=?, View_count=?, Album_id=? WHERE Song_id=?");
-            $stmt->bind_param("sssiii", $title, $new_file_url, $lyric, $views, $album_id, $id);
+            $stmt = $conn->prepare("UPDATE Songs SET Song_title=?, File_url=?, Lyric=?, Album_id=? WHERE Song_id=?");
+            $stmt->bind_param("sssii", $title, $new_file_url, $lyric, $album_id, $id);
         } else {
-            $stmt = $conn->prepare("UPDATE Songs SET Song_title=?, Lyric=?, View_count=?, Album_id=? WHERE Song_id=?");
-            $stmt->bind_param("ssiii", $title, $lyric, $views, $album_id, $id);
+            $stmt = $conn->prepare("UPDATE Songs SET Song_title=?, Lyric=?, Album_id=? WHERE Song_id=?");
+            $stmt->bind_param("ssii", $title, $lyric, $album_id, $id);
         }
 
         if ($stmt->execute()) {
