@@ -3,35 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>eMusik - Playlist Info</title> 
-    <link rel="stylesheet" href='song-info-style.css'>
+    <title>eMusik - Từng Ngày Yêu Em - buitruonglinh</title> 
+    <link rel="stylesheet" href='./css/song-info-style.css'>
+    <link rel="stylesheet" href='./css/library-style.css'>
+    <link href='https://fonts.googleapis.com/css?family=Passero One' rel='stylesheet'>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link href=' https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css' rel='stylesheet'>
+   
 </head>
 <body>
     <div style="display: flex;">
         <div>
             <nav class="navbar">
-                <img class="logo" src="./img/logo.png" alt="eMusik"></img>
+                <button class="logo_nav" onclick="document.location='./music-streaming-home.html'">
+                    <h3 style="font-family: 'Passero One'; font-size: 48px; margin: 0px auto;">eMuzik</h3>
+                </button>
                 <div class="nav">
                 <table>
                         <tr>
-                            <button class="nav_button">
-                                <img class="nav_logo" src="./img/home.png"> Home
+                            <button class="nav_button" onclick="document.location='./music-streaming-home.html'">
+                                <img class="nav_logo" src="./img/home.png"> Home</img>
                             </button>
                         </tr>
                         <tr>
-                            <button class="nav_button">
+                            <button class="nav_button" onclick="document.location='./music-streaming-library.html'">
                                 <img class="nav_logo" src="./img/library.png"> Library
                             </button>
                         </tr>
-                        <tr>
-                            <button class="nav_button">
-                                <img class="nav_logo" src="./img/favourite.png"> Favourite
-                            </button>                        
-                        </tr>
                         <!--
                         <tr>
-                            <button class="nav_button">
-                                <img class="nav_logo" src="./img/account.png"> Account
+                            <button class="nav_button" onclick="document.location='./music-streaming-favourite.html'">
+                                <img class="nav_logo" src="./img/favourite.png"> Favourite
                             </button>                        
                         </tr>
                         -->
@@ -41,7 +43,7 @@
         </div>
         <div class="home">
             <div class="header"> 
-                <ul style="display: grid; grid-template-columns: 90% 10%;">
+                <ul style="display: grid; grid-template-columns: 90% 10%; list-style-type: none;">
                     <li>
                         <div class="search" style="text-align: center;">
                             <input type="text" id="search_info" name="search_info" placeholder="Search songs, artists..."></input>
@@ -53,10 +55,10 @@
                                 <img style="width: 40px; height: 40px; border-radius: 30px;" src="./img/avatar.jpg" alt="Avatar"></img>
                             </button>
                             <div class="dropDownList" name="avatar" id="dropDown">
-                                <button value="myAccount" class="dropDownBtn">My Account</option>
-                                <button value="MyFavourite" class="dropDownBtn">My Favourite</option>
-                                <button value="ThemeMode" class="dropDownBtn">Theme Mode</option>
-                                <button value="logOut" class="dropDownBtn">Log Out</option>
+                                <button onclick="document.location='./music-streaming-account.html'" value="myAccount" class="dropDownBtn">My Account</option>
+                                <!--<button value="MyFavourite" class="dropDownBtn">My Favourite</option>-->
+                                <button value="themeMode" id="themeMode" class="dropDownBtn">🌙 Theme Mode</button>
+                                <button onclick="document.location='./music-streaming-login.html'" value="logOut" class="dropDownBtn">Log Out</option>
                             </div>
                         </div>
                     </li>
@@ -68,91 +70,49 @@
                     <div class="song-name">
                         <h4>Song</h4>
                         <h2>Từng Ngày Yêu Em</h2>
-                        <div style="margin-top: 0px; grid-template-columns: 30px 100px auto; display: grid; align-content: center;">
+                        <div onclick="document.location='./music-streaming-artist-info.html'" style="margin-top: 0px; grid-template-columns: 30px 100px auto; display: grid; align-content: center; cursor: pointer;">
                             <img style="width: 30px; height: 30px; border-radius: 30px;" src="./img/artist/artist_buitruonglinh.jpg" alt="buitruonglinh"></img>
                             <h4 style="margin-left: 10px; margin-top: 5px;">buitruonglinh</h4>
                             <h4 style="margin-left: 10px; margin-top: 5px;"> - 2024</h4>
                         </div>
                     </div>
-                    <button id="playBtn" class="playBtn">&#9205; PLAY</button>
+                    <button id="playBtn" class="playBtn">⏵ PLAY</button>
                 </div>
+            </div>
+            <div style="margin-left: 200px;">
+                <button id="likeBtn" class="likeBtn">♥ Like</button>
+                <button class="likeBtn">Share</button>
+                <button class="likeBtn" id="add_to_playlist_btn">Add Playlist</button>
             </div>
             <div style="margin-bottom: 20px; grid-template-columns: 65% 35%; display: grid; color: white;">
                 <div class="lyrics">
                     <h4 style="font-family: Tahoma, sans-serif; font-size: 110%; margin-left: 15%; margin-bottom: 20px;">Lyrics</h4>
                     <div class="lyric-body" style="border-radius: 10px; background-color: grey; color: black; max-width: 70%; padding: 5px; margin-left: 10%;">
-                        <p style="font-family: Roboto, sans-serif; margin: 10px; font-style: italic; font-weight: lighter; color: rgba(217, 217, 217, 1);">
-                            Lại chìm trong đôi mắt em xoe tròn ngất ngây<br> 
-                            Phút giây khi mà anh khẽ nhìn sang<br>
-                            Lại làm đôi môi nhớ em lại muốn hôn em thêm bao lần<br>
-                            Từng ngày cô đơn xé đôi, hạ thu đông khẽ trôi<br>
-                            Cạnh bên em anh sẽ thôi u sầu<br>
-                            Lại làm cho anh càng thấy yêu em hơn ngày qua<br>
-                            Chẳng phải gió cuốn mưa bay đưa đôi tay 
-                            Đón anh về ngày lời yêu cất lên<br>
-                            Chỉ cần thức giấc khi bên em nơi anh thấy yên bình<br>
-                            Biển rộng sông sâu anh trót thương chỉ riêng mình em thôi đấy<br>
-                            Tình yêu ấy chẳng thể đổi thay<br>
-                            Dù là bao lâu cảm xúc trong anh mãi đong đầy<br>
-                            Vội lạc vào giấc mơ nhẹ nhàng tựa ý thơ<br>
-                            Nụ cười người để anh nhớ để anh mong đợi<br>
-                            Sợ một ngày ngát xanh cuộc đời này vắng em<br>
-                            Anh phải làm sao bây giờ ?<br>
-                            Em này anh biết chăng bao ngày bao tháng năm<br>
-                            Chỉ cần một lần say đắm sẽ in hằn sâu trong tim anh<br>
-                            Mãi như vậy như lời hứa yêu em yêu mình em một đời<br>
-                            Từ khi yêu em thế gian vương đầy sắc hoa<br>
-                            Tới nơi chân trời ta vẫn hằng mơ<br>
-                            Đừng để cho tia nắng mai đặt chiếc hôn lên đôi vai gầy<br>
-                            Mặc kệ cơn dông bước ra điều gì phía trước ta<br>
-                            Từng ngày bên nhau lướt qua êm đềm<br>
-                            Lại làm cho anh càng muốn yêu em không rời xa<br>
-                            Tình yêu đến ngọt ngào yêu áng mây trên cao<br>
-                            Tình yêu khẽ thì thầm anh thích em ra sao<br>
-                            Tình yêu muốn nồng nàn như sóng xô dạt dào khắp muôn nơi<br>
-                            Từng ngày cô đơn xé đôi hạ thu đông khẽ trôi<br>
-                            Cạnh bên em anh sẽ thôi u sầu<br>
-                            Lại làm cho anh càng thấy yêu em<br>
-                            Lại làm mình ngất ngây nghẹn ngào từng phút giây<br>
-                            Cả bầu trời ngày hôm ấy bỗng như thu lại<br>
-                            Nhẹ nhàng rồi dắt tay<br>
-                            Anh ngỏ lời muốn em sẽ là của anh sau này<br>
-                            Em à anh biết chăng<br>
-                            Dẫu là bao tháng năm<br>
-                            Chỉ cần một lần say đắm sẽ in hằn sâu trong tim anh<br>
-                            Mãi như vậy như lời hứa yêu em<br>
-                            yêu mình em một đời<br>
-                            Tình yêu đến ngọt ngào yêu áng mây trên cao<br>
-                            Tình yêu khẽ thì thầm anh thích em ra sao<br>
-                            Tình yêu muốn nồng nàn như sóng xô dạt dào khắp muôn nơi<br>
-                            Từng ngày cô đơn xé đôi hạ thu đông khẽ trôi<br>
-                            Cạnh bên em anh sẽ thôi u sầu<br>
-                            Lại làm cho anh càng thấy yêu em<br>
-                            Lại làm mình ngất ngây nghẹn ngào từng phút giây<br>
-                            Cả bầu trời ngày hôm ấy bỗng như thu lại<br>
-                            Nhẹ nhàng rồi dắt tay<br>
-                            Anh ngỏ lời muốn em sẽ là của anh sau này<br>
-                            Em à anh biết chăng<br>
-                            Dẫu là bao tháng năm<br>
-                            Chỉ cần một lần say đắm sẽ in hằn sâu trong tim anh<br>
-                            Mãi như vậy như lời hứa yêu em yêu mình em một đời<br>
-                            Là ri la, là ri la, la ri la ta ta<br>
-                            Là ri la, là ri la, la ri la ta ta<br>
-                            Lời yêu thương mà lâu nay<br>
-                            Từ con tim anh dành cho em<br>
-                            Sẽ không bao giờ đổi thay<br>
-                            Là ri la, là ri la, la ri la ta ta<br>
-                            Là ri la, là ri la, la ri la ta ta<br>
-                            Vì anh sẽ mãi như vậy<br>
-                            Như lời hứa yêu em<br>
-                            Yêu mình em một đời<br>
+                        <p style="font-family: Roboto, sans-serif; margin: 10px; font-style: italic; font-weight: lighter; color: rgba(1, 1, 1, 1);">
+                            Lại chìm trong đôi mắt em xoe tròn ngất ngây<br>Phút giây khi mà anh khẽ nhìn sang<br>Lại làm đôi môi nhớ em lại muốn hôn em thêm bao lần<br>
+                            Từng ngày cô đơn xé đôi, hạ thu đông khẽ trôi<br>Cạnh bên em anh sẽ thôi u sầu<br>Lại làm cho anh càng thấy yêu em hơn ngày qua<br>
+                            Chẳng phải gió cuốn mưa bay đưa đôi tay<br>Đón anh về ngày lời yêu cất lên<br>Chỉ cần thức giấc khi bên em nơi anh thấy yên bình<br>
+                            Biển rộng sông sâu anh trót thương chỉ riêng mình em thôi đấy<br>Tình yêu ấy chẳng thể đổi thay<br>Dù là bao lâu cảm xúc trong anh mãi đong đầy<br>
+                            Vội lạc vào giấc mơ nhẹ nhàng tựa ý thơ<br>Nụ cười người để anh nhớ để anh mong đợi<br>Sợ một ngày ngát xanh cuộc đời này vắng em<br>
+                            Anh phải làm sao bây giờ ?<br>Em này anh biết chăng bao ngày bao tháng năm<br>Chỉ cần một lần say đắm sẽ in hằn sâu trong tim anh<br>Mãi như vậy như lời hứa yêu em yêu mình em một đời<br>
+                            Từ khi yêu em thế gian vương đầy sắc hoa<br>Tới nơi chân trời ta vẫn hằng mơ<br>Đừng để cho tia nắng mai đặt chiếc hôn lên đôi vai gầy<br>
+                            Mặc kệ cơn dông bước ra điều gì phía trước ta<br>Từng ngày bên nhau lướt qua êm đềm<br>Lại làm cho anh càng muốn yêu em không rời xa<br>
+                            Vội lạc vào giấc mơ nhẹ nhàng tựa ý thơ<br>Nụ cười người để anh nhớ để anh mong đợi<br>Sợ một ngày ngát xanh cuộc đời này vắng em<br>
+                            Anh phải làm sao bây giờ ?<br>Em này anh biết chăng bao ngày bao tháng năm<br>Chỉ cần một lần say đắm sẽ in hằn sâu trong tim anh<br>Mãi như vậy như lời hứa yêu em yêu mình em một đời<br>
+                            Tình yêu đến ngọt ngào yêu áng mây trên cao<br>Tình yêu khẽ thì thầm anh thích em ra sao<br>Tình yêu muốn nồng nàn như sóng xô dạt dào khắp muôn nơi<br>
+                            Từng ngày cô đơn xé đôi hạ thu đông khẽ trôi<br>Cạnh bên em anh sẽ thôi u sầu<br>Lại làm cho anh càng thấy yêu em<br>
+                            Lại làm mình ngất ngây nghẹn ngào từng phút giây<br>Cả bầu trời ngày hôm ấy bỗng như thu lại<br>Nhẹ nhàng rồi dắt tay<br>
+                            Anh ngỏ lời muốn em sẽ là của anh sau này<br>Em à anh biết chăng<br>Dẫu là bao tháng năm<br>Chỉ cần một lần say đắm sẽ in hằn sâu trong tim anh<br>
+                            Mãi như vậy như lời hứa yêu em<br>Yêu mình em một đời<br>Là ri la, là ri la, la ri la ta ta<br>Là ri la, là ri la, la ri la ta ta<br>
+                            Lời yêu thương mà lâu nay<br>Từ con tim anh dành cho em<br>Sẽ không bao giờ đổi thay<br>Là ri la, là ri la, la ri la ta ta<br>Là ri la, là ri la, la ri la ta ta<br>
+                            Vì anh sẽ mãi như vậy<br>Như lời hứa yêu em<br>Yêu mình em một đời<br>
                         </p>
                     </div>
                 </div>
                 <div class="artist-participate">
                     <h4 style="font-family: Tahoma, sans-serif; font-size: 110%;">Artists</h4>
                     <div class="artist-participate-body">
-                        <div class="artist-participate-nav" style="grid-template-columns: 30px auto; display: grid; gap: 10px; font-family: Tahoma, sans-serif; align-content: center;">
+                        <div onclick="document.location='./music-streaming-artist-info.html'" class="artist-participate-nav" style="grid-template-columns: 30px auto; display: grid; gap: 10px; font-family: Tahoma, sans-serif; align-content: center; cursor: pointer;">
                             <img style="width: 30px; height:30px; border-radius: 30px;" src="./img/artist/artist_buitruonglinh.jpg"></img>
                             <h4 style="margin-left: 10px; margin-top: 5px;">buitruonglinh</h4>
                         </div>
@@ -178,10 +138,10 @@
                     <div class="footer-section">
                         <h4>Useful Link</h4>
                         <ul>
-                            <li><a href="#Introduce">My Account</a></li>
-                            <li><a href="#Term">Library</a></li>
-                            <li><a href="#Privacy">Favourite</a></li>
-                            <li><a href="#PolicySafety">Import Music</a></li>
+                            <li><a href="./music-streaming-account.html">My Account</a></li>
+                            <li><a href="./music-streaming-library.html">Library</a></li>
+                            <li><a href="./music-streaming-favourite.html">Favourite</a></li>
+                            <li><a href="./music-streaming-import-music.html">Import Music</a></li>
                         </ul>
                     </div>
                     <div class="footer-section">
@@ -211,25 +171,79 @@
             </div>
             <div style="grid-template-rows: 30px 30px; display: grid; margin-left: 20px; margin-top: 20px;">
                 <div style="align-content: center; justify-content: center; text-align: center;">
-                    <img class="playImg" id="prevImg" src="./img/left-next.png"></img>
-                    <img class="playImg" id="playImg" src="./img/play-music.png"></img>
-                    <img class="playImg" id="nextImg" src="./img/right-next.png"></img>
+                    <button class="playImg" id="prev"><img id="prevImg" src="./img/left-next.png"></img></button>
+                    <button class="playImg" id="play"><img id="playImg" src="./img/play-music.png"></img></button> 
+                    <button class="playImg" id="next"><img id="nextImg" src="./img/right-next.png"></img></button> 
                 </div>
-                <div style="align-content: center; justify-content: center; text-align: center; grid-template-columns: 50px auto 50px; display: grid; margin-left: 20px; margin-top: 20px;">
-                    <h5>00:00</h5> 
-                    <div style="border-radius: 20px; width: 400px; height: 2px; border: 2px solid rgba(1, 1, 1, 1); margin-top: 25px; margin-left: 10px; margin-right: 10px;"></div>
-                    <h5>03:45</h5>
+                <div style="align-content: center; justify-content: center; text-align: center; grid-template-columns: 50px 500px 50px; display: grid; margin-left: 20px; margin-top: 20px;">
+                    <p id="currentDuration" style="font-family: Roboto, sans-serif; font-weight: bold;">00:00</p> 
+                    <!--<div style="border-radius: 20px; width: 400px; height: 2px; border: 2px solid rgba(1, 1, 1, 1); margin-top: 25px; margin-left: 10px; margin-right: 10px;"></div>-->
+                    <input id="durationRange" type="range" min="0" max="100" value="0" style="accent-color: black;">
+                    <p id="endDuration" style="font-family: Roboto, sans-serif; font-weight: bold;">00:00</p>
+                    <!--<h5 id="endDuration" style="font-family: Roboto, sans-serif;">Na:Na</h5>-->
                 </div>
             </div>
             <div style="grid-template-columns: 30px auto; display: grid; margin-top: 20px; margin-right: 50px; align-content: center; justify-content: center; text-align: center;">
                 <img style="width: 30px; height: 30px;" src="./img/volume.png"></img>
-                <div style="border-radius: 20px; width: 150px; height: 2px; border: 2px solid rgba(1, 1, 1, 1); margin-top: 10px; margin-left: 10px; margin-right: 10px;"></div>
+                <input class="volumeRange" id="volumeRange" type="range" min="0" max="1" step="0.01" value="1" style="accent-color: black;">
+                <!--<div style="border-radius: 20px; width: 150px; height: 2px; border: 2px solid rgba(1, 1, 1, 1); margin-top: 10px; margin-left: 10px; margin-right: 10px;"></div>-->
             </div>
             <audio id="myAudio">
                 <source src="./img/song/song_buitruonglinh/song_tungngayyeuem/song.mp3" type="audio/mpeg"></source>
+                <source src="./img/song/song_buitruonglinh/song_tungngayyeuem/song.ogg" type="audio/ogg"></source>
+                <source src="./img/song/song_buitruonglinh/song_tungngayyeuem/song.wav" type="audio/wav"></source>
+                Your browser does not support the audio element.
             </audio>
         </div>
     </div>
-    <script src="music-streaming-song.js"></script>
+    <div class="add_to_playlist_popup" id="add_to_playlist_popup">
+        <div class="popupHead" id="popupHead">
+            <div class="popupHeader" id="popupHeader">Add To Playlists</div>
+            <button class="popupClose" id="popupClose">&#128936;</button>
+        </div>
+        <div class="popup_search" style="text-align: center;">
+            <input type="text" id="search_info" name="search_info" placeholder="Search playlists..."></input>
+        </div>
+        <div>
+            <button id="create_new_playlist" style="grid-template-columns: 40px auto; display: grid; gap: 10px; align-items: center; background-color: rgba(0,0,0,0); border: 0px solid black; margin: 10px 0px 10px 20px;">
+                <img src="./img/add.png" style="width: 40px; height: 40px;"></img>
+                <p style="font-family: Roboto, sans-serif;">Create New Playlist</p>
+            </button>
+        </div>
+        <div>
+            <div style="margin: 20px 0px 20px 20px; font-family: Roboto, sans-serif; font-weight: bold;">Your Playlists</div>
+            <div style="grid-template-columns: 40px 60% 60px; display: grid; gap: 10px; align-items: center; justify-content: center;">
+                <img src="./img/default-playlist-avatar.jpg" style="width: 40px; height: 40px; border: 1px solid black; border-radius: 10px;"></img>
+                <p style="font-family: Roboto, sans-serif;">Say Hi</p>
+                <button style="background-color: grey; color: black; padding: 5px 10px; font-weight: bold; border-radius: 20px;">Add</button>
+            </div>
+        </div>
+    </div>
+    <div class="add_playlist_popup" id="add_playlist_popup">
+        <div class="popup_head" id="popup_head">
+            <div class="popup_header" id="popup_header">Create Playlist</div>
+            <button class="popup_close" id="popup_close">&#128936;</button>
+        </div>
+        <div style="grid-template-columns: 240px 330px; gap: 30px; display: grid;">
+            <div style="margin-left: 30px;">
+                <img src="./img/default-playlist-avatar.jpg" style="width: 200px; height: 200px; border: 3px solid black;">
+                <button style="font-family: Roboto, sans-serif; width: fit-content; height: fit-content; background-color: rgba(217, 217, 217, 1); color: black; font-size: medium; padding: 10px; font-weight: bold; border-radius: 20px; justify-content: center; text-align: center; margin-top: 10px; margin-left: 40px;">Change Avatar</button>
+            </div>
+            <div style="font-family: Roboto, sans-serif;">
+                <h4 style="margin-bottom: 10px; margin-top: 0px;">Playlist's Name</h4>
+                <input type="text" style="width: 300px; height: 30px; border-radius: 30px; background-color: rgba(217, 217, 217, 1); color: black; padding-left: 10px;">
+                <h4 style="margin-bottom: 10px;">Description</h4>
+                <input type="text" style="width: 300px; height: 120px; border-radius: 30px; background-color: rgba(217, 217, 217, 1); color: black; padding-left: 10px;">
+            </div>
+        </div>
+        <div style="grid-template-columns: 240px 150px 150px; gap: 30px; display: grid; margin-top: 10px;">
+            <button class="changeSeenMode" id="changeSeenMode">🔒 Private</button>
+            <button style="width: 80%; height: fit-content; padding: 10px 20px; border-radius: 20px; font-family: Roboto, sans-serif; background-color: rgba(1, 1, 1, 1); color: white;">Create</button>
+            <button style="width: 80%; height: fit-content; padding: 10px 20px; border-radius: 20px; font-family: Roboto, sans-serif; background-color: red; color: white;">Cancel</button>
+        </div>
+    </div>
+    <script src="./js/music-streaming-song.js"></script>
+    <script src="./js/music-streaming-home.js"></script>
+    <script src="./js/music-streaming-library.js"></script>
 </body>
 </html>

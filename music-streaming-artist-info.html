@@ -4,28 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>eMusik - Artist Info</title> 
-    <link rel="stylesheet" href='/css/artist-info-style.css'>
-    <link rel="stylesheet" href="/css/home-style.css">
+    <link rel="stylesheet" href='./css/artist-info-style.css'>
+    <link href='https://fonts.googleapis.com/css?family=Passero One' rel='stylesheet'>
 </head>
 <body>
     <div style="display: flex;">
         <div>
             <nav class="navbar">
-                <img class="logo" src="./img/logo.png" alt="eMusik"></img>
+                <button class="logo_nav" onclick="document.location='./music-streaming-home.html'">
+                    <h3 style="font-family: 'Passero One'; font-size: 48px; margin: 0px auto;">eMuzik</h3>
+                </button>
                 <div class="nav">
                 <table>
                         <tr>
-                            <button class="nav_button">
+                            <button class="nav_button" onclick="document.location='./music-streaming-home.html'">
                                 <img class="nav_logo" src="./img/home.png"> Home
                             </button>
                         </tr>
                         <tr>
-                            <button class="nav_button">
+                            <button class="nav_button" onclick="document.location='./music-streaming-library.html'">
                                 <img class="nav_logo" src="./img/library.png"> Library
                             </button>
                         </tr>
                         <tr>
-                            <button class="nav_button">
+                            <button class="nav_button" onclick="document.location='./music-streaming-favourite.html'">
                                 <img class="nav_logo" src="./img/favourite.png"> Favourite
                             </button>                        
                         </tr>
@@ -42,7 +44,7 @@
         </div>
         <div class="home">
             <div class="header"> 
-                <ul style="display: grid; grid-template-columns: 90% 10%;">
+                <ul style="display: grid; grid-template-columns: 90% 10%; list-style-type: none;">
                     <li>
                         <div class="search" style="text-align: center;">
                             <input type="text" id="search_info" name="search_info" placeholder="Search songs, artists..."></input>
@@ -56,7 +58,7 @@
                             <div class="dropDownList" name="avatar" id="dropDown">
                                 <button value="myAccount" class="dropDownBtn">My Account</option>
                                 <button value="MyFavourite" class="dropDownBtn">My Favourite</option>
-                                <button value="ThemeMode" class="dropDownBtn">Theme Mode</option>
+                                <button value="themeMode" id="themeMode" class="dropDownBtn">🌙 Theme Mode</button>
                                 <button value="logOut" class="dropDownBtn">Log Out</option>
                             </div>
                         </div>
@@ -212,6 +214,6 @@
             </footer>
         </div>
     </div>
-    <script src="/js/music-streaming-home.js"></script>
+    <script src="./js/music-streaming-home.js"></script>
 </body>
 </html>
