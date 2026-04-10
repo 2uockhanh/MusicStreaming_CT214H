@@ -10,8 +10,11 @@
 <body>
     <aside class="sidebar">
         <div class="sidebar-header">eMuzik Admin</div>
+        <button class="nav-btn" onclick="window.location.href='music-streaming-home.php'"><i class="fas fa-home"></i> Return to Home</button>
         <button class="nav-btn active" onclick="switchTab('users', this)"><i class="fas fa-users"></i> Users Management</button>
         <button class="nav-btn" onclick="switchTab('songs', this)"><i class="fas fa-music"></i> Songs Management</button>
+        <button class="nav-btn" onclick="switchTab('albums', this)"><i class="fas fa-list"></i> Albums Management</button>
+        <button class="nav-btn" onclick="switchTab('artists', this)"><i class="fas fa-users"></i> Artists Management</button>
     </aside>
 
     <main class="main-content">
@@ -48,6 +51,42 @@
                     </tr>
                 </thead>
                 <tbody id="song-list-body"></tbody>
+            </table>
+        </div>
+
+        <div id="albums" class="table-container">
+            <div class="search" style="text-align: center; margin-bottom: 15px;">
+                <input type="text" id="search_album" placeholder="Search for album name or artist..." onkeyup="searchAlbums()" style="padding: 10px; width: 300px; border-radius: 5px; border: 1px solid #ccc;">
+            </div>
+            <div class="header">
+                <h1>Albums List</h1>
+                <button class="btn-add" onclick="openAlbumModal('add')"><i class="fas fa-plus"></i> Add Album</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Album_id</th><th>Album_title</th><th>Artist</th><th>Release Date</th><th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="album-list-body"></tbody>
+            </table>
+        </div>
+
+        <div id="artists" class="table-container">
+            <div class="search" style="text-align: center; margin-bottom: 15px;">
+                <input type="text" id="search_artist" placeholder="Search for artist name" onkeyup="searchArtists()" style="padding: 10px; width: 300px; border-radius: 5px; border: 1px solid #ccc;">
+            </div>
+            <div class="header">
+                <h1>Artists List</h1>
+                <button class="btn-add" onclick="openArtistModal('add')"><i class="fas fa-plus"></i> Add Artist</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Artist_id</th><th>Artist_name</th><th>Biography</th><th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="artist-list-body"></tbody>
             </table>
         </div>
 
@@ -96,15 +135,17 @@
                         <input type="file" id="music_file" name="music_file" accept="audio/*">
                         <small id="current-file-name" style="color: #666; display: block; margin-top: 5px;"></small>
                     </div>
+
+
                     <div class="form-group-modern">
                         <label>Lyrics</label>
                         <textarea id="lyric" name="lyric" rows="4"></textarea>
                     </div>
-                    <div class="form-row-multi" style="display: flex; gap: 15px;">
-                        <div class="form-group-modern" style="flex: 1;">
-                            <label>Album ID</label>
-                            <input type="number" id="album_id" name="album_id">
-                        </div>
+                    <div class="form-group-modern">
+                        <label>Album</label>
+                        <select id="album_id" name="album_id">
+                            <option value="">-- Select Album (Optional) --</option>
+                        </select>
                     </div>
                     <div class="modal-actions">
                         <button type="button" class="btn-cancel" onclick="closeSongModal()">Cancel</button>
@@ -113,6 +154,75 @@
                 </form>
             </div>
         </div>
+
+        <div id="album-crud-modal" class="admin-modal-overlay" style="display: none;">
+            <div class="admin-modal-content" style="width: 550px; height: 550px;">
+                <span class="close-modal" onclick="closeAlbumModal()">&times;</span>
+                <h2 id="album-modal-title">Add Album</h2>
+                <form id="album-crud-form" enctype="multipart/form-data" onsubmit="submitAlbum(event)">
+                    <input type="hidden" id="album_id" name="album_id">
+                    <div class="form-group-modern">
+                        <label>Album Title</label>
+                        <input type="text" id="album_title" name="album_title" required>
+                    </div>
+                    <div class="form-group-modern">
+                        <label>Artist</label>
+                        <select id="artist_id" name="artist_id" required>
+                            <option value="">-- Select Artist --</option>
+                        </select>
+                    </div>
+                    <div class="form-group-modern">
+                        <label>Release Date</label>
+                        <input type="date" id="release_date" name="release_date">
+                    </div>
+                    <div class="form-group-modern">
+                        <label>Album Cover (JPG/PNG)</label>
+                        <input type="file" id="cover" name="cover" accept="image/png, image/jpeg">
+                        <small id="current-cover-name" style="color: #666; display: block; margin-top: 5px;"></small>
+                    </div>
+                    <div class="form-group-modern">
+                        <label>Cover URL (fallback)</label>
+                        <input type="text" id="cover_image_url" name="cover_image_url" placeholder="uploads/avatars/filename.jpg">
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn-cancel" onclick="closeAlbumModal()">Cancel</button>
+                        <button type="submit" class="btn-save-modern">Save Album</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="artist-crud-modal" class="admin-modal-overlay" style="display: none;">
+            <div class="admin-modal-content" style="width: 500px; height: 520px;">
+                <span class="close-modal" onclick="closeArtistModal()">&times;</span>
+                <h2 id="artist-modal-title">Add/Edit Artist</h2>
+                <form id="artist-crud-form" enctype="multipart/form-data" onsubmit="submitArtist(event)">
+                    <input type="hidden" id="artist_id" name="artist_id">
+                    <div class="form-group-modern">
+                        <label>Artist Name</label>
+                        <input type="text" id="artist_name" name="artist_name" required>
+                    </div>
+                    <div class="form-group-modern">
+                        <label>Biography</label>
+                        <textarea id="biography" name="biography" rows="4"></textarea>
+                    </div>
+                    <div class="form-group-modern">
+                        <label>Avatar (JPG/PNG)</label>
+                        <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg">
+                        <small id="current-avatar-name" style="color: #666; display: block; margin-top: 5px;"></small>
+                    </div>
+                    <div class="form-group-modern">
+                        <label>Avatar URL (fallback)</label>
+                        <input type="text" id="avatar_url" name="avatar_url" placeholder="uploads/avatars/default.jpg">
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn-cancel" onclick="closeArtistModal()">Cancel</button>
+                        <button type="submit" class="btn-save-modern">Save Artist</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
     </main>
 
     <script>
