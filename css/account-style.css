@@ -1,0 +1,236 @@
+/* Change Body Mode */
+body{
+    background-color: rgba(1,1,1,0.6);
+}
+.dark-body {
+    background-color: rgba(1,1,1,0.6);
+}
+.light-body {
+    background-color: rgba(255,255,255,1);
+}
+/* ================= FORM TÀI KHOẢN ================= */
+.article_body h1 { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 28px; 
+    margin-bottom: 40px; 
+    color: #fff;
+    text-align: center;
+}
+
+.profile-container { 
+    display: flex; 
+    gap: 60px; 
+    align-items: center;
+    justify-content: center; 
+}
+
+/* --- Khu vực Avatar --- */
+.avatar-section { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 15px; 
+}
+.avatar-circle { 
+    width: 200px; 
+    height: 200px; 
+    border-radius: 50%; 
+    overflow: hidden; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    background-color: #f0f0f0; 
+}
+.avatar-circle img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+}
+.btn-avatar { 
+    padding: 8px 15px; 
+    border: none; 
+    background: #fff; 
+    color: #000; 
+    font-weight: bold; 
+    cursor: pointer; 
+    border-radius: 5px; 
+}
+
+/* Khung chứa Avatar (Làm mỏ neo) */
+.user-icon-wrapper { 
+    position: relative; 
+    cursor: pointer; 
+    display: inline-block;
+}
+
+/* Biểu tượng Avatar */
+.user-icon { 
+    width: 40px; 
+    height: 40px; 
+    background: #fff; 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    color: #5a4b81; 
+    font-size: 20px; 
+}
+
+/* --- Khu vực Form Input --- */
+.form-section { 
+    flex: 1; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 20px; 
+    max-width: 500px; 
+    
+}
+.form-group { 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    gap: 20px; 
+}
+.form-group label { 
+    font-weight: bold; 
+    width: 120px;
+    color: #fff; 
+}
+.form-group input { 
+    flex: 1; 
+    padding: 12px; 
+    border-radius: 8px; 
+    border: none; 
+    background-color: #fcfcfc; 
+    outline: none; 
+    color: #000; 
+}
+
+/* --- Nút bấm --- */
+.btn-confirm { 
+    background-color: #28a745; 
+    color: #fff; 
+    border: none; 
+    padding: 12px 30px; 
+    border-radius: 8px; 
+    font-size: 16px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+}
+.btn-confirm:hover { background-color: #218838; }
+
+/* --- Nút bấm --- */
+.btn-cancel { 
+    background-color: #bd5232; 
+    color: #fff; 
+    border: none; 
+    padding: 12px 30px; 
+    border-radius: 8px; 
+    font-size: 16px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+}
+.action-buttons { 
+    display: flex; 
+    justify-content: center; 
+    gap: 50px; 
+    margin-top: 60px; 
+    margin-bottom: 40px;
+}
+.btn-action { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    padding: 15px 30px; 
+    border: none; 
+    border-radius: 5px; 
+    font-size: 18px; 
+    font-weight: bold; 
+    color: #000; 
+    cursor: pointer; 
+}
+.btn-action i { font-size: 24px; }
+.btn-library { background-color: #ff5c5c; }
+.btn-upload { background-color: #5c7cff; }
+
+.dropdown-menu a { 
+    padding: 10px; 
+    color: #000; 
+    text-decoration: none; 
+    font-size: 14px; 
+    border-bottom: 1px solid #eee; 
+}
+.dropdown-menu a:hover { background: #f0f0f0; }
+/* 1. Diệt tận gốc khoảng hở đáy của khung chứa */
+.main-content { 
+    padding-bottom: 0 !important; 
+}
+
+/* 2. Ép khối nội dung ở giữa phình to ra để đẩy văng Footer xuống đáy */
+.article_body {
+    flex: 1; 
+}
+
+/* 3. Chốt chặt Footer sát sàn và ép tràn viền 2 bên */
+.footer {
+    margin-top: 20px;
+    margin-bottom: 0 !important; 
+    /* margin-left: -50px !important; Kéo giãn sang trái đụng Sidebar */
+    /* margin-right: -50px !important; Kéo giãn sang phải đụng lề màn hình */
+    width: 100%; /*auto !important;*/ 
+    text-align: center;
+}
+/* ================= POPUP MODAL ================= */
+.modal-overlay {
+    display: none; /* Mặc định giấu đi */
+    position: fixed; 
+    top: 0; left: 0; 
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Phủ lớp nền đen mờ che toàn trang */
+    z-index: 2000;
+    justify-content: center; 
+    align-items: center;
+}
+
+.modal-content {
+    background: rgba(20, 20, 30, 0.85); /* Nền kính mờ */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 40px; 
+    border-radius: 10px; 
+    width: 450px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    color: #fff;
+}
+
+.close-modal {
+    position: absolute; 
+    top: 15px; right: 20px;
+    font-size: 28px; 
+    color: #fff; 
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.close-modal:hover { color: #ff5c5c; }
+/* ================= RESPONSIVE ================= */
+@media (max-width: 850px) {
+    body { flex-direction: column; height: auto; min-height: 100vh; }
+    .navbar { width: 100%; min-height: auto; flex-direction: row; justify-content: space-between; padding: 15px; }
+    .nav_button { width: auto; font-size: 16px; height: auto; }
+    .header { grid-template-columns: 1fr; gap: 15px; }
+    .search input { width: 100%; }
+    .profile-container { flex-direction: column; align-items: center; gap: 30px; }
+    .form-section { width: 100%; }
+    .form-group { flex-direction: column; align-items: flex-start; gap: 5px; }
+    .form-group input { width: 100%; }
+    .action-buttons { flex-direction: column; gap: 20px; }
+    .footer-content { grid-template-columns: 1fr; }
+}

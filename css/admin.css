@@ -1,0 +1,267 @@
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Segoe UI', Tahoma, sans-serif; }
+        body { 
+            display: flex; 
+            height: 100vh; 
+            background-color: #f4f6f9; 
+            color: #333; 
+        }
+        
+        /* Sidebar */
+        .sidebar { 
+            width: 250px; 
+            background-color: #2c3e50; 
+            color: #fff; 
+            display: flex; 
+            flex-direction: column; }
+        .sidebar-header { 
+            padding: 20px; 
+            font-size: 24px; 
+            font-weight: bold; 
+            text-align: center; 
+            border-bottom: 1px solid #1a252f; }
+        .nav-btn { 
+            padding: 15px 20px; 
+            border: none; 
+            background: transparent; 
+            color: #adb5bd; 
+            text-align: left; 
+            font-size: 16px; 
+            cursor: pointer; 
+            transition: 0.2s; 
+            display: flex; 
+            gap: 10px; 
+            align-items: center; }
+        .nav-btn:hover, .nav-btn.active { 
+            background-color: #34495e; 
+            color: #fff; 
+            border-left: 4px solid #3498db; }
+        
+        /* Main Content */
+        .main-content { 
+            flex: 1; 
+            padding: 30px; 
+            overflow-y: auto; }
+        .header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 30px; }
+        .header h1 { 
+            font-size: 24px; }
+        .btn-add { 
+            padding: 10px 15px;
+             background-color: #28a745; 
+             color: #fff; 
+             border: none; 
+             border-radius: 5px; 
+             cursor: pointer; 
+             font-weight: bold; }
+        
+        /* Table */
+        .table-container { 
+            background: #fff; 
+            padding: 20px; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+            display: none; }
+        .table-container.active { 
+            display: block; }
+        table {
+             width: 100%; 
+             border-collapse: collapse; 
+             margin-top: 10px; }
+        th, td { padding: 12px 15px; 
+            text-align: left; 
+            border-bottom: 1px solid #ddd; }
+        th { 
+            background-color: #f8f9fa; font-weight: 600; }
+        tr:hover {
+             background-color: #f1f3f5; }
+        
+        /* Action Buttons */
+        .action-btn { 
+            padding: 6px 10px; 
+            border: none; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            color: #fff; 
+            font-size: 12px; 
+            margin-right: 5px;}
+        .btn-edit { 
+            background-color: #f39c12; }
+        .btn-delete { 
+            background-color: #e74c3c; }
+        
+        /* Badge Role */
+        .badge { padding: 4px 8px; 
+            border-radius: 12px; 
+            font-size: 12px; 
+            font-weight: bold; 
+            color: #fff; }
+        .badge-admin { 
+            background-color: #dc3545; }
+        .badge-user { 
+            background-color: #17a2b8; }
+
+  
+/* ================= PHÂN TRANG (PAGINATION) ================= */
+.pagination { 
+    display: flex; 
+    justify-content: flex-end; /* Đẩy cục phân trang sang góc phải */
+    align-items: center; 
+    gap: 15px; 
+    margin-top: 20px; 
+}
+
+.page-btn { 
+    padding: 8px 15px; 
+    background-color: #e9ecef; 
+    border: 1px solid #dee2e6; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    color: #495057; 
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.page-btn:hover { background-color: #3498db; color: #fff; border-color: #3498db; }
+.page-btn:disabled { cursor: not-allowed; opacity: 0.5; background-color: #e9ecef; color: #495057; }
+
+.page-info { font-size: 14px; font-weight: bold; color: #333; }
+/* Search bar */
+    .search {
+    font-family: Tahoma, sans-serif;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.search input {
+    width: 50%;
+    height: 40px;
+    border-radius: 20px;
+    border-width: 0px;
+    font-size: 20px;
+    margin: 0 auto;
+    color: rgba(1, 1, 1, 1);
+    border: 1px solid;
+    padding-left: 10px;
+}
+.search img {
+    width: 40px;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 20px;
+}
+
+/* Lớp nền mờ phủ toàn bộ màn hình */
+.admin-modal-overlay {
+    display: none; 
+    position: fixed; 
+    top: 0; left: 0; 
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.5); 
+    z-index: 9999; /* Luôn nổi trên cùng */
+    justify-content: center; 
+    align-items: center;
+}
+
+/* Khung trắng chứa nội dung form */
+.admin-modal-content {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    width: 450px;
+    height: 350px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+/* ==================== MODAL OVERLAY & CONTENT ==================== */
+.admin-modal-overlay {
+    display: none; 
+    position: fixed; 
+    top: 0; left: 0; 
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 9999; 
+    justify-content: center; 
+    align-items: center;
+    backdrop-filter: blur(2px);
+}
+
+.admin-modal-content {
+    background: #fff; 
+    padding: 25px 30px; 
+    border-radius: 10px; 
+    width: 450px; 
+    position: relative; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* NÚT ĐÓNG (X) NỔI TRÊN CÙNG */
+.close-modal {
+    position: absolute; 
+    top: 15px; right: 20px; 
+    font-size: 26px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    color: #888; 
+    z-index: 10; /* Đảm bảo không bị thẻ nào đè lên */
+    transition: 0.2s;
+}
+.close-modal:hover { color: #e74c3c; }
+
+/* ==================== FORM INPUTS MODERN ==================== */
+h2[id$="-title"] { margin-top: 0; margin-bottom: 20px; font-size: 22px; color: #2c3e50; border-bottom: 2px solid #f1f2f6; padding-bottom: 10px; }
+
+.form-group-modern { margin-bottom: 15px; display: flex; flex-direction: column; }
+.form-group-modern label, #crud-form label { font-weight: 600; margin-bottom: 5px; font-size: 14px; color: #34495e; }
+
+.form-group-modern input, .form-group-modern select, .form-group-modern textarea, 
+#crud-form input, #crud-form select {
+    padding: 10px 12px; 
+    border: 1px solid #ced4da; 
+    border-radius: 6px; 
+    font-size: 14px; 
+    transition: 0.3s;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-group-modern input:focus, #crud-form input:focus, #crud-form select:focus, .form-group-modern textarea:focus {
+    border-color: #3498db; 
+    outline: none; 
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+/* ==================== BUTTONS NẰM NGANG ==================== */
+.modal-actions {
+    display: flex; 
+    justify-content: flex-end; /* Đẩy 2 nút sang phải */
+    gap: 12px; /* Khoảng cách giữa 2 nút */
+    margin-top: 25px;
+}
+
+.btn-cancel {
+    background: #e2e6ea; color: #333; 
+    border: none; padding: 10px 20px; 
+    border-radius: 6px; font-weight: bold; 
+    cursor: pointer; transition: 0.2s;
+}
+.btn-cancel:hover { background: #cbd3da; }
+
+.btn-save-modern {
+    background: #2ecc71; color: white; 
+    border: none; padding: 10px 20px; 
+    border-radius: 6px; font-weight: bold; 
+    cursor: pointer; transition: 0.2s;
+}
+.btn-save-modern:hover { background: #27ae60; }
