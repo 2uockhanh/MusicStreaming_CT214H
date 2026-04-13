@@ -6,6 +6,7 @@ function savePlayerState() {
     const audio = document.getElementById('audio-player');
     if (!audio || !audio.src) return;
     const state = {
+        id: audio.getAttribute('data-song-id') || '',
         title: document.getElementById('player-title').innerText,
         artist: document.getElementById('player-artist').innerText,
         img: document.getElementById('player-img').src,
@@ -17,7 +18,7 @@ function savePlayerState() {
 }
 
 // Hàm này được đưa ra global scope để các trang khác (như song-info) có thể gọi
-function playSong(url, title, artist, img) {
+function playSong(url, title, artist, img, songId = null) {
     const audio = document.getElementById('audio-player');
     const playBtn = document.getElementById('btn-play');
 
@@ -44,6 +45,19 @@ function playSong(url, title, artist, img) {
         console.log("🎵 Trình duyệt đang tìm file nhạc tại: ", audioUrl);
         console.log("🔗 Đường dẫn gốc (từ DB) là: ", url);
         
+        // --- LƯU ID BÀI HÁT ĐỂ TÍNH VIEW KHI NGHE ---
+        let finalSongId = songId;
+        if (!finalSongId && typeof currentPlaylist !== 'undefined') {
+            const foundSong = currentPlaylist.find(s => s.url === url);
+            if (foundSong && foundSong.id) {
+                finalSongId = foundSong.id;
+            }
+        }
+        if (finalSongId) {
+            audio.setAttribute('data-song-id', finalSongId);
+            audio.setAttribute('data-view-counted', 'false'); // Reset trạng thái tính view cho bài mới
+        }
+
         audio.src = audioUrl;
         audio.setAttribute('data-original-url', url);
         audio.play().catch(e => {
@@ -91,6 +105,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     audio.src = audioUrl;
                     audio.setAttribute('data-original-url', state.originalUrl);
+                    if (state.id) audio.setAttribute('data-song-id', state.id);
+                    audio.setAttribute('data-view-counted', 'true'); // Khôi phục lại, không tính view lần nữa
                     audio.currentTime = state.currentTime || 0;
                     
                     // Tự động phát tiếp nếu trước đó đang phát (Trình duyệt có thể chặn nếu user chưa click)
@@ -119,7 +135,32 @@ document.addEventListener('DOMContentLoaded', () => {
         if (index < 0 || index >= currentPlaylist.length) return;
         currentIndex = index;
         const song = currentPlaylist[currentIndex];
-        playSong(song.url, song.title, song.artist, song.img);
+        playSong(song.url, song.title, song.artist, song.img, song.id);
+    }
+
+    // --- HÀM TĂNG VIEW THỰC SỰ ---
+    function countView() {
+        const songId = audio.getAttribute('data-song-id');
+        const isCounted = audio.getAttribute('data-view-counted');
+
+        if (songId && isCounted === 'false') {
+            audio.setAttribute('data-view-counted', 'true'); // Đánh dấu đã đếm để không gọi API lại nhiều lần
+            
+            const formData = new FormData();
+            formData.append('song_id', songId);
+            fetch('includes/song_api.php?action=increment_view', {
+                method: 'POST',
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success && data.new_view_count !== undefined) {
+                    const viewElements = document.querySelectorAll(`.view-count-${songId}`);
+                    viewElements.forEach(el => el.innerText = data.new_view_count);
+                }
+            })
+            .catch(err => console.error("Lỗi cập nhật lượt nghe:", err));
+        }
     }
 
     // Phát / Tạm dừng
@@ -178,7 +219,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Tự động chuyển bài khi kết thúc
-    audio.addEventListener('ended', () => nextBtn.click());
+    audio.addEventListener('ended', () => {
+        countView(); // Chắc chắn tính view nếu nghe đến cuối
+        nextBtn.click();
+    });
 
     // Xử lý kéo thả (seek) mượt mà, không bị giật lùi
     let isDragging = false;
@@ -201,6 +245,11 @@ document.addEventListener('DOMContentLoaded', () => {
             progressBar.value = progressPercent;
             currentTimeEl.innerText = formatTime(audio.currentTime);
             totalTimeEl.innerText = formatTime(audio.duration);
+
+            // Tính view khi bài hát phát được hơn 10 giây hoặc qua 50% bài hát
+            if (audio.currentTime > 10 || progressPercent > 50) {
+                countView();
+            }
         }
         // Lưu trạng thái định kỳ 3 giây/lần
         if (Math.floor(audio.currentTime) % 3 === 0) savePlayerState();

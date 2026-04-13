@@ -132,4 +132,63 @@ if ($action === 'delete') {
     exit;
 }
 
+// Tăng lượt xem cho bài hát
+if ($action === 'increment_view') {
+    $id = $_POST['song_id'] ?? '';
+    if ($id) {
+        try {
+            $stmt = $conn->prepare("UPDATE Songs SET View_count = View_count + 1 WHERE Song_id = ?");
+            $stmt->bind_param("i", $id);
+            if ($stmt->execute()) {
+                // Lấy lại lượt view mới nhất để trả về cho Frontend
+                $stmt2 = $conn->prepare("SELECT View_count FROM Songs WHERE Song_id = ?");
+                $stmt2->bind_param("i", $id);
+                $stmt2->execute();
+                $new_view = $stmt2->get_result()->fetch_assoc()['View_count'] ?? 0;
+                
+                echo json_encode(['success' => true, 'message' => 'Tăng view thành công', 'new_view_count' => $new_view]);
+            }
+        } catch (Exception $e) {
+            echo json_encode(['success' => false, 'message' => 'Lỗi DB: ' . $e->getMessage()]);
+        }
+    }
+    exit;
+}
+
+// Toggle Like bài hát (Thêm/Xóa khỏi thư viện Yêu thích)
+if ($action === 'toggle_like') {
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    if (empty($_SESSION['user_id'])) {
+        echo json_encode(['success' => false, 'message' => 'Vui lòng đăng nhập để lưu bài hát!']);
+        exit;
+    }
+    $u_id = $_SESSION['user_id'];
+    $s_id = $_POST['song_id'] ?? '';
+    
+    if ($s_id) {
+        try {
+            $check = $conn->prepare("SELECT * FROM Favorites WHERE User_id = ? AND Song_id = ?");
+            $check->bind_param("ii", $u_id, $s_id);
+            $check->execute();
+            if ($check->get_result()->num_rows > 0) {
+                // Đã like -> Xóa khỏi Yêu thích
+                $del = $conn->prepare("DELETE FROM Favorites WHERE User_id = ? AND Song_id = ?");
+                $del->bind_param("ii", $u_id, $s_id);
+                $del->execute();
+                echo json_encode(['success' => true, 'status' => 'unliked']);
+            } else {
+                // Chưa like -> Thêm vào Yêu thích
+                $ins = $conn->prepare("INSERT INTO Favorites (User_id, Song_id) VALUES (?, ?)");
+                $ins->bind_param("ii", $u_id, $s_id);
+                $ins->execute();
+                echo json_encode(['success' => true, 'status' => 'liked']);
+            }
+        } catch (Exception $e) {
+            echo json_encode(['success' => false, 'message' => 'Lỗi DB: ' . $e->getMessage()]);
+        }
+    }
+    exit;
+}
 ?>

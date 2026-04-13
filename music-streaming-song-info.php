@@ -49,6 +49,45 @@ if (!empty($songInfo['Artist_id'])) {
     $otherSongsResult = $stmt_other_songs->get_result();
 }
 
+// 4. Xử lý logic khi người dùng bấm nút "Add" (Thêm bài hát vào Playlist)
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_playlist_id'])) {
+    $pl_id = intval($_POST['add_to_playlist_id']);
+    $s_id = $song_id;
+    
+    // Kiểm tra xem bài hát đã tồn tại trong Playlist này chưa
+    $check_stmt = $conn->prepare("SELECT * FROM playlist_Song WHERE Playlist_id = ? AND Song_id = ?");
+    $check_stmt->bind_param("ii", $pl_id, $s_id);
+    $check_stmt->execute();
+    if ($check_stmt->get_result()->num_rows === 0) {
+        $insert_stmt = $conn->prepare("INSERT INTO playlist_Song (Playlist_id, Song_id) VALUES (?, ?)");
+        $insert_stmt->bind_param("ii", $pl_id, $s_id);
+        $insert_stmt->execute();
+        echo "<script>alert('Đã thêm bài hát vào playlist thành công!');</script>";
+    } else {
+        echo "<script>alert('Bài hát này đã có trong playlist!');</script>";
+    }
+}
+
+// 5. Lấy danh sách Playlist của User hiện hành để hiển thị lên Popup
+$user_playlists = [];
+if (!empty($_SESSION['user_id'])) {
+    $sql_my_pl = "SELECT Playlist_id, Playlist_name, Playlist_avatar_url FROM Playlists WHERE User_id = ? ORDER BY Playlist_id DESC";
+    $stmt_my_pl = $conn->prepare($sql_my_pl);
+    $stmt_my_pl->bind_param("i", $_SESSION['user_id']);
+    $stmt_my_pl->execute();
+    $user_playlists = $stmt_my_pl->get_result()->fetch_all(MYSQLI_ASSOC);
+}
+
+// 6. Kiểm tra xem người dùng đã Like bài hát này chưa
+$is_liked = false;
+if (!empty($_SESSION['user_id'])) {
+    $check_like = $conn->prepare("SELECT * FROM Favorites WHERE User_id = ? AND Song_id = ?");
+    $check_like->bind_param("ii", $_SESSION['user_id'], $song_id);
+    $check_like->execute();
+    if ($check_like->get_result()->num_rows > 0) {
+        $is_liked = true;
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -134,7 +173,7 @@ if (!empty($songInfo['Artist_id'])) {
                 </div>
             </div>
             <div style="margin-left: 200px;">
-                <button id="likeBtn" class="likeBtn">♥ Like</button>
+                <button id="likeBtn" class="likeBtn <?php echo $is_liked ? 'liked' : ''; ?>" data-song-id="<?php echo $song_id; ?>"><?php echo $is_liked ? '♥ Liked' : '♥ Like'; ?></button>
                 <button class="likeBtn">Share</button>
                 <button class="likeBtn" id="add_to_playlist_btn">Add Playlist</button>
             </div>
@@ -201,6 +240,50 @@ if (!empty($songInfo['Artist_id'])) {
         </div>
     </div>
     
+    <!-- LỚP PHỦ VÀ POPUP ADD TO PLAYLIST -->
+    <div id="popup_overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); z-index: 1999;"></div>
+    <div class="add_to_playlist_popup" id="add_to_playlist_popup" style="display: none; z-index: 2000;">
+        <div class="popupHead" id="popupHead">
+            <div class="popupHeader" id="popupHeader">Add To Playlists</div>
+            <button class="popupClose" id="popupClose">&#128936;</button>
+        </div>
+        
+        <?php if (!empty($_SESSION['user_id'])): ?>
+            <div class="popup_search" style="text-align: center;">
+                <input type="text" id="search_playlist" name="search_playlist" placeholder="Search playlists..."></input>
+            </div>
+            <div>
+                <button id="create_new_playlist" onclick="window.location.href='music-streaming-library.php'" style="grid-template-columns: 40px auto; display: grid; gap: 10px; align-items: center; background-color: rgba(0,0,0,0); border: 0px solid black; margin: 10px 0px 10px 20px; cursor: pointer;">
+                    <img src="./img/add.png" style="width: 40px; height: 40px;"></img>
+                    <p style="font-family: Roboto, sans-serif; margin: 0;">Create New Playlist</p>
+                </button>
+            </div>
+            <div>
+                <div style="margin: 20px 0px 20px 20px; font-family: Roboto, sans-serif; font-weight: bold;">Your Playlists</div>
+                <div style="max-height: 250px; overflow-y: auto; overflow-x: hidden;">
+                    <?php foreach ($user_playlists as $pl): ?>
+                        <div style="grid-template-columns: 40px 60% 60px; display: grid; gap: 10px; align-items: center; justify-content: center; margin-bottom: 10px;">
+                            <img src="<?php echo htmlspecialchars($pl['Playlist_avatar_url'] ?? './img/default-playlist-avatar.jpg'); ?>" style="width: 40px; height: 40px; border: 1px solid black; border-radius: 10px; object-fit: cover;"></img>
+                            <p style="font-family: Roboto, sans-serif; margin: 0; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"><?php echo htmlspecialchars($pl['Playlist_name']); ?></p>
+                            <form method="POST" action="" style="margin: 0;">
+                                <input type="hidden" name="add_to_playlist_id" value="<?php echo $pl['Playlist_id']; ?>">
+                                <button type="submit" style="background-color: grey; color: black; padding: 5px 10px; font-weight: bold; border-radius: 20px; cursor: pointer; border: none;">Add</button>
+                            </form>
+                        </div>
+                    <?php endforeach; ?>
+                    <?php if (count($user_playlists) === 0): ?>
+                        <p style="font-family: Roboto, sans-serif; font-size: 14px; text-align: center; padding: 20px 0;">Bạn chưa có playlist nào. Hãy tạo mới nhé!</p>
+                    <?php endif; ?>
+                </div>
+            </div>
+        <?php else: ?>
+            <div style="text-align: center; padding: 30px 10px;">
+                <p style="margin-bottom: 20px; font-family: Roboto, sans-serif;">Vui lòng đăng nhập để lưu bài hát vào playlist của bạn.</p>
+                <button onclick="window.location.href='music-streaming-login.php'" style="background: grey; color: black; border: none; padding: 12px 30px; border-radius: 30px; font-weight: bold; font-size: 15px; cursor: pointer;">Log In Now</button>
+            </div>
+        <?php endif; ?>
+    </div>
+
     <!-- TRÌNH PHÁT NHẠC (MUSIC PLAYER) - giữ nguyên -->
     <div id="music-player" style="position: fixed; bottom: 0; left: 0; width: 100%; background: #121212; color: white; display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; z-index: 1000; box-sizing: border-box; border-top: 1px solid #282828;">
         <div style="display: flex; align-items: center; width: 30%;">
@@ -233,8 +316,6 @@ if (!empty($songInfo['Artist_id'])) {
 
     <!-- Bằng việc include file JS này, thanh tìm kiếm và player vẫn sẽ hoạt động trơn tru! -->
     <script src="js/music-streaming-home.js?v=<?php echo time(); ?>"></script>
-    <script src="./js/music-streaming-song.js"></script>
-    <script src="./js/music-streaming-library.js"></script>
     <script>
         // Thêm JS để nút play trên trang này hoạt động
         document.getElementById('playBtn').addEventListener('click', () => {
@@ -292,6 +373,59 @@ if (!empty($songInfo['Artist_id'])) {
         // Kiểm tra ngay lúc load trang nếu bài này đang được phát
         if (systemAudio.getAttribute('data-original-url') === '<?php echo htmlspecialchars($songInfo['File_url'] ?? ''); ?>' && !systemAudio.paused) {
             bigPlayBtn.innerHTML = '⏸ PAUSE';
+        }
+
+        // --- XỬ LÝ JS CHO POPUP ADD TO PLAYLIST ---
+        const addToPlaylistBtn = document.getElementById('add_to_playlist_btn');
+        const playlistPopup = document.getElementById('add_to_playlist_popup');
+        const popupOverlay = document.getElementById('popup_overlay');
+        const closePopupBtn = document.getElementById('popupClose');
+
+        if (addToPlaylistBtn && playlistPopup) {
+            addToPlaylistBtn.addEventListener('click', () => {
+                playlistPopup.style.display = 'block';
+                popupOverlay.style.display = 'block';
+            });
+        }
+        function closePlaylistPopup() {
+            if (playlistPopup) playlistPopup.style.display = 'none';
+            if (popupOverlay) popupOverlay.style.display = 'none';
+        }
+        if (closePopupBtn) closePopupBtn.addEventListener('click', closePlaylistPopup);
+        if (popupOverlay) popupOverlay.addEventListener('click', closePlaylistPopup);
+
+        // --- XỬ LÝ JS CHO NÚT LIKE BÀI HÁT ---
+        const likeBtn = document.getElementById('likeBtn');
+        if (likeBtn) {
+            likeBtn.addEventListener('click', function() {
+                const songId = this.getAttribute('data-song-id');
+                const isLiked = this.classList.contains('liked');
+                
+                // Cập nhật UI ngay lập tức cho trải nghiệm mượt (Optimistic UI)
+                this.classList.toggle('liked');
+                if (!isLiked) {
+                    this.textContent = '♥ Liked';
+                } else {
+                    this.textContent = '♥ Like';
+                }
+
+                // Gửi request ngầm lưu vào CSDL
+                const formData = new FormData();
+                formData.append('song_id', songId);
+                fetch('includes/song_api.php?action=toggle_like', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (!data.success) {
+                        alert(data.message || 'Có lỗi xảy ra!');
+                        // Hoàn tác UI nếu bị lỗi (chưa đăng nhập)
+                        this.classList.toggle('liked');
+                        this.textContent = isLiked ? '♥ Liked' : '♥ Like';
+                    }
+                }).catch(err => console.error('Lỗi Like bài hát:', err));
+            });
         }
     </script>
 </body>
