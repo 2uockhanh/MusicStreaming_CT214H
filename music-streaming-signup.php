@@ -29,7 +29,7 @@ if (isset($_POST['btn_signup'])) {
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>eMusik - Sign Up</title>
-	<link rel="stylesheet" href='/css/welcome-style.css'>
+	<link rel="stylesheet" href='./css/welcome-style.css'>
 </head>
 <body>
 	<div id="welcome" style="background-color: rgba(1,1,1,0.6);">
@@ -40,8 +40,8 @@ if (isset($_POST['btn_signup'])) {
 			<div class="lg">
 				<img class="logo" src="./img/logo.png">
 			</div>
-			<form action="" method="POST">
-				<div class="signup">
+			<form method="POST" action="">
+			<div class="signup">
 				<h3>SIGN UP</h3>
 				<div class="signup_form">
 					<table>
@@ -59,7 +59,8 @@ if (isset($_POST['btn_signup'])) {
 						</tr>
 					</table>
 				</div>
-				<button class="btn" name="btn_signup">SIGN UP</button>
+				<button type="submit" class="btn" name="btn_signup">SIGN UP</button>
+				<?php if (!empty($error)) echo "<p style='color:red; text-align:center; font-family: Roboto, sans-serif; margin-top: 10px;'>$error</p>"; ?>
 				<div class="nav_form">
 					<table>
 						<tr>
@@ -72,6 +73,6 @@ if (isset($_POST['btn_signup'])) {
 			</form>
 		</section>
 	</div>
-	<script src="music-streaming.js"></script>
+	<script src="./js/music-streaming-mode-toggle.js"></script>
 </body>
 </html>
