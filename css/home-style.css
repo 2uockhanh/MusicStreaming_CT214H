@@ -177,7 +177,11 @@ body{
     align-content: center;
 }
 .song_nav img, .playlist_nav img {
+<<<<<<< HEAD
     width: 70%;
+=======
+    width: 70%;  
+>>>>>>> a6f9757347f91081d963074a00db226ffab80926
     border-color:white; 
     border-width: 10px;
     margin-bottom: 10px; 

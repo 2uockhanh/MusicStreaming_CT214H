@@ -21,16 +21,28 @@
 					<table>
 						<tr>
 							<th>Username </th>
+<<<<<<< HEAD
 							<td><input type="text" id="input_username" name="input_username"></td>
 						</tr>
 						<tr>
 							<th style="margin-right: 20px;">Password </th>
 							<td><input type="text" id="input_password" name="input_password"></td>
+=======
+							<td><input type="text" id="input_username"></td>
+						</tr>
+						<tr>
+							<th style="margin-right: 20px;">Password </th>
+							<td><input type="text" id="input_password"></td>
+>>>>>>> a6f9757347f91081d963074a00db226ffab80926
 						</tr>
 					</table>
 				</div>
 				<div>
+<<<<<<< HEAD
 					<button class="btn">LOG IN</button>
+=======
+					<button id="logInBtn" class="btn">LOG IN</button>
+>>>>>>> a6f9757347f91081d963074a00db226ffab80926
 				</div>
 				<div class="nav_form">
 					<table>
@@ -46,5 +58,50 @@
 		</section>
 	</div>
 	<script src="./js/music-streaming-mode-toggle.js"></script>
+<<<<<<< HEAD
+=======
+	<script>
+		document.getElementById("logInBtn").addEventListener("click", checkLogInInput);
+		function checkLogInInput() {
+			const username = document.getElementById("input_username").value;
+			const password = document.getElementById("input_password").value;
+			if (username === "" || password === "") {
+				alert("Please type your information.");
+				return;
+			}
+			// Mật khẩu không hợp lệ
+			if (!validPassword(password)) {
+				alert("Your password is invalid.");
+				return;
+			}
+			// Tất cả thông tin hợp lệ
+			alert("Your information is valid.");
+		}
+		function validPassword(inputPassword) {
+			// Độ dài mật khẩu có ít nhất 8 ký tự
+			if (inputPassword.length < 8) {
+				alert("Your password must have at least 8 characters.");
+				return false;
+			}
+			// Các ký tự đặc biệt được phép dùng
+			const specialCharList = '!@#$%^&*()-_+=[]{}:;><?|~,.';
+			// Các biến đếm số ký tự thường, hoa, đặc biệt, chữ số
+			let lowerChar = 0, upperChar = 0, specialChar = 0, digitChar = 0;
+			for (let i = 0; i < inputPassword.length; i++) {
+				// Mật khẩu không bao gồm ký tự cách
+				if (inputPassword.charAt(i) == ' ') { return false; }
+				if (inputPassword.charAt(i) >= 'A' && inputPassword.charAt(i) <= 'Z') { upperChar++; }
+				if (inputPassword.charAt(i) >= 'a' && inputPassword.charAt(i) <= 'z') { lowerChar++; }
+				if (inputPassword.charAt(i) >= '0' && inputPassword.charAt(i) <= '9') { digitChar++; }
+				if (specialCharList.includes(inputPassword.charAt(i))) { specialChar++; }
+			}
+			// Mật khẩu cần phải có ít nhất 1 ký tự thường, 1 ký tự hoa, 1 ký tự đặc biệt, 1 ký tự chữ số
+			if (lowerChar == 0 || upperChar == 0 || specialChar == 0 || digitChar == 0) {
+				return false;
+			}
+			return true;
+		};
+	</script>
+>>>>>>> a6f9757347f91081d963074a00db226ffab80926
 </body>
 </html>

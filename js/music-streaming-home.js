@@ -12,6 +12,7 @@ function changeModeToggle() {
 		document.getElementById("themeMode").textContent = "🌙 Theme Mode";
 		document.body.classList.remove("light-body");
 	}
+<<<<<<< HEAD
 };
 let currentPlaylist = [];
 let currentIndex = -1;
@@ -360,3 +361,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 		*/
 });
+=======
+};
+>>>>>>> a6f9757347f91081d963074a00db226ffab80926

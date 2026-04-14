@@ -20,10 +20,13 @@ document.getElementById('avatar-input').onchange = function() {
     .then(data => {
         if (data.success) {
             alert('Avatar updated successfully!');
+<<<<<<< HEAD
             // Cập nhật tất cả các avatar trên giao diện theo ảnh mới
             document.querySelectorAll('img[alt="Avatar"]').forEach(img => {
                 img.src = data.url;
             });
+=======
+>>>>>>> a6f9757347f91081d963074a00db226ffab80926
         } else {
             alert('Failed to update avatar: ' + data.message);
         }

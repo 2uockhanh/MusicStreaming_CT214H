@@ -94,6 +94,7 @@ function range_slider() {
         document.getElementById("playImg").src = "./img/play-music.png";
     }
 }
+<<<<<<< HEAD
 /*
 const addToPlaylistBtn = document.getElementById('add_to_playlist_btn');
 const playlistPopup = document.getElementById('add_to_playlist_popup');
@@ -114,6 +115,8 @@ if (closePopupBtn) closePopupBtn.addEventListener('click', closePlaylistPopup);
 if (popupOverlay) popupOverlay.addEventListener('click', closePlaylistPopup);
 */
 
+=======
+>>>>>>> a6f9757347f91081d963074a00db226ffab80926
 document.getElementById("add_to_playlist_btn").addEventListener("click", openAddPlaylistPopUp);
 function openAddPlaylistPopUp() {
     document.getElementById("add_to_playlist_popup").style.display = "block";
