@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eMusik - Artist Info</title> 
+    <link rel="stylesheet" href='./css/artist-info-style.css'>
+    <link href='https://fonts.googleapis.com/css?family=Passero One' rel='stylesheet'>
+</head>
+<body>
+    <div style="display: flex;">
+        <div>
+            <nav class="navbar">
+                <button class="logo_nav" onclick="document.location='./music-streaming-home.html'">
+                    <h3 style="font-family: 'Passero One'; font-size: 48px; margin: 0px auto;">eMuzik</h3>
+                </button>
+                <div class="nav">
+                <table>
+                        <tr>
+                            <button class="nav_button" onclick="document.location='./music-streaming-home.html'">
+                                <img class="nav_logo" src="./img/home.png"> Home
+                            </button>
+                        </tr>
+                        <tr>
+                            <button class="nav_button" onclick="document.location='./music-streaming-library.html'">
+                                <img class="nav_logo" src="./img/library.png"> Library
+                            </button>
+                        </tr>
+                    </table>
+                </div>
+            </nav>
+        </div>
+        <div class="home">
+            <div class="header"> 
+                <ul style="display: grid; grid-template-columns: 90% 10%; list-style-type: none;">
+                    <li>
+                        <div class="search" style="text-align: center;">
+                            <input type="text" id="search_info" name="search_info" placeholder="Search songs, artists..."></input>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="avatar_dropdown">
+                            <button class="dropbtn" id="dropbtn">
+                                <img style="width: 40px; height: 40px; border-radius: 30px;" src="./img/avatar.jpg" alt="Avatar"></img>
+                            </button>
+                            <div class="dropDownList" name="avatar" id="dropDown">
+                                <button value="myAccount" class="dropDownBtn">My Account</option>
+                                <button value="themeMode" id="themeMode" class="dropDownBtn">🌙 Theme Mode</button>
+                                <button value="logOut" class="dropDownBtn">Log Out</option>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div style="margin-bottom: 20px;">
+                <div class="artist-header">
+                    <img class="artist-image" src="./img/artist/artist_buitruonglinh.jpg" alt="buitruonglinh"></img>
+                    <div class="artist-name">
+                        <h3>buitruonglinh</h3>
+                        <!--<h4 style="font-weight: lighter;">0 followers</h4>-->
+                    </div>
+                    <!--<button class="follow-button">FOLLOW</button>-->
+                </div>
+            </div>
+            <div class="uploaded_song">
+                <div class="uploaded_song_head">
+                    <h3>UPLOADED SONG</h3>
+                </div>
+                <div class="uploaded_song_body">
+                    <div class="show_body_grid">
+                        <button class="arrow-btn">
+                            <img src="./img/left-arrow.png" style="height: 30px;"></img>
+                        </button>
+                    </div>
+                    <div class="show_body_grid">
+                        <!-- SONG 1 -->
+                        <button class="song_nav">
+                            <div class="song_nav_grid">
+                                <img src="./img/song/song_buitruonglinh/song_thinhvuongvietnamsangngoi/poster.jpg" alt="eMusik"></img>
+                                <div class="article_body">
+                                    <h4>Thịnh Vượng Việt Nam Sáng Ngời</h4> 
+                                    <h4 style="font-weight: lighter;">buitruonglinh</h4>
+                                </div>
+                            </div>
+                        </button>
+                        <!-- SONG 2 -->
+                        <button class="song_nav">
+                            <div class="song_nav_grid">
+                                <img src="./img/song/song_buitruonglinh/song_duemtungyeu/poster.jpg" alt="eMusik"></img>
+                                <div class="article_body">
+                                    <h4>Dù Em Từng Yêu</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4>
+                                </div>
+                            </div> 
+                        </button>
+                        <!-- SONG 3 -->
+                        <button class="song_nav">
+                            <div class="song_nav_grid">
+                                <img src="./img/song/song_buitruonglinh/song_giothi/poster.jpg" alt="eMusik"></img>
+                                <div class="article_body">
+                                    <h4>Giờ Thì</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4>
+                                </div>
+                            </div>
+                        </button>
+                        <!-- SONG 4 -->
+                        <button class="song_nav">
+                            <div class="song_nav_grid">
+                                <img src="./img/song/song_buitruonglinh/song_duongtoichoemve/poster.jpg" alt="eMusik"></img>
+                                <div class="article_body">
+                                    <h4>Đường Tôi Chở Em Về</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4>
+                                </div>
+                            </div>
+                        </button>
+                        <!-- SONG 5 -->
+                        <button class="song_nav">
+                            <div class="song_nav_grid">
+                                <img src="./img/song/song_buitruonglinh/song_tungngayyeuem/poster.jpg" alt="eMusik"></img>
+                                <div class="article_body">
+                                    <h4>Từng Ngày Yêu Em</h4> <h4 style="font-weight: lighter;">buitruonglinh</h4>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="show_body_grid">
+                        <button class="arrow-btn">
+                            <img src="./img/right-arrow.png" style="height: 30px;"></img>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="playlists">
+                <div class="playlists_head">
+                    <h3>PLAYLISTS</h3>
+                </div>
+                <div class="playlists_body">
+                    <div class="show_body_grid">
+                        <button class="arrow-btn">
+                            <img src="./img/left-arrow.png" style="height: 30px;"></img>
+                        </button>
+                    </div>
+                    <div class="show_body_grid">
+                        <!-- PLAYLIST 1 -->
+                        <button class="playlist_nav">
+                            <div class="playlist_nav_grid">
+                                <img src="./img/playlist/playlist_buitruonglinh/diadon_thinhvuongvietnamsangngoi/poster.jpg" alt="eMusik"></img>
+                                <div class="article_body">
+                                    <h4>Thịnh Vượng Việt Nam Sáng Ngời</h4> 
+                                    <!--<h4 style="font-weight: lighter;">Đĩa Đơn</h4>-->
+                                </div>
+                            </div>
+                        </button>
+                        <!-- PLAYLIST 2 -->
+                        <button class="playlist_nav">
+                            <div class="playlist_nav_grid">
+                                <img src="./img/playlist/playlist_buitruonglinh/album_tungngaynhumaimai/poster.jpg" alt="eMusik"></img>
+                                <div class="article_body">
+                                    <h4>Từng Ngày Như Mãi Mãi</h4> 
+                                    <!--<h4 style="font-weight: lighter;">Album</h4>-->
+                                </div>
+                            </div> 
+                        </button>
+                    </div>
+                    <div class="show_body_grid">
+                        <button class="arrow-btn">
+                            <img src="./img/right-arrow.png" style="height: 30px;"></img>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h4>About Us</h4>
+                        <ul>
+                            <li><a href="#Introduce">Introduce</a></li>
+                            <li><a href="#Term">Term</a></li>
+                            <li><a href="#Privacy">Privacy</a></li>
+                            <li><a href="#PolicySafety">Policy And Safety</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Useful Link</h4>
+                        <ul>
+                            <li><a href="./music-streaming-account.html">My Account</a></li>
+                            <li><a href="./music-streaming-library.html">Library</a></li>
+                            <li><a href="./music-streaming-favourite.html">Favourite</a></li>
+                            <li><a href="./music-streaming-import-music.html">Import Music</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Social Links</h4>
+                        <ul>
+                            <li><a href="#Facebook">Facebook</a></li>
+                            <li><a href="#TikTok">TikTok</a></li>
+                            <li><a href="#Threads">Threads</a></li>
+                            <li><a href="#Instagram">Instagram</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2026 eMusik. All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="./js/music-streaming-home.js"></script>
+</body>
+</html>
