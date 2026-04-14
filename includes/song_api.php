@@ -32,6 +32,30 @@ function handleMusicUpload($file_input) {
     return null;
 }
 
+// --- Hàm xử lý Upload File Ảnh Bài Hát ---
+function handleSongImageUpload($file_input) {
+    if (!isset($_FILES[$file_input]) || $_FILES[$file_input]['error'] !== UPLOAD_ERR_OK) {
+        return null;
+    }
+
+    $file = $_FILES[$file_input];
+    $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+    $allowed = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+
+    if (!in_array($ext, $allowed)) {
+        throw new Exception("Chỉ chấp nhận file ảnh (jpg, jpeg, png, gif, webp).");
+    }
+
+    $uploadDir = '../uploads/songs/';
+    if (!is_dir($uploadDir)) mkdir($uploadDir, 0777, true);
+    $newName = uniqid('song_img_', true) . '.' . $ext;
+    
+    if (move_uploaded_file($file['tmp_name'], $uploadDir . $newName)) {
+        return 'uploads/songs/' . $newName; 
+    }
+    return null;
+}
+
 // hiển thị danh sách các bài hát có trong csdl => đặt ID giảm dần để biết được bài nào được thêm vào gần đây nhất
 
 if ($action === 'read') {
@@ -40,11 +64,11 @@ if ($action === 'read') {
         if ($search !== '') {
             // Nếu có từ khóa -> Tìm theo tên bài hát
             $searchParam = "%" . $search . "%";
-            $stmt = $conn->prepare("SELECT Song_id, Song_title, File_url, Lyric, Album_id, View_count FROM Songs WHERE Song_title LIKE ? ORDER BY Song_id DESC");
+            $stmt = $conn->prepare("SELECT Song_id, Song_title, File_url, Lyric, Album_id, View_count, Song_image_url FROM Songs WHERE Song_title LIKE ? ORDER BY Song_id DESC");
             $stmt->bind_param("s", $searchParam);
         } else {
             // Nếu không có từ khóa -> Lấy tất cả
-            $stmt = $conn->prepare("SELECT Song_id, Song_title, File_url, Lyric, Album_id, View_count FROM Songs ORDER BY Song_id DESC");
+            $stmt = $conn->prepare("SELECT Song_id, Song_title, File_url, Lyric, Album_id, View_count, Song_image_url FROM Songs ORDER BY Song_id DESC");
         }
         
         $stmt->execute();
@@ -62,6 +86,7 @@ if ($action === 'create') {
     $lyric = $_POST['lyric'] ?? '';
     $views = $_POST['view_count'] ?? 0;
     $album_id = !empty($_POST['album_id']) ? $_POST['album_id'] : null;
+    $song_image_url = !empty($_POST['song_image_url']) ? $_POST['song_image_url'] : './img/default-song.jpg';
 
     try {
         $file_url = handleMusicUpload('music_file');
@@ -71,8 +96,13 @@ if ($action === 'create') {
             exit;
         }
 
-        $stmt = $conn->prepare("INSERT INTO Songs (Song_title, File_url, Lyric, View_count, Album_id) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssii", $title, $file_url, $lyric, $views, $album_id);
+        $uploaded_img = handleSongImageUpload('song_avatar');
+        if ($uploaded_img) {
+            $song_image_url = $uploaded_img;
+        }
+
+        $stmt = $conn->prepare("INSERT INTO Songs (Song_title, File_url, Lyric, View_count, Album_id, Song_image_url) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssiis", $title, $file_url, $lyric, $views, $album_id, $song_image_url);
 
         if ($stmt->execute()) {
             echo json_encode(['success' => true, 'message' => 'Thêm bài hát thành công!']);
@@ -92,16 +122,32 @@ if ($action === 'update') {
     $lyric = $_POST['lyric'] ?? '';
     $views = $_POST['view_count'] ?? 0;
     $album_id = !empty($_POST['album_id']) ? $_POST['album_id'] : null;
+    $song_image_url = $_POST['song_image_url'] ?? '';
 
     try {
         $new_file_url = handleMusicUpload('music_file');
+        $uploaded_img = handleSongImageUpload('song_avatar');
+        
+        if ($uploaded_img) {
+            $song_image_url = $uploaded_img;
+        }
 
         if ($new_file_url) {
-            $stmt = $conn->prepare("UPDATE Songs SET Song_title=?, File_url=?, Lyric=?, View_count=?, Album_id=? WHERE Song_id=?");
-            $stmt->bind_param("sssiii", $title, $new_file_url, $lyric, $views, $album_id, $id);
+            if ($song_image_url !== '') {
+                $stmt = $conn->prepare("UPDATE Songs SET Song_title=?, File_url=?, Lyric=?, View_count=?, Album_id=?, Song_image_url=? WHERE Song_id=?");
+                $stmt->bind_param("sssiisi", $title, $new_file_url, $lyric, $views, $album_id, $song_image_url, $id);
+            } else {
+                $stmt = $conn->prepare("UPDATE Songs SET Song_title=?, File_url=?, Lyric=?, View_count=?, Album_id=? WHERE Song_id=?");
+                $stmt->bind_param("sssiii", $title, $new_file_url, $lyric, $views, $album_id, $id);
+            }
         } else {
-            $stmt = $conn->prepare("UPDATE Songs SET Song_title=?, Lyric=?, View_count=?, Album_id=? WHERE Song_id=?");
-            $stmt->bind_param("ssiii", $title, $lyric, $views, $album_id, $id);
+            if ($song_image_url !== '') {
+                $stmt = $conn->prepare("UPDATE Songs SET Song_title=?, Lyric=?, View_count=?, Album_id=?, Song_image_url=? WHERE Song_id=?");
+                $stmt->bind_param("ssiisi", $title, $lyric, $views, $album_id, $song_image_url, $id);
+            } else {
+                $stmt = $conn->prepare("UPDATE Songs SET Song_title=?, Lyric=?, View_count=?, Album_id=? WHERE Song_id=?");
+                $stmt->bind_param("ssiii", $title, $lyric, $views, $album_id, $id);
+            }
         }
 
         if ($stmt->execute()) {

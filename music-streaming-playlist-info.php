@@ -1,85 +1,197 @@
 <?php
 session_start();
-include 'includes/db-connect.php';
+require_once './includes/db-connect.php';
 
-// 1. Xử lý Avatar người dùng trên Header
-$avatarUrl = 'img/avatar.jpg';
-if (!empty($_SESSION['user_id'])) {
-    $userId = $_SESSION['user_id'];
-    $stmt = $conn->prepare("SELECT User_avatar_url FROM users WHERE user_id = ?");
-    $stmt->bind_param("i", $userId);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    if ($row = $result->fetch_assoc()) {
-        if (!empty($row['User_avatar_url'])) {
-            $avatarUrl = $row['User_avatar_url'];
+// 1. Kiểm tra đăng nhập
+if (!isset($_SESSION['user_id'])) {
+    header("Location: music-streaming-login.php");
+    exit();
+}
+$user_id = $_SESSION['user_id'];
+
+// --- XỬ LÝ THÊM BÀI HÁT VÀO PLAYLIST ---
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_song_id'])) {
+    $add_song_id = intval($_POST['add_song_id']);
+    $pl_id = isset($_POST['target_pl_id']) ? intval($_POST['target_pl_id']) : (isset($_GET['id']) ? intval($_GET['id']) : 0);
+    
+    // Kiểm tra quyền (chỉ chủ sở hữu mới được thêm)
+    $check_owner = $conn->prepare("SELECT User_id FROM Playlists WHERE Playlist_id = ?");
+    $check_owner->bind_param("i", $pl_id);
+    $check_owner->execute();
+    $owner_res = $check_owner->get_result()->fetch_assoc();
+    
+    if ($owner_res && $owner_res['User_id'] == $user_id) {
+        $check_exist = $conn->prepare("SELECT * FROM playlist_Song WHERE Playlist_id = ? AND Song_id = ?");
+        $check_exist->bind_param("ii", $pl_id, $add_song_id);
+        $check_exist->execute();
+        if ($check_exist->get_result()->num_rows === 0) {
+            $ins = $conn->prepare("INSERT INTO playlist_Song (Playlist_id, Song_id) VALUES (?, ?)");
+            $ins->bind_param("ii", $pl_id, $add_song_id);
+            $ins->execute();
+            echo "<script>alert('Đã thêm bài hát vào Playlist!'); window.location.href='music-streaming-playlist-info.php?id=$pl_id';</script>";
+            exit();
+        } else {
+            echo "<script>alert('Bài hát đã có trong Playlist!'); window.location.href='music-streaming-playlist-info.php?id=$pl_id';</script>";
+            exit();
         }
     }
-    $stmt->close();
 }
 
-// 2. Lấy thông tin chi tiết Playlist
-$playlist_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
-$sql_playlist_info = "SELECT p.*, u.User_name, u.User_avatar_url 
-                      FROM Playlists p 
-                      LEFT JOIN Users u ON p.User_id = u.User_id 
-                      WHERE p.Playlist_id = ?";
-$stmt_playlist = $conn->prepare($sql_playlist_info);
-$stmt_playlist->bind_param("i", $playlist_id);
-$stmt_playlist->execute();
-$playlistResult = $stmt_playlist->get_result();
-$playlistInfo = $playlistResult->fetch_assoc();
+// --- XỬ LÝ CẬP NHẬT THÔNG TIN PLAYLIST ---
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_playlist_id']) && isset($_GET['id'])) {
+    $edit_pl_id = intval($_POST['edit_playlist_id']);
+    $pl_id = intval($_GET['id']);
+    $new_name = trim($_POST['playlist_name']);
+    $is_public = intval($_POST['is_public']);
 
-if (!$playlistInfo) {
-    header("Location: music-streaming-home.php"); // Nếu ko tìm thấy, trả về home
+    // Kiểm tra có phải chủ sở hữu cập nhật Playlist không
+    if ($edit_pl_id === $pl_id) {
+        $check_owner = $conn->prepare("SELECT User_id, Playlist_avatar_url FROM Playlists WHERE Playlist_id = ?");
+        $check_owner->bind_param("i", $pl_id);
+        $check_owner->execute();
+        $owner_res = $check_owner->get_result()->fetch_assoc();
+
+        if ($owner_res && $owner_res['User_id'] == $user_id) {
+            $avatar_url = $owner_res['Playlist_avatar_url']; // Giữ nguyên ảnh cũ nếu không update
+
+            // Kiểm tra có tải ảnh mới lên không
+            if (isset($_FILES['playlist_avatar']) && $_FILES['playlist_avatar']['error'] === UPLOAD_ERR_OK) {
+                $ext = strtolower(pathinfo($_FILES['playlist_avatar']['name'], PATHINFO_EXTENSION));
+                if (in_array($ext, ['jpg', 'jpeg', 'png', 'gif', 'webp'])) {
+                    $uploadDir = 'uploads/playlists/';
+                    if (!is_dir($uploadDir)) mkdir($uploadDir, 0777, true);
+                    $newName = uniqid('pl_', true) . '.' . $ext;
+                    if (move_uploaded_file($_FILES['playlist_avatar']['tmp_name'], $uploadDir . $newName)) {
+                        $avatar_url = $uploadDir . $newName; // Cập nhật đường dẫn mới
+                    }
+                }
+            }
+
+            $stmt_update = $conn->prepare("UPDATE Playlists SET Playlist_name = ?, Playlist_avatar_url = ?, is_public = ? WHERE Playlist_id = ?");
+            $stmt_update->bind_param("ssii", $new_name, $avatar_url, $is_public, $pl_id);
+            $stmt_update->execute();
+
+            echo "<script>alert('Cập nhật Playlist thành công!'); window.location.href='music-streaming-playlist-info.php?id=$pl_id';</script>";
+            exit();
+        }
+    }
+}
+
+// 2. Lấy Avatar người dùng cho phần Header Dropdown
+$avatarUrl = './img/avatar.jpg';
+$stmt_avatar = $conn->prepare("SELECT User_avatar_url FROM users WHERE user_id = ?");
+$stmt_avatar->bind_param("i", $user_id);
+$stmt_avatar->execute();
+$res_avatar = $stmt_avatar->get_result();
+if ($row = $res_avatar->fetch_assoc()) {
+    if (!empty($row['User_avatar_url'])) {
+        $avatarUrl = $row['User_avatar_url'];
+    }
+}
+$stmt_avatar->close();
+
+// 3. Xác định dữ liệu là Album hay Playlist
+$type_label = '';
+$title = '';
+$cover_img = '';
+$owner_name = '';
+$owner_img = '';
+$year = '';
+$songs = [];
+$is_owner = false;
+$artist_link = '#';
+
+if (isset($_GET['album_id'])) {
+    // --- NẾU LÀ ALBUM CỦA NGHỆ SĨ ---
+    $album_id = intval($_GET['album_id']);
+    $sql = "SELECT a.*, ar.Artist_name, ar.Avatar_url FROM Albums a JOIN Artists ar ON a.Artist_id = ar.Artist_id WHERE a.Album_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $album_id);
+    $stmt->execute();
+    $data = $stmt->get_result()->fetch_assoc();
+    if ($data) {
+        $type_label = 'Album';
+        $title = $data['Album_title'];
+        $cover_img = $data['Cover_image_url'] ?: './img/default-playlist.jpg';
+        $owner_name = $data['Artist_name'];
+        $owner_img = $data['Avatar_url'] ?: './img/default-artist.jpg';
+        $year = $data['Release_date'] ? date('Y', strtotime($data['Release_date'])) : '';
+        $artist_link = "music-streaming-artist-info.php?id=" . $data['Artist_id'];
+        
+        $sql_songs = "SELECT s.*, ar.Artist_name FROM Songs s LEFT JOIN Artists ar ON s.Artist_id = ar.Artist_id WHERE s.Album_id = ?";
+        $stmt_s = $conn->prepare($sql_songs);
+        $stmt_s->bind_param("i", $album_id);
+        $stmt_s->execute();
+        $songs = $stmt_s->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+} elseif (isset($_GET['id'])) {
+    // --- NẾU LÀ PLAYLIST CÁ NHÂN TẠO ---
+    $playlist_id = intval($_GET['id']);
+    $sql = "SELECT p.*, u.User_name, u.User_avatar_url FROM Playlists p JOIN Users u ON p.User_id = u.User_id WHERE p.Playlist_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $playlist_id);
+    $stmt->execute();
+    $data = $stmt->get_result()->fetch_assoc();
+    if ($data) {
+        $type_label = 'Playlist';
+        $title = $data['Playlist_name'];
+        $cover_img = $data['Playlist_avatar_url'] ?: './img/default-playlist-avatar.jpg';
+        $owner_name = $data['User_name'];
+        $owner_img = $data['User_avatar_url'] ?: './img/avatar.jpg';
+        $year = date('Y'); 
+        $is_owner = ($data['User_id'] == $_SESSION['user_id']);
+        $artist_link = "music-streaming-account.php";
+
+        $sql_songs = "SELECT s.*, ar.Artist_name FROM playlist_Song ps JOIN Songs s ON ps.Song_id = s.Song_id LEFT JOIN Artists ar ON s.Artist_id = ar.Artist_id WHERE ps.Playlist_id = ?";
+        $stmt_s = $conn->prepare($sql_songs);
+        $stmt_s->bind_param("i", $playlist_id);
+        $stmt_s->execute();
+        $songs = $stmt_s->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+}
+
+if (!$title) {
+    echo "<script>alert('Không tìm thấy dữ liệu Album/Playlist!'); window.location.href='music-streaming-home.php';</script>";
     exit();
 }
 
-// 3. Lấy các bài hát trong Playlist
-$sql_songs = "SELECT s.Song_id, s.Song_title, s.File_url, s.Song_image_url, s.Duration, a.Artist_name 
-              FROM playlist_Song ps
-              INNER JOIN Songs s ON ps.Song_id = s.Song_id
-              LEFT JOIN Artists a ON s.Artist_id = a.Artist_id 
-              WHERE ps.Playlist_id = ? 
-              ORDER BY s.Song_id DESC";
-$stmt_songs = $conn->prepare($sql_songs);
-$stmt_songs->bind_param("i", $playlist_id);
-$stmt_songs->execute();
-$songsResult = $stmt_songs->get_result();
+// Hàm format thời gian giây -> phút:giây
+function formatDuration($seconds) {
+    if (!$seconds) return "0:00";
+    $m = floor($seconds / 60);
+    $s = $seconds % 60;
+    return $m . ':' . str_pad($s, 2, '0', STR_PAD_LEFT);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>eMusik - <?php echo htmlspecialchars($playlistInfo['Playlist_name']); ?></title> 
+    <title>eMuzik - <?php echo htmlspecialchars($title); ?></title> 
     <link rel="stylesheet" href='./css/playlist-info-style.css'>
+    <link rel="stylesheet" href='./css/home-style.css'>
     <link href='https://fonts.googleapis.com/css?family=Passero One' rel='stylesheet'>
 </head>
 <body>
     <div style="display: flex;">
-        <!-- MENU TRÁI -->
+        <!-- CỘT NAVBAR -->
         <div>
             <nav class="navbar">
                 <button class="logo_nav" onclick="document.location='./music-streaming-home.php'">
                     <h3 style="font-family: 'Passero One'; font-size: 48px; margin: 0px auto;">eMuzik</h3>
                 </button>
                 <div class="nav">
-                <table>
+                    <table>
                         <tr>
                             <button class="nav_button" onclick="document.location='./music-streaming-home.php'">
-                                <img class="nav_logo" src="./img/home.png"> Home
+                                <img class="nav_logo" src="./img/home.png"> Home</img>
                             </button>
                         </tr>
                         <tr>
-                            <button class="nav_button" onclick="document.location='./music-streaming-library.html'">
+                            <button class="nav_button" onclick="document.location='./music-streaming-library.php'">
                                 <img class="nav_logo" src="./img/library.png"> Library
                             </button>
-                        </tr>
-                        <tr>
-                            <button class="nav_button">
-                                <img class="nav_logo" src="./img/favourite.png"> Favourite
-                            </button>                        
                         </tr>
                     </table>
                 </div>
@@ -112,26 +224,30 @@ $songsResult = $stmt_songs->get_result();
                 </ul>
             </div>
 
+            <!-- PHẦN THÔNG TIN PLAYLIST -->
             <div style="margin-bottom: 20px; cursor: pointer;">
-                <div class="playlist-header">
-                    <img class="playlist-image" src="<?php echo htmlspecialchars($playlistInfo['Playlist_avatar_url'] ?? './img/default-playlist.jpg'); ?>" alt="cover">
+                <div class="playlist-header" onclick="document.location='<?php echo $artist_link; ?>'">
+                    <img class="playlist-image" src="<?php echo htmlspecialchars($cover_img); ?>" alt="cover"></img>
                     <div class="playlist-name">
-                        <h4>Playlist</h4>
-                        <h2><?php echo htmlspecialchars($playlistInfo['Playlist_name']); ?></h2>
+                        <h4><?php echo $type_label; ?></h4>
+                        <h2><?php echo htmlspecialchars($title); ?></h2>
                         <div style="margin-top: 0px; grid-template-columns: 30px 100px auto; display: grid; align-content: center;">
-                            <img style="width: 30px; height: 30px; border-radius: 30px;" src="<?php echo htmlspecialchars($playlistInfo['User_avatar_url'] ?? './img/default-playlist-avatar.jpg'); ?>" alt="user">
-                            <h4 style="margin-left: 10px; margin-top: 5px;"><?php echo htmlspecialchars($playlistInfo['User_name'] ?? 'Unknown'); ?></h4>
+                            <img style="width: 30px; height: 30px; border-radius: 30px; object-fit: cover;" src="<?php echo htmlspecialchars($owner_img); ?>" alt="avatar"></img>
+                            <h4 style="margin-left: 10px; margin-top: 5px; white-space: nowrap;"><?php echo htmlspecialchars($owner_name); ?></h4>
+                            <h4 style="margin-left: 10px; margin-top: 5px;"> - <?php echo $year; ?></h4>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <?php if ($is_owner): ?>
             <div style="margin-left: 200px; margin-top: 20px; margin-bottom: 20px;">
-                <button id="playPlaylistBtn" class="likeBtn" style="background-color: #1DB954; color: white; font-weight: bold; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer;">⏵ PLAY ALL</button>
-                <button class="likeBtn" id="likeBtn">♥ Save</button>
-                <button class="likeBtn" id="addSongsBtn">Add Songs</button>
-                <button class="likeBtn" id="editPlaylistBtn">Edit Playlist</button>
+                <button class="likeBtn" id="addSongsBtn" onclick="document.getElementById('add_songs_popup').style.display='block'; document.getElementById('popup_overlay').style.display='block';">Add Songs</button>
+                <button class="likeBtn" id="editPlaylistBtn" onclick="document.getElementById('edit_playlist_popup').style.display='block'; document.getElementById('popup_overlay').style.display='block';">Edit Playlist</button>
             </div>
-            
+            <?php endif; ?>
+
+            <!-- BẢNG BÀI HÁT THEO HTML CỦA BẠN -->
             <div>
                 <table class="playlist-table">
                     <tr style="cursor: unset;">
@@ -139,43 +255,33 @@ $songsResult = $stmt_songs->get_result();
                         <th>Title</th>
                         <th>Duration</th>
                     </tr>
-                    <?php if ($songsResult && $songsResult->num_rows > 0): ?>
-                        <?php 
-                        $index = 1;
-                        $hidden_song_data = "";
-                        while($song = $songsResult->fetch_assoc()): 
-                            $duration = $song['Duration'] ?? 0;
-                            $min = floor($duration / 60);
-                            $sec = $duration % 60;
-                            $timeStr = $min . ':' . str_pad($sec, 2, '0', STR_PAD_LEFT);
-                            
-                            $hidden_song_data .= sprintf(
-                                '<div class="song_nav" data-id="%s" data-url="%s" data-title="%s" data-artist="%s" data-img="%s" style="display:none;"></div>',
-                                $song['Song_id'], htmlspecialchars($song['File_url']), htmlspecialchars($song['Song_title']), htmlspecialchars($song['Artist_name'] ?? 'Unknown Artist'), htmlspecialchars($song['Song_image_url'] ?? './img/default-song.jpg')
-                            );
-                        ?>
-                        <tr onclick="document.location='music-streaming-song-info.php?id=<?php echo $song['Song_id']; ?>'">
-                            <td><?php echo $index++; ?></td>
-                            <td>
-                                <div> <h4><?php echo htmlspecialchars($song['Song_title']); ?></h4> <h4 style="font-weight: lighter;"><?php echo htmlspecialchars($song['Artist_name'] ?? 'Unknown Artist'); ?></h4> </div>
-                            </td>
-                            <td><?php echo $timeStr; ?></td>
-                        </tr>
-                        <?php endwhile; ?>
+                    <?php if (count($songs) > 0): ?>
+                        <?php foreach ($songs as $index => $song): ?>
+                            <!-- Nhấn vào 1 bài hát thì chuyển đến song-info tương ứng -->
+                            <tr onclick="document.location='./music-streaming-song-info.php?id=<?php echo $song['Song_id']; ?>'">
+                                <td><?php echo $index + 1; ?></td>
+                                <td>
+                                    <div> 
+                                        <h4><?php echo htmlspecialchars($song['Song_title']); ?></h4> 
+                                        <h4 style="font-weight: lighter;"><?php echo htmlspecialchars($song['Artist_name'] ?? 'Unknown'); ?></h4> 
+                                    </div>
+                                </td>
+                                <td><?php echo formatDuration($song['Duration']); ?></td>
+                            </tr>
+                        <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="3" style="text-align: center; padding: 20px; color: #b3b3b3;">Playlist này chưa có bài hát nào.</td>
+                            <td colspan="3" style="text-align: center; padding: 20px;">Không có bài hát nào.</td>
                         </tr>
                     <?php endif; ?>
                 </table>
-                <?php echo $hidden_song_data ?? ''; ?>
             </div>
             
             <div class="copyright">
-                <p style="color: grey; margin: 0px;">Last Update: <?php echo date('d/m/Y'); ?></p>
-                <p style="color: grey; margin: 0px;">&copy; 2026 LOOPS MUSIC.</p>
+                <p>Last Update: <?php echo date('d/m/Y'); ?></p>
+                <p>&copy; 2026 LOOPS MUSIC.</p>
             </div>
-            
+
             <!-- FOOTER -->
             <footer class="footer">
                 <div class="footer-content">
@@ -192,8 +298,8 @@ $songsResult = $stmt_songs->get_result();
                         <h4>Useful Link</h4>
                         <ul>
                             <li><a href="./music-streaming-account.php">My Account</a></li>
-                            <li><a href="./music-streaming-library.html">Library</a></li>
-                            <li><a href="./music-streaming-favourite.html">Favourite</a></li>
+                            <li><a href="./music-streaming-library.php">Library</a></li>
+                            <li><a href="./music-streaming-favourite.php">Favourite</a></li>
                             <li><a href="./music-streaming-import-music.html">Import Music</a></li>
                         </ul>
                     </div>
@@ -211,54 +317,60 @@ $songsResult = $stmt_songs->get_result();
                     <p>&copy; 2026 eMusik. All rights reserved.</p>
                 </div>
             </footer>
-
-            <!-- KHOẢNG TRỐNG ĐỂ KHÔNG BỊ PLAYER CHE -->
-            <div style="height: 100px;"></div>
+            
+            <div style="height: 100px;"></div> <!-- Tránh bị player che -->
         </div>
     </div>
 
-    <div class="add_songs_popup" id="add_songs_popup">
+    <!-- LỚP PHỦ OVERLAY -->
+    <div id="popup_overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); z-index: 1999;" onclick="this.style.display='none'; document.getElementById('add_songs_popup').style.display='none'; document.getElementById('edit_playlist_popup').style.display='none';"></div>
+
+    <!-- POPUP TỪ HTML CỦA BẠN (ẨN THEO MẶC ĐỊNH) -->
+    <div class="add_songs_popup" id="add_songs_popup" style="display: none; z-index: 2000;">
         <div class="popupHead" id="popupHead">
             <div class="popupHeader" id="popupHeader">Add Songs</div>
-            <button class="popupClose" id="popupClose">&#128936;</button>
+            <button class="popupClose" id="popupClose" onclick="document.getElementById('add_songs_popup').style.display='none'; document.getElementById('popup_overlay').style.display='none';">&#128936;</button>
         </div>
         <div class="popup_search" style="text-align: center;">
-            <input type="text" id="search_info" name="search_info" placeholder="Search playlists..."></input>
+            <input type="text" id="search_add_song" placeholder="Search songs..."></input>
         </div>
-        <div style="margin: 20px auto;">
-            <div style="grid-template-columns: 40px 60% 60px; display: grid; gap: 10px; align-items: center; justify-content: center; border-top: 1px solid black; padding-top: 10px; margin-top: 10px;">
-                <img src="./img/default-song.jpg" style="width: 40px; height: 40px; border: 1px solid black; border-radius: 10px;"></img>
-                <p style="font-family: Roboto, sans-serif;">Bài hát bạn muốn thêm...</p>
-                <button style="background-color: grey; color: black; padding: 5px 10px; font-weight: bold; border-radius: 20px;">Add</button>
-            </div>
+        <div id="add_song_results" style="margin: 20px auto; overflow-y: auto; max-height: 300px;">
+            <!-- Dữ liệu mẫu như HTML -->
+            <p style="text-align: center; color: black; font-family: Roboto, sans-serif;">Gõ để tìm kiếm bài hát...</p>
         </div>
     </div>
     
-    <div class="edit_playlist_popup" id="edit_playlist_popup">
-        <div class="popup_head" id="popup_head">
-            <div class="popup_header" id="popup_header">Edit Playlist</div>
-            <button class="popup_close" id="popup_close">&#128936;</button>
-        </div>
-        <div style="grid-template-columns: 240px 330px; gap: 30px; display: grid;">
-            <div style="margin-left: 30px;">
-                <img src="<?php echo htmlspecialchars($playlistInfo['Playlist_avatar_url'] ?? './img/default-playlist.jpg'); ?>" style="width: 200px; height: 200px; border: 3px solid black; object-fit: cover;">
-                <button style="font-family: Roboto, sans-serif; width: fit-content; height: fit-content; background-color: rgba(217, 217, 217, 1); color: black; font-size: medium; padding: 10px; font-weight: bold; border-radius: 20px; justify-content: center; text-align: center; margin-top: 10px; margin-left: 40px;">Change Avatar</button>
+    <div class="edit_playlist_popup" id="edit_playlist_popup" style="display: none; z-index: 2000;">
+        <form method="POST" action="" enctype="multipart/form-data">
+            <input type="hidden" name="edit_playlist_id" value="<?php echo isset($_GET['id']) ? intval($_GET['id']) : 0; ?>">
+            <div class="popup_head" id="popup_head">
+                <div class="popup_header" id="popup_header">Edit Playlist</div>
+                <button type="button" class="popup_close" id="popup_close" onclick="document.getElementById('edit_playlist_popup').style.display='none'; document.getElementById('popup_overlay').style.display='none';">&#128936;</button>
             </div>
-            <div style="font-family: Roboto, sans-serif;">
-                <h4 style="margin-bottom: 10px; margin-top: 0px;">Playlist's Name</h4>
-                <input type="text" value="<?php echo htmlspecialchars($playlistInfo['Playlist_name']); ?>" style="width: 300px; height: 30px; border-radius: 30px; background-color: rgba(217, 217, 217, 1); color: black; padding-left: 10px;">
-                <h4 style="margin-bottom: 10px;">Description</h4>
-                <input type="text" value="" style="width: 300px; height: 120px; border-radius: 30px; background-color: rgba(217, 217, 217, 1); color: black; padding-left: 10px;">
+            <div style="grid-template-columns: 240px 330px; gap: 30px; display: grid;">
+                <div style="margin-left: 30px; text-align: center;">
+                    <img id="edit_pl_preview" src="<?php echo htmlspecialchars($cover_img); ?>" style="width: 200px; height: 200px; border: 3px solid black; object-fit: cover;">
+                    <input type="file" id="playlist_avatar" name="playlist_avatar" accept="image/*" style="display: none;" onchange="previewImage(event)">
+                    <button type="button" onclick="document.getElementById('playlist_avatar').click()" style="font-family: Roboto, sans-serif; width: fit-content; height: fit-content; background-color: rgba(217, 217, 217, 1); color: black; font-size: medium; padding: 10px; font-weight: bold; border-radius: 20px; justify-content: center; text-align: center; margin-top: 10px;">Change Avatar</button>
+                </div>
+                <div style="font-family: Roboto, sans-serif;">
+                    <h4 style="margin-bottom: 10px; margin-top: 0px;">Playlist's Name</h4>
+                    <input type="text" name="playlist_name" value="<?php echo htmlspecialchars($title); ?>" style="width: 300px; height: 30px; border-radius: 30px; background-color: rgba(217, 217, 217, 1); color: black; padding-left: 10px;" required>
+                    <h4 style="margin-bottom: 10px; margin-top: 10px;">Description</h4>
+                    <input type="text" name="playlist_desc" value="" style="width: 300px; height: 120px; border-radius: 30px; background-color: rgba(217, 217, 217, 1); color: black; padding-left: 10px;">
+                </div>
             </div>
-        </div>
-        <div style="grid-template-columns: 240px 150px 150px; gap: 30px; display: grid; margin-top: 10px;">
-            <button class="changeSeenMode" id="changeSeenMode"><?php echo (isset($playlistInfo['is_public']) && $playlistInfo['is_public']) ? '🔓 Public' : '🔒 Private'; ?></button>
-            <button style="width: 80%; height: fit-content; padding: 10px 20px; border-radius: 20px; font-family: Roboto, sans-serif; background-color: rgba(1, 1, 1, 1); color: white;">Save</button>
-            <button style="width: 80%; height: fit-content; padding: 10px 20px; border-radius: 20px; font-family: Roboto, sans-serif; background-color: red; color: white;" onclick="document.getElementById('edit_playlist_popup').style.display='none'">Cancel</button>
-        </div>
+            <div style="grid-template-columns: 240px 150px 150px; gap: 30px; display: grid; margin-top: 10px;">
+                <?php $pl_public = isset($data['is_public']) ? $data['is_public'] : 0; ?>
+                <input type="hidden" name="is_public" id="edit_is_public" value="<?php echo $pl_public; ?>">
+                <button type="button" class="changeSeenMode" id="editChangeSeenMode"><?php echo $pl_public ? '🔓 Public' : '🔒 Private'; ?></button>
+                <button type="submit" style="width: 80%; height: fit-content; padding: 10px 20px; border-radius: 20px; font-family: Roboto, sans-serif; background-color: rgba(1, 1, 1, 1); color: white; cursor: pointer;">Save</button>
+                <button type="button" style="width: 80%; height: fit-content; padding: 10px 20px; border-radius: 20px; font-family: Roboto, sans-serif; background-color: red; color: white; cursor: pointer;" onclick="document.getElementById('edit_playlist_popup').style.display='none'; document.getElementById('popup_overlay').style.display='none';">Cancel</button>
+            </div>
+        </form>
     </div>
-    
-    <!-- TRÌNH PHÁT NHẠC (MUSIC PLAYER) -->
+
+    <!-- TRÌNH PHÁT NHẠC (Yêu cầu có id chính xác để js cập nhật) -->
     <div id="music-player" style="position: fixed; bottom: 0; left: 0; width: 100%; background: #121212; color: white; display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; z-index: 1000; box-sizing: border-box; border-top: 1px solid #282828;">
         <div style="display: flex; align-items: center; width: 30%;">
             <img id="player-img" src="./img/default-song.jpg" style="width: 55px; height: 55px; border-radius: 5px; margin-right: 15px; object-fit: cover;">
@@ -267,7 +379,6 @@ $songsResult = $stmt_songs->get_result();
                 <p id="player-artist" style="margin: 5px 0 0 0; font-size: 13px; color: #b3b3b3; text-overflow: ellipsis; overflow: hidden;">...</p>
             </div>
         </div>
-        
         <div style="flex: 1; display: flex; flex-direction: column; align-items: center; max-width: 40%;">
             <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 8px;">
                 <button id="btn-prev" style="background: none; border: none; color: #b3b3b3; cursor: pointer; font-size: 20px; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#b3b3b3'">⏮</button>
@@ -287,26 +398,76 @@ $songsResult = $stmt_songs->get_result();
         <audio id="audio-player" style="display: none;"></audio>
     </div>
 
-    <script src="js/music-streaming-home.js"></script>
-    <script src="js/music-streaming-playlist-info.js"></script>
+    <script src="./js/music-streaming-home.js"></script>
+    <!-- Script xử lý Popup -->
     <script>
-        // JS cho nút Play All
-        document.getElementById('playPlaylistBtn')?.addEventListener('click', () => {
-            if (typeof currentPlaylist !== 'undefined' && currentPlaylist.length > 0) {
-                const firstSong = currentPlaylist[0];
-                playSong(firstSong.url, firstSong.title, firstSong.artist, firstSong.img);
-                currentIndex = 0;
-            } else {
-                alert('Playlist này hiện chưa có bài hát nào để phát!');
+        // Preview Image cho Edit Playlist
+        function previewImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('edit_pl_preview').src = e.target.result;
+                }
+                reader.readAsDataURL(file);
             }
-        });
-        
-        // Đổi trạng thái nút Save
-        document.getElementById('likeBtn')?.addEventListener('click', function() {
-            this.classList.toggle('liked');
-            if (this.classList.contains('liked')) this.textContent = '♥ Saved';
-            else this.textContent = '♥ Save';
-        });
+        }
+
+        // Chuyển đổi trạng thái Public / Private
+        const editChangeSeenMode = document.getElementById('editChangeSeenMode');
+        const editIsPublic = document.getElementById('edit_is_public');
+        if (editChangeSeenMode && editIsPublic) {
+            editChangeSeenMode.addEventListener('click', function() {
+                if (this.textContent.includes('Private')) {
+                    this.textContent = '🔓 Public';
+                    editIsPublic.value = 1;
+                } else {
+                    this.textContent = '🔒 Private';
+                    editIsPublic.value = 0;
+                }
+            });
+        }
+
+        // API Tìm kiếm bài hát và Add vào playlist
+        const searchAddSong = document.getElementById('search_add_song');
+        const addSongResults = document.getElementById('add_song_results');
+
+        if (searchAddSong && addSongResults) {
+            let addSearchTimeout;
+            searchAddSong.addEventListener('input', (e) => {
+                clearTimeout(addSearchTimeout);
+                const query = e.target.value.trim();
+                if (query.length === 0) {
+                    addSongResults.innerHTML = '<p style="text-align: center; color: black; font-family: Roboto, sans-serif;">Gõ để tìm kiếm bài hát...</p>';
+                    return;
+                }
+
+                addSearchTimeout = setTimeout(() => {
+                    fetch(`includes/song_api.php?action=read&search=${encodeURIComponent(query)}`)
+                        .then(res => res.json())
+                        .then(data => {
+                            addSongResults.innerHTML = '';
+                            if (data.success && data.data.length > 0) {
+                                data.data.forEach(song => {
+                                    addSongResults.innerHTML += `
+                                        <div style="grid-template-columns: 40px 60% 60px; display: grid; gap: 10px; align-items: center; justify-content: center; border-top: 1px solid #ccc; padding: 10px 0;">
+                                            <img src="${song.Song_image_url ? song.Song_image_url : './img/default-song.jpg'}" style="width: 40px; height: 40px; border: 1px solid black; border-radius: 10px; object-fit: cover;"></img>
+                                            <p style="font-family: Roboto, sans-serif; color: black; margin: 0; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${song.Song_title}</p>
+                                            <form method="POST" action="" style="margin: 0;">
+                                                <input type="hidden" name="add_song_id" value="${song.Song_id}">
+                                                <input type="hidden" name="target_pl_id" value="<?php echo isset($_GET['id']) ? intval($_GET['id']) : 0; ?>">
+                                                <button type="submit" style="background-color: grey; color: black; padding: 5px 10px; font-weight: bold; border-radius: 20px; border: none; cursor: pointer;">Add</button>
+                                            </form>
+                                        </div>
+                                    `;
+                                });
+                            } else {
+                                addSongResults.innerHTML = '<p style="text-align: center; color: black; font-family: Roboto, sans-serif;">Không tìm thấy bài hát nào.</p>';
+                            }
+                        }).catch(err => console.error(err));
+                }, 300);
+            });
+        }
     </script>
 </body>
 </html>

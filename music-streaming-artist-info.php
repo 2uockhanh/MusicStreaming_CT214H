@@ -186,7 +186,7 @@ $albumsResult = $stmt_albums->get_result();
                     <div class="show_body_grid">
                         <?php if (isset($albumsResult) && $albumsResult->num_rows > 0): ?>
                             <?php while($album = $albumsResult->fetch_assoc()): ?>
-                            <button class="playlist_nav" onclick="window.location.href='music-streaming-playlist-info.php?id=<?php echo $album['Album_id']; ?>'" style="cursor: pointer;">
+                            <button class="playlist_nav" onclick="window.location.href='music-streaming-playlist-info.php?album_id=<?php echo $album['Album_id']; ?>'" style="cursor: pointer;">
                                 <div class="playlist_nav_grid">
                                     <img src="<?php echo htmlspecialchars($album['Cover_image_url'] ?? './img/default-playlist.jpg'); ?>" alt="eMusik"></img>
                                     <div class="article_body">

@@ -317,6 +317,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 div.addEventListener('mouseleave', () => div.style.backgroundColor = 'transparent');
                                 
                                 div.innerHTML = `
+                                    <img src="${song.Song_image_url ? song.Song_image_url : './img/default-song.jpg'}" style="width: 40px; height: 40px; border-radius: 4px; object-fit: cover; margin-right: 12px;" alt="cover">
                                     <div style="flex: 1;">
                                         <h4 style="margin: 0; font-size: 14px; color: white;">${song.Song_title}</h4>
                                         <p style="margin: 4px 0 0 0; font-size: 12px; color: #b3b3b3;">Lượt xem: ${song.View_count}</p>
