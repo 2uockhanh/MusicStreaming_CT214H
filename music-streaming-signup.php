@@ -3,23 +3,39 @@ require './includes/db-connect.php';
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
+$error = "";
+
 if (isset($_POST['btn_signup'])) {
     $username = trim($_POST['input_username']);
     $password = trim($_POST['input_password']);
     $email = trim($_POST['input_email']);
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT); // Mã hóa mật khẩu
-    // Dùng prepared statement để lưu vào CSDL
-    $sql = "INSERT INTO users (user_name, email, password, role) VALUES (?, ?, ?, 'user')";
-    $stmt = $conn->prepare($sql);
-    if ($stmt) {
-            $stmt->bind_param("sss", $username,$email, $hashed_password);
-            if ($stmt->execute()) {
-                echo "<script>alert('Đăng ký thành công!'); window.location.href='music-streaming-login.php';</script>";
-            } else {
-                $error = "Lỗi: Tên đăng nhập đã tồn tại!";
+    
+    // 1. KIỂM TRA EMAIL ĐÃ TỒN TẠI HAY CHƯA
+    $stmt_check = $conn->prepare("SELECT email FROM users WHERE email = ?");
+    $stmt_check->bind_param("s", $email);
+    $stmt_check->execute();
+    $result = $stmt_check->get_result();
+    
+    if ($result->num_rows > 0) {
+        $error = "This email address is already in use. Please try a different one!";
+    } else {
+        // 2. NẾU CHƯA TỒN TẠI, TIẾN HÀNH ĐĂNG KÝ
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT); // Mã hóa mật khẩu
+        // Dùng prepared statement để lưu vào CSDL
+        $sql = "INSERT INTO users (user_name, email, password, role) VALUES (?, ?, ?, 'user')";
+        $stmt = $conn->prepare($sql);
+        if ($stmt) {
+                $stmt->bind_param("sss", $username,$email, $hashed_password);
+                if ($stmt->execute()) {
+                    echo "<script>alert('Registration successful!'); window.location.href='music-streaming-login.php';</script>";
+                } else {
+                    $error = "Error: The username or email address already exists!";
+                }
+                $stmt->close();
             }
-            $stmt->close();
-        }
+    }
+    $stmt_check->close();
 }
 ?> 
 
