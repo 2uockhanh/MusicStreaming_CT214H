@@ -237,7 +237,19 @@ body{
 }
 /* Add to Playlist Popup */
 .add_to_playlist_popup {
-    width: 600px; height: 400px; display: none; background-color: white; position: fixed; left: 33%; top: 20%; border-radius: 20px;
+    width: 600px; 
+    max-width: 95%; /* Không bao giờ rộng quá màn hình */
+    height: auto; /* Để chiều cao tự giãn */
+    max-height: 90vh; /* Không cao quá màn hình, tránh bị che khuất */
+    background-color: white; 
+    border-radius: 30px; 
+    display: none; 
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2001;
+    overflow-y: auto; /* Hiện thanh cuộn nếu nội dung quá dài */
 }
 .popupHead {
     grid-template-columns:auto 40px; 
@@ -266,4 +278,179 @@ body{
     color: rgba(1, 1, 1, 1);
     border: 1px solid;
     padding-left: 10px;
+}
+
+@media screen and (max-width: 850px) {
+    /* 1. ÉP BỐ CỤC CHÍNH THÀNH DỌC */
+    body > div[style*="display: flex"], .main-wrapper {
+        flex-direction: column !important;
+    }
+
+    /* 2. MENU ĐIỀU HƯỚNG NẰM NGANG Ở TRÊN CÙNG */
+    .navbar {
+        width: 100% !important;
+        height: auto !important;
+        padding: 10px 0 !important;
+        margin: 0 !important;
+    }
+    .nav {
+        display: flex !important;
+        flex-direction: row !important; 
+        justify-content: space-around !important; 
+        width: 100% !important;
+        padding: 0 !important;
+    }
+    .nav_button {
+        width: 33% !important; 
+        height: auto !important;
+        font-size: 14px !important; 
+        padding: 10px 0 !important;
+        display: flex !important;
+        flex-direction: column !important; 
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    .nav_logo {
+        margin: 0 0 5px 0 !important; 
+    }
+    .logo_nav {
+        margin: 10px auto 20px !important;
+    }
+
+    /* 3. MỞ RỘNG VÙNG NỘI DUNG */
+    .home {
+        width: 100% !important;
+        margin-left: 0 !important; 
+        padding: 10px !important;
+        box-sizing: border-box;
+    }
+    .show_song, .show_artist, .show_playlist {
+        width: 100% !important;
+        margin-left: 0 !important;
+    }
+
+    /* 4. THANH TÌM KIẾM & AVATAR */
+    .header ul {
+        grid-template-columns: 80% 20% !important;
+        padding: 0 !important;
+    }
+    .search input {
+        width: 95% !important;
+        font-size: 14px !important;
+    }
+    .avatar_dropdown {
+        margin-right: 0 !important; 
+    }
+
+    /* 5. ÉP FOOTER XẾP DỌC CHẮC CHẮN 100% */
+    .footer-content {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 30px !important;
+    }
+
+    /* 6. TINH GỌN TRÌNH PHÁT NHẠC */
+    #music-player {
+        padding: 8px 10px !important;
+    }
+    #music-player > div:first-child {
+        width: 40% !important; 
+    }
+    #music-player > div:nth-child(2) {
+        max-width: 60% !important; 
+    }
+    #music-player > div:last-child {
+        display: none !important; 
+    }
+    /* ÉP NỘI DUNG POPUP XẾP DỌC TRÊN MOBILE */
+    .add_playlist_popup div[style*="grid-template-columns"] {
+        grid-template-columns: 1fr !important; /* Biến 2 cột thành 1 cột */
+        gap: 15px !important;
+        padding: 20px !important;
+    }
+
+    .add_playlist_popup img {
+        width: 150px !important;
+        height: 150px !important;
+        margin: 0 auto !important;
+    }
+
+    .add_playlist_popup input {
+        width: 100% !important;
+    }
+}
+/* 
+Giao diện repondsive cho điện thoại  */
+
+@media screen and (max-width: 850px) {
+    /* 1. Bố cục chính và Navbar */
+    body > div[style*="display: flex"], .main-wrapper { flex-direction: column !important; }
+    .navbar { width: 100% !important; height: auto !important; padding: 10px 0 !important; margin: 0 !important; }
+    .nav { display: flex !important; flex-direction: row !important; justify-content: space-around !important; width: 100% !important; padding: 0 !important; }
+    .nav_button { width: 33% !important; height: auto !important; font-size: 14px !important; padding: 10px 0 !important; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; }
+    .nav_logo { margin: 0 0 5px 0 !important; }
+    .logo_nav { margin: 10px auto 20px !important; }
+    .home { width: 100% !important; margin-left: 0 !important; padding: 10px !important; box-sizing: border-box; }
+
+    /* 2. Căn giữa Header Bài hát */
+    .song-header {
+        display: flex !important;
+        flex-direction: column !important; /* Đẩy ảnh, chữ, nút xếp dọc */
+        align-items: center !important;
+        text-align: center !important;
+        margin-left: 0 !important;
+        gap: 15px !important;
+        width: 100% !important;
+    }
+
+    .song-image {
+        width: 180px !important;
+        height: 180px !important;
+        margin: 0 auto !important;
+    }
+
+    .song-name {
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    /* 3. Kéo nút Play về giữa */
+    .playBtn {
+        margin: 10px auto !important;
+        width: 80% !important; 
+        max-width: 250px !important;
+    }
+
+    /* 4. Gỡ bỏ margin-left 200px của nhóm nút phụ */
+    .song-actions {
+        margin-left: 0 !important;
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 10px !important;
+        width: 100% !important;
+    }
+
+    /* 5. Gỡ bỏ chia cột, ép Lời bài hát và Nghệ sĩ xếp dọc */
+    .song-details-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 30px !important;
+    }
+
+    .lyrics { width: 100% !important; }
+    .lyrics h4 { margin-left: 0 !important; text-align: center !important; }
+    .lyric-body {
+        max-width: 90% !important;
+        margin: 0 auto !important;
+    }
+
+    .artist-participate { width: 100% !important; text-align: center !important; }
+    .artist-participate-body {
+        justify-content: center !important;
+        display: flex !important;
+    }
 }

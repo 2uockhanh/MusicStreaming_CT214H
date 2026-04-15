@@ -18,13 +18,8 @@ if (isset($_POST['btn_login'])) {
 
     // 2. Nếu tìm thấy user, tiếp tục kiểm tra mật khẩu
     if ($row = $result->fetch_assoc()) {
-<<<<<<< HEAD
         // Hàm password_verify so sánh mã băm, kết hợp đối chiếu chuỗi thường cho dữ liệu sample
         if (password_verify($password, $row['password']) || $password === $row['password']) {
-=======
-        // Hàm password_verify sẽ đối chiếu mật khẩu nhập vào với mã băm trong DB
-        if (password_verify($password, $row['password'])) {
->>>>>>> a6f9757347f91081d963074a00db226ffab80926
             // 3. Đăng nhập thành công -> Lưu thông tin vào Session
             $_SESSION['user_id'] = $row['user_id'];
             $_SESSION['user_name'] = $row['user_name'];

@@ -271,3 +271,89 @@ body{
     padding-top: 2px;
     border-top: 1px solid;
 }
+
+
+@media screen and (max-width: 850px) {
+    /* 1. ÉP BỐ CỤC CHÍNH THÀNH DỌC */
+    body > div[style*="display: flex"], .main-wrapper {
+        flex-direction: column !important;
+    }
+
+    /* 2. MENU ĐIỀU HƯỚNG NẰM NGANG Ở TRÊN CÙNG */
+    .navbar {
+        width: 100% !important;
+        height: auto !important;
+        padding: 10px 0 !important;
+        margin: 0 !important;
+    }
+    .nav {
+        display: flex !important;
+        flex-direction: row !important; 
+        justify-content: space-around !important; 
+        width: 100% !important;
+        padding: 0 !important;
+    }
+    .nav_button {
+        width: 33% !important; 
+        height: auto !important;
+        font-size: 14px !important; 
+        padding: 10px 0 !important;
+        display: flex !important;
+        flex-direction: column !important; 
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    .nav_logo {
+        margin: 0 0 5px 0 !important; 
+    }
+    .logo_nav {
+        margin: 10px auto 20px !important;
+    }
+
+    /* 3. MỞ RỘNG VÙNG NỘI DUNG */
+    .home {
+        width: 100% !important;
+        margin-left: 0 !important; 
+        padding: 10px !important;
+        box-sizing: border-box;
+    }
+    .show_song, .show_artist, .show_playlist {
+        width: 100% !important;
+        margin-left: 0 !important;
+    }
+
+    /* 4. THANH TÌM KIẾM & AVATAR */
+    .header ul {
+        grid-template-columns: 80% 20% !important;
+        padding: 0 !important;
+    }
+    .search input {
+        width: 95% !important;
+        font-size: 14px !important;
+    }
+    .avatar_dropdown {
+        margin-right: 0 !important; 
+    }
+
+    /* 5. ÉP FOOTER XẾP DỌC CHẮC CHẮN 100% */
+    .footer-content {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 30px !important;
+    }
+
+    /* 6. TINH GỌN TRÌNH PHÁT NHẠC */
+    #music-player {
+        padding: 8px 10px !important;
+    }
+    #music-player > div:first-child {
+        width: 40% !important; 
+    }
+    #music-player > div:nth-child(2) {
+        max-width: 60% !important; 
+    }
+    #music-player > div:last-child {
+        display: none !important; 
+    }
+}
