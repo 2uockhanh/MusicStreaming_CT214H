@@ -380,3 +380,78 @@ body{
         width: 100% !important;
     }
 }
+
+/* =======================================================
+   RESPONSIVE CHO TRANG SONG INFO (Màn hình <= 850px)
+   ======================================================= */
+@media screen and (max-width: 850px) {
+    /* 1. Bố cục chính và Navbar */
+    body > div[style*="display: flex"], .main-wrapper { flex-direction: column !important; }
+    .navbar { width: 100% !important; height: auto !important; padding: 10px 0 !important; margin: 0 !important; }
+    .nav { display: flex !important; flex-direction: row !important; justify-content: space-around !important; width: 100% !important; padding: 0 !important; }
+    .nav_button { width: 33% !important; height: auto !important; font-size: 14px !important; padding: 10px 0 !important; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; }
+    .nav_logo { margin: 0 0 5px 0 !important; }
+    .logo_nav { margin: 10px auto 20px !important; }
+    .home { width: 100% !important; margin-left: 0 !important; padding: 10px !important; box-sizing: border-box; }
+
+    /* 2. Căn giữa Header Bài hát */
+    .song-header {
+        display: flex !important;
+        flex-direction: column !important; /* Đẩy ảnh, chữ, nút xếp dọc */
+        align-items: center !important;
+        text-align: center !important;
+        margin-left: 0 !important;
+        gap: 15px !important;
+        width: 100% !important;
+    }
+
+    .song-image {
+        width: 180px !important;
+        height: 180px !important;
+        margin: 0 auto !important;
+    }
+
+    .song-name {
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    /* 3. Kéo nút Play về giữa */
+    .playBtn {
+        margin: 10px auto !important;
+        width: 80% !important; 
+        max-width: 250px !important;
+    }
+
+    /* 4. Gỡ bỏ margin-left 200px của nhóm nút phụ */
+    .song-actions {
+        margin-left: 0 !important;
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 10px !important;
+        width: 100% !important;
+    }
+
+    /* 5. Gỡ bỏ chia cột, ép Lời bài hát và Nghệ sĩ xếp dọc */
+    .song-details-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 30px !important;
+    }
+
+    .lyrics { width: 100% !important; }
+    .lyrics h4 { margin-left: 0 !important; text-align: center !important; }
+    .lyric-body {
+        max-width: 90% !important;
+        margin: 0 auto !important;
+    }
+
+    .artist-participate { width: 100% !important; text-align: center !important; }
+    .artist-participate-body {
+        justify-content: center !important;
+        display: flex !important;
+    }
+}

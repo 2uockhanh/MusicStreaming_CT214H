@@ -95,7 +95,8 @@ if (!empty($_SESSION['user_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>eMusik - <?php echo htmlspecialchars($songInfo['Song_title']); ?> - <?php echo htmlspecialchars($songInfo['Artist_name'] ?? 'Unknown Artist'); ?></title> 
-    <link rel="stylesheet" href='./css/song-info-style.css'>
+    <!-- <link rel="stylesheet" href='./css/song-info-style.css'> -->
+    <link rel="stylesheet" href='./css/song-info-style.css?v=<?php echo time(); ?>'>
     <link rel="stylesheet" href='./css/library-style.css'>
     <link href='https://fonts.googleapis.com/css?family=Passero One' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
@@ -172,12 +173,14 @@ if (!empty($_SESSION['user_id'])) {
                     <button id="playBtn" class="playBtn">⏵ PLAY</button>
                 </div>
             </div>
-            <div style="margin-left: 200px;">
+            <!-- <div style="margin-left: 200px;"> -->
+                <div class="song-actions" style="margin-left: 200px; margin-top: 20px;">
                 <button id="likeBtn" class="likeBtn <?php echo $is_liked ? 'liked' : ''; ?>" data-song-id="<?php echo $song_id; ?>"><?php echo $is_liked ? '♥ Liked' : '♥ Like'; ?></button>
                 <button class="likeBtn">Share</button>
                 <button class="likeBtn" id="add_to_playlist_btn">Add Playlist</button>
             </div>
-            <div style="margin-bottom: 20px; grid-template-columns: 65% 35%; display: grid; color: white;">
+            <!-- <div style="margin-bottom: 20px; grid-template-columns: 65% 35%; display: grid; color: white;"> -->
+                <div class="song-details-grid" style="margin-bottom: 20px; grid-template-columns: 65% 35%; display: grid; color: white; margin-top: 30px;">
                 <div class="lyrics">
                     <h4 style="font-family: Tahoma, sans-serif; font-size: 110%; margin-left: 15%; margin-bottom: 20px;">Lyrics</h4>
                     <div class="lyric-body" style="border-radius: 10px; background-color: grey; color: black; max-width: 70%; padding: 5px; margin-left: 10%;">
