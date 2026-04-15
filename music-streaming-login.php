@@ -64,7 +64,7 @@ if (isset($_POST['btn_login'])) {
 				<img class="logo" src="./img/logo.png">
 			</div>
 			<form method="POST" action="">
-				<div class="login" style="height: 350px;">
+				<div class="login" style="height:fit-content;">
 				<h3>LOG IN</h3>
 				<div class="login_form">
 					<table>

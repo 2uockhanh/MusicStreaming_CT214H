@@ -58,7 +58,8 @@ $albumsResult = $stmt_albums->get_result();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>eMusik - <?php echo htmlspecialchars($artistInfo['Artist_name']); ?></title> 
-    <link rel="stylesheet" href='./css/home-style.css'>
+    <!-- <link rel="stylesheet" href='./css/home-style.css'> -->
+     <link rel="stylesheet" href='./css/home-style.css?v=<?php echo time(); ?>'>
     <link rel="stylesheet" href='./css/artist-info-style.css'>
     <link href='https://fonts.googleapis.com/css?family=Passero One' rel='stylesheet'>
 </head>
@@ -127,9 +128,14 @@ $albumsResult = $stmt_albums->get_result();
                             <?php echo htmlspecialchars($artistInfo['Biography']); ?>
                         </h4>
                     </div>
-                    <div style="display: flex; gap: 15px; align-items: center; margin-left: 30px;">
-                        <button id="playArtistBtn" class="follow-button" style="cursor: pointer; padding: 10px 25px; border-radius: 30px; font-weight: bold; background: #1DB954; color: white; border: none; white-space: nowrap; width: fit-content; height: fit-content; font-size: 14px; display: inline-flex; align-items: center; justify-content: center; min-width: 120px;">⏵ PLAY ALL</button>
-                        <button id="likeBtn" class="follow-button" style="cursor: pointer; padding: 10px 25px; border-radius: 30px; font-weight: bold; background: transparent; color: white; border: 1px solid white; white-space: nowrap; width: fit-content; height: fit-content; font-size: 14px; display: inline-flex; align-items: center; justify-content: center; min-width: 120px;">♥ Follow</button>
+                    <div class="artist-actions">
+                        <div>
+                            <button id="playArtistBtn" class="follow-button" style="cursor: pointer; padding: 10px 25px; border-radius: 30px; font-weight: bold; background: #1DB954; color: white; border: none; white-space: nowrap; width: fit-content; height: fit-content; font-size: 14px; display: inline-flex; align-items: center; justify-content: center; min-width: 120px;">⏵ PLAY ALL</button>
+                        </div>
+                        <div>
+                            <button id="likeBtn" class="follow-button" style="cursor: pointer; padding: 10px 25px; border-radius: 30px; font-weight: bold; background: transparent; color: white; border: 1px solid white; white-space: nowrap; width: fit-content; height: fit-content; font-size: 14px; display: inline-flex; align-items: center; justify-content: center; min-width: 120px;">♥ Follow</button>
+
+                        </div>
                     </div>
                 </div>
             </div>

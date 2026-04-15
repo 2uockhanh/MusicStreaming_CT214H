@@ -66,38 +66,30 @@ $favorites = $stmt_favorites->get_result()->fetch_all(MYSQLI_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>eMusik - Library</title> 
-    <link rel="stylesheet" href='./css/library-style.css'>
-    <link rel="stylesheet" href='./css/home-style.css'> <!-- Để load đúng giao diện dropdown và nav -->
+    <!-- <link rel="stylesheet" href='./css/library-style.css'> -->
+    <link rel="stylesheet" href='./css/library-style.css?v=<?php echo time(); ?>'>
+    <!-- <link rel="stylesheet" href='./css/home-style.css'> Để load đúng giao diện dropdown và nav -->
+    <link rel="stylesheet" href='./css/home-style.css?v=<?php echo time(); ?>'>
     <link href='https://fonts.googleapis.com/css?family=Passero One' rel='stylesheet'>
 </head>
 <body>
-    <div style="display: flex;">
-        <div>
-            <nav class="navbar">
-                <button class="logo_nav" onclick="document.location='./music-streaming-home.php'">
-                    <h3 style="font-family: 'Passero One'; font-size: 48px; margin: 0px auto;">eMuzik</h3>
+    <div class="main-wrapper" style="display: flex;">
+        <nav class="navbar">
+            <button class="logo_nav" onclick="document.location='./music-streaming-home.php'">
+                <h3 style="font-family: 'Passero One'; font-size: 48px; margin: 0px auto;">eMuzik</h3>
+            </button>
+            <div class="nav">
+                <button class="nav_button" onclick="document.location='./music-streaming-home.php'">
+                    <img class="nav_logo" src="./img/home.png"> Home
                 </button>
-                <div class="nav">
-                <table>
-                        <tr>
-                            <button class="nav_button" onclick="document.location='./music-streaming-home.php'">
-                                <img class="nav_logo" src="./img/home.png"> Home
-                            </button>
-                        </tr>
-                        <tr>
-                            <button class="nav_button" onclick="document.location='./music-streaming-library.php'">
-                                <img class="nav_logo" src="./img/library.png"> Library
-                            </button>
-                        </tr>
-                        <tr>
-                            <button class="nav_button">
-                                <img class="nav_logo" src="./img/favourite.png"> Favourite
-                            </button>                        
-                        </tr>
-                    </table>
-                </div>
-            </nav>
-        </div>
+                <button class="nav_button" onclick="document.location='./music-streaming-library.php'">
+                    <img class="nav_logo" src="./img/library.png"> Library
+                </button>
+                <button class="nav_button" onclick="document.location='./music-streaming-favourite.php'">
+                    <img class="nav_logo" src="./img/favourite.png"> Favourite
+                </button>
+            </div>
+        </nav>
         <div class="home">
             <div class="header"> 
                 <ul style="display: grid; grid-template-columns: 90% 10%; list-style-type: none;">

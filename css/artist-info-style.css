@@ -268,3 +268,58 @@ body{
     padding-top: 2px;
     border-top: 1px solid;
 }
+
+/* =======================================================
+   RESPONSIVE BỔ SUNG CHO TRANG ARTIST INFO
+   ======================================================= */
+@media screen and (max-width: 850px) {
+    /* 1. Giải phóng độ rộng header */
+    .artist-header {
+        width: 100% !important;
+        margin-left: 0 !important;
+        display: flex !important;
+        flex-direction: column !important; /* Xếp dọc các thành phần */
+        align-items: center !important;
+        text-align: center !important;
+        gap: 20px !important;
+        padding: 20px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* 2. Phóng to ảnh nghệ sĩ cho cân đối */
+    .artist-image {
+        width: 120px !important;
+        height: 120px !important;
+        border-radius: 50% !important;
+    }
+
+    /* 3. Chỉnh lại tên và bio */
+    .artist-name {
+        display: block !important;
+        width: 100% !important;
+    }
+    .artist-name h3 {
+        font-size: 24px !important;
+        margin-bottom: 10px !important;
+    }
+    .artist-name h4 {
+        margin: 0 auto !important;
+        max-width: 90% !important;
+    }
+
+    /* 4. Căn giữa các nút bấm và ngăn chúng tràn lề */
+    .artist-actions {
+        display: flex !important;
+        flex-direction: row !important; /* Nút nằm ngang */
+        justify-content: center !important;
+        gap: 10px !important;
+        width: 100% !important;
+        margin-left: 0 !important; /* Xóa margin cũ gây lệch */
+    }
+
+    .follow-button {
+        padding: 10px 15px !important;
+        font-size: 13px !important;
+        min-width: 100px !important;
+    }
+}

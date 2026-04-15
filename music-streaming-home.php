@@ -41,7 +41,8 @@ $playlistsResult = $conn->query($sql_playlists);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>eMusik - Home</title> 
-    <link rel="stylesheet" href='./css/home-style.css'>
+    <!-- <link rel="stylesheet" href='./css/home-style.css'> -->
+     <link rel="stylesheet" href='./css/home-style.css?v=<?php echo time(); ?>'>
     <link href='https://fonts.googleapis.com/css?family=Passero One' rel='stylesheet'>
 </head>
 <body>
@@ -63,11 +64,11 @@ $playlistsResult = $conn->query($sql_playlists);
                                 <img class="nav_logo" src="./img/library.png"> Library
                             </button>
                         </tr>
-                        <tr>
+                        <!-- <tr>
                             <button class="nav_button" onclick="document.location='./music-streaming-favourite.php'">
                                 <img class="nav_logo" src="./img/favourite.png"> Favourite
                             </button>                        
-                        </tr>
+                        </tr> -->
                     </table>
                 </div>
             </nav>
