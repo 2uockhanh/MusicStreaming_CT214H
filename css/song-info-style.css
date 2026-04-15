@@ -380,10 +380,9 @@ body{
         width: 100% !important;
     }
 }
+/* 
+Giao diện repondsive cho điện thoại  */
 
-/* =======================================================
-   RESPONSIVE CHO TRANG SONG INFO (Màn hình <= 850px)
-   ======================================================= */
 @media screen and (max-width: 850px) {
     /* 1. Bố cục chính và Navbar */
     body > div[style*="display: flex"], .main-wrapper { flex-direction: column !important; }
