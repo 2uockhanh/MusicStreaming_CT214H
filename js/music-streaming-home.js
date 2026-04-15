@@ -320,7 +320,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     <img src="${song.Song_image_url ? song.Song_image_url : './img/default-song.jpg'}" style="width: 40px; height: 40px; border-radius: 4px; object-fit: cover; margin-right: 12px;" alt="cover">
                                     <div style="flex: 1;">
                                         <h4 style="margin: 0; font-size: 14px; color: white;">${song.Song_title}</h4>
-                                        <p style="margin: 4px 0 0 0; font-size: 12px; color: #b3b3b3;">Lượt xem: ${song.View_count}</p>
+                                        <p style="margin: 4px 0 0 0; font-size: 12px; color: #b3b3b3;">View: ${song.View_count}</p>
                                     </div>
                                     <div style="background: #1ed760; color: black; border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">▶</div>
                                 `;
