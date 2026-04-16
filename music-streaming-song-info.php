@@ -118,7 +118,7 @@ if (!empty($_SESSION['user_id'])) {
                             </button>
                         </tr>
                         <tr>
-                            <button class="nav_button" onclick="document.location='./music-streaming-library.html'">
+                            <button class="nav_button" onclick="document.location='./music-streaming-library.php'">
                                 <img class="nav_logo" src="./img/library.png"> Library
                             </button>
                         </tr>
@@ -218,7 +218,7 @@ if (!empty($_SESSION['user_id'])) {
                         <h4>Useful Link</h4>
                         <ul>
                             <li><a href="./music-streaming-account.php">My Account</a></li>
-                            <li><a href="./music-streaming-library.html">Library</a></li>
+                            <li><a href="./music-streaming-library.php">Library</a></li>
                             <li><a href="./music-streaming-favourite.html">Favourite</a></li>
                             <li><a href="./music-streaming-import-music.html">Import Music</a></li>
                         </ul>
